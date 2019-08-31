@@ -1,0 +1,1278 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+
+
+<head><meta name="generator" content="Hexo 3.9.0">
+    <meta charset="utf-8">
+    <meta name="keywords" content="深入浅出MySQL-SQL优化, hmlr123">
+    <meta name="description" content="重中之中
+
+
+
+
+英语词汇好尴尬，貌似都认识。。。
+如何分析SQL语句分析SQL语句的方法使用show [session|global] status获取服务器提供的信息，默认session
+mysql&gt; show global statu">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <title>深入浅出MySQL-SQL优化 | hmlr123</title>
+    <link rel="icon" type="image/png" href="/favicon.png">
+
+    <link rel="stylesheet" type="text/css" href="/libs/awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/materialize/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
+    <link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/matery.css">
+    <link rel="stylesheet" type="text/css" href="/css/my.css">
+    <style type="text/css">
+        
+    </style>
+
+    <script src="/libs/jquery/jquery-2.2.0.min.js"></script>
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"></head>
+
+
+<body>
+
+<header class="navbar-fixed">
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="nav-wrapper container">
+            <div class="brand-logo">
+                <a href="/" class="waves-effect waves-light">
+                    
+                    <img src="/medias/logo.png" class="logo-img" alt="LOGO">
+                    
+                    <span class="logo-span">hmlr123</span>
+                </a>
+            </div>
+            
+
+<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fa fa-navicon"></i></a>
+<ul class="right">
+    
+    <li class="hide-on-med-and-down">
+        <a href="/" class="waves-effect waves-light">
+            
+            <i class="fa fa-home"></i>
+            
+            <span>首页</span>
+        </a>
+    </li>
+    
+    <li class="hide-on-med-and-down">
+        <a href="/tags" class="waves-effect waves-light">
+            
+            <i class="fa fa-tags"></i>
+            
+            <span>标签</span>
+        </a>
+    </li>
+    
+    <li class="hide-on-med-and-down">
+        <a href="/categories" class="waves-effect waves-light">
+            
+            <i class="fa fa-bookmark"></i>
+            
+            <span>分类</span>
+        </a>
+    </li>
+    
+    <li class="hide-on-med-and-down">
+        <a href="/archives" class="waves-effect waves-light">
+            
+            <i class="fa fa-archive"></i>
+            
+            <span>归档</span>
+        </a>
+    </li>
+    
+    <li class="hide-on-med-and-down">
+        <a href="/about" class="waves-effect waves-light">
+            
+            <i class="fa fa-user-circle-o"></i>
+            
+            <span>关于</span>
+        </a>
+    </li>
+    
+    <li class="hide-on-med-and-down">
+        <a href="/friends" class="waves-effect waves-light">
+            
+            <i class="fa fa-address-book"></i>
+            
+            <span>友情链接</span>
+        </a>
+    </li>
+    
+    <li>
+        <a href="#searchModal" class="modal-trigger waves-effect waves-light">
+            <i id="searchIcon" class="fa fa-search" title="搜索"></i>
+        </a>
+    </li>
+</ul>
+
+<div id="mobile-nav" class="side-nav sidenav">
+
+    <div class="mobile-head bg-color">
+        
+        <img src="/medias/logo.png" class="logo-img circle responsive-img">
+        
+        <div class="logo-name">hmlr123</div>
+        <div class="logo-desc">
+            
+            走走停停，记录滴滴点点
+            
+        </div>
+    </div>
+
+    
+
+    <ul class="menu-list mobile-menu-list">
+        
+        <li>
+            <a href="/" class="waves-effect waves-light">
+                
+                <i class="fa fa-fw fa-home"></i>
+                
+                首页
+            </a>
+        </li>
+        
+        <li>
+            <a href="/tags" class="waves-effect waves-light">
+                
+                <i class="fa fa-fw fa-tags"></i>
+                
+                标签
+            </a>
+        </li>
+        
+        <li>
+            <a href="/categories" class="waves-effect waves-light">
+                
+                <i class="fa fa-fw fa-bookmark"></i>
+                
+                分类
+            </a>
+        </li>
+        
+        <li>
+            <a href="/archives" class="waves-effect waves-light">
+                
+                <i class="fa fa-fw fa-archive"></i>
+                
+                归档
+            </a>
+        </li>
+        
+        <li>
+            <a href="/about" class="waves-effect waves-light">
+                
+                <i class="fa fa-fw fa-user-circle-o"></i>
+                
+                关于
+            </a>
+        </li>
+        
+        <li>
+            <a href="/friends" class="waves-effect waves-light">
+                
+                <i class="fa fa-fw fa-address-book"></i>
+                
+                友情链接
+            </a>
+        </li>
+        
+        
+    </ul>
+</div>
+
+        </div>
+
+        
+    </nav>
+
+</header>
+
+
+
+
+
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/16.jpg')">
+    <div class="container">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <div class="description center-align post-title">
+                        深入浅出MySQL-SQL优化
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<main class="post-container content">
+
+    
+    <link rel="stylesheet" href="/libs/tocbot/tocbot.css">
+<style>
+    #articleContent h1::before,
+    #articleContent h2::before,
+    #articleContent h3::before,
+    #articleContent h4::before,
+    #articleContent h5::before,
+    #articleContent h6::before {
+        display: block;
+        content: " ";
+        height: 100px;
+        margin-top: -100px;
+        visibility: hidden;
+    }
+
+    #articleContent :focus {
+        outline: none;
+    }
+
+    .toc-fixed {
+        position: fixed;
+        top: 64px;
+    }
+
+    .toc-widget {
+        padding-left: 20px;
+    }
+
+    .toc-widget .toc-title {
+        margin: 35px 0 15px 0;
+        padding-left: 17px;
+        font-size: 1.5rem;
+        font-weight: bold;
+        line-height: 1.5rem;
+    }
+
+    .toc-widget ol {
+        padding: 0;
+        list-style: none;
+    }
+
+    #toc-content ol {
+        padding-left: 10px;
+    }
+
+    #toc-content ol li {
+        padding-left: 10px;
+    }
+
+    #toc-content .toc-link:hover {
+        color: #42b983;
+        font-weight: 700;
+        text-decoration: underline;
+    }
+
+    #toc-content .toc-link::before {
+        background-color: transparent;
+        max-height: 25px;
+    }
+
+    #toc-content .is-active-link {
+        color: #42b983;
+    }
+
+    #toc-content .is-active-link::before {
+        background-color: #42b983;
+    }
+
+    #floating-toc-btn {
+        position: fixed;
+        right: 20px;
+        bottom: 76px;
+        padding-top: 15px;
+        margin-bottom: 0;
+        z-index: 998;
+    }
+
+    #floating-toc-btn .btn-floating {
+        width: 48px;
+        height: 48px;
+    }
+
+    #floating-toc-btn .btn-floating i {
+        line-height: 48px;
+        font-size: 1.4rem;
+    }
+</style>
+<div class="row">
+    <div id="main-content" class="col s12 m12 l9">
+        <!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                    <div class="article-tag">
+                        
+                            <a href="/tags/MySQL/" target="_blank">
+                                <span class="chip bg-color">MySQL</span>
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fa fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/categories/读书笔记/" class="post-category" target="_blank">
+                                读书笔记
+                            </a>
+                        
+                            <a href="/categories/读书笔记/深入浅出MySQL/" class="post-category" target="_blank">
+                                深入浅出MySQL
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+
+            <div class="post-info">
+                <div class="post-date info-break-policy">
+                    <i class="fa fa-calendar-minus-o fa-fw"></i>发布日期:&nbsp;&nbsp;
+                    2019-04-21
+                </div>
+
+                
+                    
+                    <div class="info-break-policy">
+                        <i class="fa fa-file-word-o fa-fw"></i>文章字数:&nbsp;&nbsp;
+                        3.2k
+                    </div>
+                    
+
+                    
+                    <div class="info-break-policy">
+                        <i class="fa fa-clock-o fa-fw"></i>阅读时长:&nbsp;&nbsp;
+                        14 分
+                    </div>
+                    
+                
+				
+				
+                    <div id="busuanzi_container_page_pv" class="info-break-policy">
+                        <i class="fa fa-eye fa-fw"></i>阅读次数:&nbsp;&nbsp;
+                        <span id="busuanzi_value_page_pv"></span>
+                    </div>
+				
+            </div>
+        </div>
+        <hr class="clearfix">
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <p>重中之中</p>
+<a id="more"></a>
+
+
+
+<h1 id="英语词汇"><a href="#英语词汇" class="headerlink" title="英语词汇"></a>英语词汇</h1><p>好尴尬，貌似都认识。。。</p>
+<h1 id="如何分析SQL语句"><a href="#如何分析SQL语句" class="headerlink" title="如何分析SQL语句"></a>如何分析SQL语句</h1><h2 id="分析SQL语句的方法"><a href="#分析SQL语句的方法" class="headerlink" title="分析SQL语句的方法"></a>分析SQL语句的方法</h2><p>使用<code>show [session|global] status</code>获取服务器提供的信息，默认<code>session</code></p>
+<pre class=" language-mysql"><code class="language-mysql">mysql> show global status like 'Com%';
++---------------------------+-------+
+| Variable_name             | Value |
++---------------------------+-------+
+| Com_admin_commands        | 0     |
+| Com_assign_to_keycache    | 0     |
+| Com_alter_db              | 0     |
+| Com_alter_db_upgrade      | 0     |
+| Com_alter_event           | 0     |
+| Com_alter_function        | 0     |
+| Com_alter_procedure       | 0     |
+| Com_alter_server          | 0     |
+| Com_alter_table           | 6     |
+| Com_alter_tablespace      | 0     |</code></pre>
+<p>使用<code>show processlist</code>查看当前MySQL进行的线程</p>
+<pre class=" language-mysql"><code class="language-mysql">mysql> show processlist;
++----+------+----------------+------+---------+------+-------+------------------+
+| Id | User | Host           | db   | Command | Time | State | Info             |
++----+------+----------------+------+---------+------+-------+------------------+
+|  5 | root | localhost:6029 | NULL | Query   |    0 | NULL  | show processlist |
++----+------+----------------+------+---------+------+-------+------------------+
+1 row in set (0.00 sec)</code></pre>
+<h3 id="explain"><a href="#explain" class="headerlink" title="explain"></a><code>explain</code></h3><p><strong>使用explain、desc可以获取MySQL是如何执行select语句的信息，包括表连接和连接的顺序</strong></p>
+<pre class=" language-mysql"><code class="language-mysql">mysql> explain select count(*) from actor \G;
+*************************** 1. row ***************************
+           id: 1
+  select_type: SIMPLE
+        table: actor
+         type: index
+possible_keys: NULL
+          key: idx_actor_last_name
+      key_len: 137
+          ref: NULL
+         rows: 200
+        Extra: Using index
+1 row in set (0.00 sec)
+
+ERROR:
+No query specified</code></pre>
+<p>解释</p>
+<p><code>select_type</code>：表示select的类型，常见的取值simple（简单表，不使用表连接或子查询）、primary（主查询，外层的查询）、union（union语句中的第二个或者后面的查询语句）、subquery（子查询中的第一个select）等</p>
+<p><code>table</code>：输出结果集的表</p>
+<p><span style="color:red"><code>type</code></span>：表示MySQL在表中找到所需行的方式，访问类型 重点理解</p>
+<ul>
+<li><code>type=all</code> 全表扫描</li>
+<li><code>type=index</code> 索引全扫描</li>
+<li><code>type=range</code> 索引范围扫描,常用于&lt;、&lt;=、&gt;、&gt;=等操作符</li>
+<li><strong><code>type=ref</code></strong> 使用非唯一索引或唯一索引的前缀索引，返回某个单独值得记录行，<strong>个人理解就是范围结果不唯一，where条件是等于</strong></li>
+</ul>
+<pre class=" language-mysql"><code class="language-mysql">mysql> explain select b.*, a.* from payment a, customer b where a.customer_id=b.customer_id \G;
+*************************** 1. row ***************************
+           id: 1
+  select_type: SIMPLE
+        table: b
+         type: ALL
+possible_keys: PRIMARY
+          key: NULL
+      key_len: NULL
+          ref: NULL
+         rows: 505
+        Extra:
+*************************** 2. row ***************************
+           id: 1
+  select_type: SIMPLE
+        table: a
+         type: ref
+possible_keys: idx_fk_customer_id
+          key: idx_fk_customer_id
+      key_len: 2
+          ref: sakila.b.customer_id
+         rows: 13
+        Extra:
+2 rows in set (0.00 sec)
+
+ERROR:
+No query specified</code></pre>
+<ul>
+<li><p><code>type=eq_ref</code> 类似ref，区别在于使用唯一索引，每个索引键值，表中只有一条匹配记录，<strong>多表连接</strong>中使用<code>primary key</code> 或者 <code>unique key</code>作为关联条件 <strong>就是说外键使用唯一不重复的，多表联合操作返回唯一值。</strong>外表的一个元祖，内表只有唯一一条元组与之对应</p>
+</li>
+<li><p><code>type=const/system</code>，单表中最多有一个匹配行，查询起来非常迅速，所以这个匹配行中的其他列的值可以被优化器在当前查询中当作常量处理，根据主键<code>primary key</code> 或唯一索引 <code>unique index</code>进行查询。j</p>
+<p><strong>就是说查询条件的字段不重复唯一</strong>就会当作常量处理。</p>
+<p>coast：查询的条件唯一</p>
+<p>system：coast的特例，表里面只有一条记录的时候</p>
+</li>
+</ul>
+<pre class=" language-mysql"><code class="language-mysql">mysql> explain select * from actor where actor_id=1 \G;
+*************************** 1. row ***************************
+           id: 1
+  select_type: SIMPLE
+        table: actor
+         type: const
+possible_keys: PRIMARY
+          key: PRIMARY
+      key_len: 2
+          ref: const
+         rows: 1
+        Extra:
+1 row in set (0.00 sec)
+
+ERROR:
+No query specified</code></pre>
+<ul>
+<li>type=null，MySQL不用访问表或者索引，直接就能得到结果.</li>
+</ul>
+<pre class=" language-mysql"><code class="language-mysql">mysql> explain select 1 from dual where 1 \G;
+*************************** 1. row ***************************
+           id: 1
+  select_type: SIMPLE
+        table: NULL
+         type: NULL
+possible_keys: NULL
+          key: NULL
+      key_len: NULL
+          ref: NULL
+         rows: NULL
+        Extra: No tables used
+1 row in set (0.00 sec)
+
+ERROR:
+No query specified</code></pre>
+<ul>
+<li><code>type=REF_OR_NUL</code> 类似ref,只是索索条件包括，链接字段的值为空的情况</li>
+<li><code>type=index_merge</code>索引合并优化</li>
+<li><code>type=unique_subquery</code>：in后面是一个查询主键字段的子查询字段</li>
+<li><code>type=index_subquery</code>：in后面是一个普通索引的子查询</li>
+</ul>
+<p><code>possible_keys</code>：查询的时候可能使用的索引</p>
+<p><code>key</code>：实际使用的索引</p>
+<p><code>key_len</code>：索引字段的长度</p>
+<p><code>rows</code>：扫描的行数</p>
+<p><code>extra</code>：执行的情况和描述</p>
+<ul>
+<li><code>using where</code>表示优化器回表查询数据</li>
+<li><code>using index</code>表示查询覆盖索引查询</li>
+</ul>
+<p>使用<code>explain extended</code>查看优化器做的修改</p>
+<p>使用<code>explain partition</code>查看分区情况</p>
+<p>优化器会去掉恒成立的条件</p>
+<h3 id="profile"><a href="#profile" class="headerlink" title="profile"></a>profile</h3><p><strong>profile可以更清楚的了解SQL执行的过程</strong></p>
+<p>查看<code>profiling</code></p>
+<pre class=" language-mysql"><code class="language-mysql">select @@profiling;</code></pre>
+<p>开启<code>profiling</code></p>
+<pre class=" language-mysql"><code class="language-mysql">set profiling=1;</code></pre>
+<p>使用<code>profile</code></p>
+<pre class=" language-mysql"><code class="language-mysql">mysql> show profiles;
++----------+------------+-------------------------------------+
+| Query_ID | Duration   | Query                               |
++----------+------------+-------------------------------------+
+|        1 | 0.00045525 | select count(* ) from actor         |
+|        2 | 0.00022275 | expalinselect count(* ) from actor  |
+|        3 | 0.00007975 | expalin select count(* ) from actor |
+|        4 | 0.00019775 | explain select count(* ) from actor |
+|        5 | 0.00031625 | explain select count(* ) from actor |
++----------+------------+-------------------------------------+
+5 rows in set (0.00 sec)</code></pre>
+<p>使用<code>profile</code>查看CPU、磁盘IO等资源的消耗</p>
+<pre class=" language-mysql"><code class="language-mysql">mysql> show profile cpu for query 5;
++----------------------+----------+----------+------------+
+| Status               | Duration | CPU_user | CPU_system |
++----------------------+----------+----------+------------+
+| starting             | 0.000096 | 0.000000 |   0.000000 |
+| checking permissions | 0.000007 | 0.000000 |   0.000000 |
+| Opening tables       | 0.000017 | 0.000000 |   0.000000 |
+| System lock          | 0.000044 | 0.000000 |   0.000000 |
+| init                 | 0.000010 | 0.000000 |   0.000000 |
+| optimizing           | 0.000006 | 0.000000 |   0.000000 |
+| statistics           | 0.000010 | 0.000000 |   0.000000 |
+| preparing            | 0.000006 | 0.000000 |   0.000000 |
+| executing            | 0.000011 | 0.000000 |   0.000000 |
+| end                  | 0.000007 | 0.000000 |   0.000000 |
+| query end            | 0.000015 | 0.000000 |   0.000000 |
+| closing tables       | 0.000005 | 0.000000 |   0.000000 |
+| freeing items        | 0.000079 | 0.000000 |   0.000000 |
+| logging slow query   | 0.000002 | 0.000000 |   0.000000 |
+| cleaning up          | 0.000003 | 0.000000 |   0.000000 |
++----------------------+----------+----------+------------+
+15 rows in set (0.00 sec)</code></pre>
+<p>使用<code>show profile source for query xxx</code>可以查看SQL解析执行过程中每个步骤使用的源码文件、函数名、以及具体的源文件行数</p>
+<p>注意事项：</p>
+<p><strong>每次开启MySQL客户端都要开启<code>profiling</code></strong></p>
+<h3 id="trace"><a href="#trace" class="headerlink" title="trace"></a><code>trace</code></h3><p>MySQL5.6提供了对SQL上网跟踪trace，了解优化器执行过程</p>
+<p>使用流程</p>
+<ol>
+<li>开启trace 设置格式json ，设置trace最大能够使用的内存大小(避免默认内存导致显示不完整)</li>
+</ol>
+<pre class=" language-mysql"><code class="language-mysql">set optimizer_trace='enabled=on' ,en_markers_in_json=on;
+set optimizer_trace_max_mem_size=100000;</code></pre>
+<ol start="2">
+<li>执行想要trace的语句</li>
+<li>检查information_schema.optimizer_trace 知道SQL如何执行SQL</li>
+</ol>
+<pre class=" language-mysql"><code class="language-mysql">select * from information_schema.optimizer_trace \G:</code></pre>
+<p>由于我的MySQL版本为5.5，不支持<code>trace</code>，所以不做例子</p>
+<h1 id="索引问题"><a href="#索引问题" class="headerlink" title="索引问题"></a>索引问题</h1><p>索引分类见索引章节，大部分内容在该章节有所涉及</p>
+<p>MySQL索引最常见的是采用<code>B-tree</code>（ALV平衡树），可以用于全关键字、关键字范围、关键字前缀查询。</p>
+<h2 id="使用索引的情况"><a href="#使用索引的情况" class="headerlink" title="使用索引的情况"></a>使用索引的情况</h2><ol>
+<li>匹配全值</li>
+<li>匹配值的范围查询</li>
+<li>匹配最左前缀（复合索引中）</li>
+<li>仅仅对索引查询</li>
+<li>前缀索引</li>
+<li>能够实现索引匹配部分精确而其他部分进行范围查询</li>
+</ol>
+<pre class=" language-mysql"><code class="language-mysql">mysql> explain select inventory_id from rental where rental_date='2006&2&14 15:16:03' and customer_id>=300 and customer_id<=400 \G;
+*************************** 1. row ***************************
+           id: 1
+  select_type: SIMPLE
+        table: rental
+         type: ref
+possible_keys: idx_fk_customer_id,idx_rental_date
+          key: idx_rental_date
+      key_len: 8
+          ref: const
+         rows: 182
+        Extra: Using where; Using index
+1 row in set (0.00 sec)
+
+ERROR:
+No query specified</code></pre>
+<p>解释：先用索引匹配出对应的数据地址，然后回表获取对应数据，在进行范围查询</p>
+<ol start="7">
+<li>如果列名是索引，那么使用<code>column_name is null</code>会使用索引</li>
+</ol>
+<pre class=" language-mysql"><code class="language-mysql">mysql> explain select * from payment where rental_id is null \G;
+*************************** 1. row ***************************
+           id: 1
+  select_type: SIMPLE
+        table: payment
+         type: ref
+possible_keys: fk_payment_rental
+          key: fk_payment_rental
+      key_len: 5
+          ref: const
+         rows: 5
+        Extra: Using where
+1 row in set (0.10 sec)</code></pre>
+<ol start="8">
+<li>5.6引入<code>index Condition Pushdown(ICP)</code>特性优化查询，将某些条件过滤操作下放到存储引擎，以6为例，在5.6一下，数据库的操作如6的所说，但是在5.6及以后，数据库用索引查询出对应数据的地址后，不会立刻回表显示数据，而是在索引<code>customer_id</code>上过滤条件，再从表中读取数据，减少不必要数据的IO读操作</li>
+</ol>
+<h2 id="存在索引但是不能使用索引的情况"><a href="#存在索引但是不能使用索引的情况" class="headerlink" title="存在索引但是不能使用索引的情况"></a>存在索引但是不能使用索引的情况</h2><ul>
+<li>%开头</li>
+<li>数据类型出现隐式转换</li>
+<li>复合索引不满足最左原则</li>
+<li>or分割</li>
+</ul>
+<p>查看索引情况</p>
+<pre class=" language-mysql"><code class="language-mysql">mysql> show status like 'Handler_read%';
++-----------------------+-------+
+| Variable_name         | Value |
++-----------------------+-------+
+| Handler_read_first    | 2     |
+| Handler_read_key      | 1     |
+| Handler_read_last     | 0     |
+| Handler_read_next     | 202   |
+| Handler_read_prev     | 0     |
+| Handler_read_rnd      | 0     |
+| Handler_read_rnd_next | 27    |
++-----------------------+-------+
+7 rows in set (0.00 sec)</code></pre>
+<p><code>Handler_read_key</code>低说明索引不好，用得少</p>
+<p><code>Handler_read_rnd_next</code>高说明查询低效，需要建立索引补救</p>
+<h1 id="SQL优化步骤"><a href="#SQL优化步骤" class="headerlink" title="SQL优化步骤"></a>SQL优化步骤</h1><p>单独写个章节</p>
+<h1 id="优化表方法"><a href="#优化表方法" class="headerlink" title="优化表方法"></a>优化表方法</h1><h2 id="定期分析表"><a href="#定期分析表" class="headerlink" title="定期分析表"></a>定期分析表</h2><p>分析表 分析和存储表的关键字，得到准确的统计信息</p>
+<pre class=" language-mysql"><code class="language-mysql">mysql> analyze table payment;
++----------------+---------+----------+----------+
+| Table          | Op      | Msg_type | Msg_text |
++----------------+---------+----------+----------+
+| sakila.payment | analyze | status   | OK       |
++----------------+---------+----------+----------+
+1 row in set (0.09 sec)</code></pre>
+<p>检查表 检查单表夺标是否存在错误</p>
+<pre class=" language-mysql"><code class="language-mysql">mysql> check table payment_myisam;
++-----------------------+-------+----------+----------+
+| Table                 | Op    | Msg_type | Msg_text |
++-----------------------+-------+----------+----------+
+| sakila.payment_myisam | check | status   | OK       |
++-----------------------+-------+----------+----------+
+1 row in set (0.01 sec)</code></pre>
+<h2 id="定期优化表"><a href="#定期优化表" class="headerlink" title="定期优化表"></a>定期优化表</h2><pre class=" language-mysql"><code class="language-mysql">mysql> optimize table payment_myisam;
++-----------------------+----------+----------+-----------------------------+
+| Table                 | Op       | Msg_type | Msg_text                    |
++-----------------------+----------+----------+-----------------------------+
+| sakila.payment_myisam | optimize | status   | Table is already up to date |
++-----------------------+----------+----------+-----------------------------+</code></pre>
+<p>会给出相应的优化信息</p>
+<p><strong>注意</strong>：以上操作都会锁定表</p>
+<h1 id="常用SQL语句优化"><a href="#常用SQL语句优化" class="headerlink" title="常用SQL语句优化"></a>常用SQL语句优化</h1><h2 id="大批量插入数据"><a href="#大批量插入数据" class="headerlink" title="大批量插入数据"></a>大批量插入数据</h2><p><strong>对MyISAM存储引擎的表</strong></p>
+<pre class=" language-mysql"><code class="language-mysql">alter table xxx disable keys;    #关闭MyISAM表非唯一索引的更新。
+load the data;
+alter table xxx enable keys;    #开启</code></pre>
+<pre class=" language-mysql"><code class="language-mysql">load data infile '路径/文件名' into table xxx;</code></pre>
+<p><strong>对InnoDB的表</strong></p>
+<ol>
+<li><strong>InnoDB表的按照主键的顺序存储</strong>，按主键的顺序存储数据效率高</li>
+<li>关闭唯一性校验，在存在索引中遇到。</li>
+</ol>
+<pre class=" language-mysql"><code class="language-mysql">set unique_checks=0;
+set unique_checks=1;</code></pre>
+<ol start="3">
+<li>关闭自动提交，然后在开启自动提交</li>
+</ol>
+<pre class=" language-mysql"><code class="language-mysql">set autocommit=0;
+set autocommit=1;</code></pre>
+<h2 id="优化insert语句"><a href="#优化insert语句" class="headerlink" title="优化insert语句"></a>优化insert语句</h2><ul>
+<li>一次插入多条数据</li>
+<li>索引文件和数据文件放在不同的磁盘</li>
+<li>用文本文件导入数据 <code>load data infile xxx into table xxx</code></li>
+<li>使用内存表</li>
+</ul>
+<h2 id="优化Order-By语句"><a href="#优化Order-By语句" class="headerlink" title="优化Order By语句"></a>优化Order By语句</h2><p>这部分看不懂，等老师讲</p>
+<h2 id="优化Group-by语句"><a href="#优化Group-by语句" class="headerlink" title="优化Group by语句"></a>优化Group by语句</h2><p>默认情况下<code>group by</code>会对分类的字段排序</p>
+<p>避免排序结果的消耗，指定<code>order by null</code>禁止排序</p>
+<pre class=" language-mysql"><code class="language-mysql">mysql> explain select payment_date,sum(amount) from payment group by payment_date \G;
+*************************** 1. row ***************************
+           id: 1
+  select_type: SIMPLE
+        table: payment
+         type: ALL
+possible_keys: NULL
+          key: NULL
+      key_len: NULL
+          ref: NULL
+         rows: 16451
+        Extra: Using temporary; Using filesort
+1 row in set (0.00 sec)
+
+ERROR:
+No query specified</code></pre>
+<pre class=" language-mysql"><code class="language-mysql">mysql> explain select payment_date,sum(amount) from payment group by payment_date order by null\G;
+*************************** 1. row ***************************
+           id: 1
+  select_type: SIMPLE
+        table: payment
+         type: ALL
+possible_keys: NULL
+          key: NULL
+      key_len: NULL
+          ref: NULL
+         rows: 16451
+        Extra: Using temporary
+1 row in set (0.00 sec)
+
+ERROR:
+No query specified</code></pre>
+<p>查看时间</p>
+<pre class=" language-mysql"><code class="language-mysql">mysql> show profiles;
++----------+------------+------------------------------------------------------------------------------------------+
+| Query_ID | Duration   | Query                                                                                    |
++----------+------------+------------------------------------------------------------------------------------------+           |
+|       18 | 0.00028650 | explain select payment_date,sum(amount) from payment group by payment_date               |
+|       19 | 0.00015250 | explain select payment_date,sum(amount) from payment group by payment_date order by      |
+|       20 | 0.00026600 | explain select payment_date,sum(amount) from payment group by payment_date order by null |
++----------+------------+------------------------------------------------------------------------------------------+
+15 rows in set (0.00 sec)</code></pre>
+<p>可以看到query 18明显比20慢点儿，分析上面的explain，发现没有禁止排序分分类存在<code>using filesort</code>，而<code>filesort</code>消耗时间长</p>
+<h2 id="优化嵌套查询"><a href="#优化嵌套查询" class="headerlink" title="优化嵌套查询"></a>优化嵌套查询</h2><p>子查询可以一次性完成多种逻辑操作，同时避免事务、或者表的锁死，但是有的情况下，子查询可以用<code>join</code>替代。原因在于<strong>MySQL不需要创建临时表完成逻辑上需要两个步骤的查询工作</strong></p>
+<pre class=" language-mysql"><code class="language-mysql">mysql> explain select * from customer where customer_id not in (select customer_id from payment)\G;
+*************************** 1. row ***************************
+           id: 1
+  select_type: PRIMARY
+        table: customer
+         type: ALL
+possible_keys: NULL
+          key: NULL
+      key_len: NULL
+          ref: NULL
+         rows: 577
+        Extra: Using where
+*************************** 2. row ***************************
+           id: 2
+  select_type: DEPENDENT SUBQUERY
+        table: payment
+         type: index_subquery
+possible_keys: idx_fk_customer_id
+          key: idx_fk_customer_id
+      key_len: 2
+          ref: func
+         rows: 13
+        Extra: Using index
+2 rows in set (0.00 sec)
+
+ERROR:
+No query specified</code></pre>
+<pre class=" language-mysql"><code class="language-mysql">mysql> explain select * from customer a left join payment b on a.customer_id=b.customer_id where b.customer_id is null \G;
+*************************** 1. row ***************************
+           id: 1
+  select_type: SIMPLE
+        table: a
+         type: ALL
+possible_keys: NULL
+          key: NULL
+      key_len: NULL
+          ref: NULL
+         rows: 577
+        Extra:
+*************************** 2. row ***************************
+           id: 1
+  select_type: SIMPLE
+        table: b
+         type: ref
+possible_keys: idx_fk_customer_id
+          key: idx_fk_customer_id
+      key_len: 2
+          ref: sakila.a.customer_id
+         rows: 13
+        Extra: Using where; Not exists
+2 rows in set (0.00 sec)
+
+ERROR:
+No query specified</code></pre>
+<p>profile分析</p>
+<pre class=" language-mysql"><code class="language-mysql">*************************** 14. row ***************************
+Query_ID: 22
+Duration: 0.00227575
+   Query: explain select * from customer where customer_id not in (select customer_id from payment)
+*************************** 15. row ***************************
+Query_ID: 23
+Duration: 0.00043550
+   Query: explain select * from customer a left join payment b on a.customer_id=b.customer_id where b.customer_id is null
+15 rows in set (0.00 sec)
+
+ERROR:
+No query specified</code></pre>
+<p>可以看出第二种明显快很多</p>
+<p>再看各部分消耗时间</p>
+<pre class=" language-mysql"><code class="language-mysql">mysql> show profile for query 22;
++----------------------+----------+
+| Status               | Duration |
++----------------------+----------+
+| starting             | 0.000077 |
+| checking permissions | 0.000007 |
+| checking permissions | 0.000006 |
+| Opening tables       | 0.001802 |#
+| System lock          | 0.000032 |
+| init                 | 0.000096 |
+| optimizing           | 0.000010 |
+| statistics           | 0.000029 |
+| preparing            | 0.000012 |
+| executing            | 0.000016 |
+| optimizing           | 0.000006 |
+| statistics           | 0.000010 |
+| preparing            | 0.000023 |
+| executing            | 0.000013 |
+| end                  | 0.000010 |
+| query end            | 0.000016 |
+| closing tables       | 0.000012 |
+| freeing items        | 0.000094 |
+| logging slow query   | 0.000004 |
+| cleaning up          | 0.000006 |
++----------------------+----------+
+20 rows in set (0.00 sec)
+
+mysql> show profile for query 23;
++----------------------+----------+
+| Status               | Duration |
++----------------------+----------+
+| starting             | 0.000094 |
+| checking permissions | 0.000007 |
+| checking permissions | 0.000007 |
+| Opening tables       | 0.000036 |
+| System lock          | 0.000037 |
+| init                 | 0.000042 |
+| optimizing           | 0.000014 |
+| statistics           | 0.000042 |
+| preparing            | 0.000020 |
+| executing            | 0.000025 |
+| end                  | 0.000009 |
+| query end            | 0.000011 |
+| closing tables       | 0.000010 |
+| freeing items        | 0.000075 |
+| logging slow query   | 0.000003 |
+| cleaning up          | 0.000005 |
++----------------------+----------+
+16 rows in set (0.00 sec)</code></pre>
+<p>可以看出第二种方式比第一种慢的原因在于<code>opending tables</code>,为什么是<code>opending tables</code>,是由于创建了第一种临时表，打开表消耗了时间?</p>
+<p>由于我的版本不支持<code>trace</code>，就没办法分析优化器处理流程了</p>
+<h2 id="MySQL如何优化or条件"><a href="#MySQL如何优化or条件" class="headerlink" title="MySQL如何优化or条件"></a>MySQL如何优化or条件</h2><p>含有or的每个条件必须是索引，才会使用索引，复合索引使用or不能使用索引</p>
+<h2 id="优化分页查询"><a href="#优化分页查询" class="headerlink" title="优化分页查询"></a>优化分页查询</h2><p>正常情况下，我们使用limit查询时，会把前面的数据查询到了，但是有舍弃，造成不必要的数据去读操作，解决办法如下。</p>
+<p>第一种，在索引上完成排序分页的操作，在根据索引回表获取其他数据。</p>
+<p>第二种，添加一个字段，记录上一页的最后一行的标号，然后在查询的时候添加该字段的限制，准确的地址查询，避免，不必要的查询。但是这种情况是适用于不重复的情况，重复的情况下会出现分页结果内容丢失。</p>
+<p>过程自行看书，网上关于分页的优化有很多，比树上强一些，google一下。</p>
+<h2 id="SQL提示"><a href="#SQL提示" class="headerlink" title="SQL提示"></a>SQL提示</h2><p><code>use index</code>希望使用提供的索引</p>
+<pre class=" language-mysql"><code class="language-mysql">explain select * from table_name use index(xxx) \G;</code></pre>
+<p><code>ignore index</code>忽略索引</p>
+<pre class=" language-mysql"><code class="language-mysql">explain seletc * from table_name ignore index(xxx) \G;</code></pre>
+<p><code>force index</code>强制使用某种索引</p>
+<pre class=" language-mysql"><code class="language-mysql">explain select * from table_name force index(xxx) \G;</code></pre>
+<h1 id="常用SQL技巧"><a href="#常用SQL技巧" class="headerlink" title="常用SQL技巧"></a>常用SQL技巧</h1><h2 id="正则表达式"><a href="#正则表达式" class="headerlink" title="正则表达式"></a>正则表达式</h2><p>使用<code>regexp</code></p>
+<p><img src="https://i.loli.net/2019/04/21/5cbc3ffc058b7.jpg" alt></p>
+<h2 id="数据库名表名问题"><a href="#数据库名表名问题" class="headerlink" title="数据库名表名问题"></a>数据库名表名问题</h2><p>MySQL的命名与操作系统有关，linux系统对大小写敏感，windows对大小写不敏感，建议命名的时候（大小写不敏感）不要相同。</p>
+
+            </div>
+            <hr/>
+
+            
+
+            <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+
+<div id="article-share">
+    
+    <div class="social-share" data-disabled="qzone" data-wechat-qrcode-helper="<p>微信里点“发现”->“扫一扫”二维码便可查看分享。</p>"></div>
+    
+</div>
+
+<script src="/libs/share/js/social-share.min.js"></script>
+
+            
+
+    <div class="reprint" id="reprint-statement">
+        <p class="reprint-tip">
+            <i class="fa fa-exclamation-triangle"></i>&nbsp;&nbsp;
+            <span>转载规则</span>
+        </p>
+        
+            <div class="center-align">
+                <a rel="license" href="https://creativecommons.org/licenses/by/4.0/deed.zh">
+                    <img alt=""
+                         style="border-width:0"
+                         src="https://i.creativecommons.org/l/by/4.0/88x31.png"/>
+                </a>
+            </div>
+            <br/>
+            <span xmlns:dct="http://purl.org/dc/terms/" href="http://purl.org/dc/dcmitype/Text"
+                  property="dct:title" rel="dct:type">
+                    《深入浅出MySQL-SQL优化》
+                </span> 由
+            <a xmlns:cc="http://creativecommons.org/ns#" href="/2019/04/21/shen-ru-qian-chu-mysql-sql-you-hua/" property="cc:attributionName"
+               rel="cc:attributionURL">
+                hmlr123
+            </a> 采用
+            <a rel="license" href="https://creativecommons.org/licenses/by/4.0/deed.zh">
+                知识共享署名 4.0 国际许可协议
+            </a>进行许可。
+        
+    </div>
+
+    <script async defer>
+      document.addEventListener("copy", function (e) {
+        let toastHTML = '<span>复制成功，请遵循本文的转载规则</span><button class="btn-flat toast-action" onclick="navToReprintStatement()" style="font-size: smaller">查看</a>';
+        M.toast({html: toastHTML})
+      });
+
+      function navToReprintStatement() {
+        $("html, body").animate({scrollTop: $("#reprint-statement").offset().top - 80}, 800);
+      }
+    </script>
+
+
+        </div>
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge left-badge text-color">
+                <i class="fa fa-chevron-left"></i>&nbsp;上一篇</div>
+            <div class="card">
+                <a href="/2019/04/21/sql-you-hua-bu-zou/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/13.jpg" class="responsive-img" alt="SQL优化步骤">
+                        
+                        <span class="card-title">SQL优化步骤</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            一次实验报告，感觉还行，挂上来
+
+
+
+
+查看慢查询参数查看慢查询
+
+开启慢查询
+
+重启慢MySQL客户端，才能生效
+设置慢查询时间查看慢查询时间
+
+设置慢查询时间
+
+查看表结构，在没有索引的列查询查看表结构：
+
+可以看到user_id是主键
+                        
+                    </div>
+                    <div class="publish-info">
+                        <span class="publish-date">
+                            <i class="fa fa-clock-o fa-fw icon-date"></i>2019-04-21
+                        </span>
+                        <span class="publish-author">
+                            
+                            <i class="fa fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/读书笔记/" class="post-category" target="_blank">
+                                    读书笔记
+                                </a>
+                            
+                            <a href="/categories/读书笔记/深入浅出MySQL/" class="post-category" target="_blank">
+                                    深入浅出MySQL
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/MySQL/" target="_blank">
+                        <span class="chip bg-color">MySQL</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fa fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2019/04/20/mysql-you-hua-yuan-li/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/17.jpg" class="responsive-img" alt="MySQL优化原理">
+                        
+                        <span class="card-title">MySQL优化原理</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            获益匪浅
+
+
+请看这里，写的非常好
+https://cloud.tencent.com/developer/article/1103154
+
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="fa fa-clock-o fa-fw icon-date"></i>2019-04-20
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fa fa-user fa-fw"></i>
+                            hmlr123
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/MySQL/" target="_blank">
+                        <span class="chip bg-color">MySQL</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+</article>
+</div>
+
+
+
+    </div>
+    <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
+        <div class="toc-widget">
+            <div class="toc-title"><i class="fa fa-list-alt"></i>&nbsp;&nbsp;目录</div>
+            <div id="toc-content"></div>
+        </div>
+    </div>
+</div>
+
+<!-- TOC 悬浮按钮. -->
+
+<div id="floating-toc-btn" class="hide-on-med-and-down">
+    <a class="btn-floating btn-large bg-color">
+        <i class="fa fa-list"></i>
+    </a>
+</div>
+
+
+<script src="/libs/tocbot/tocbot.min.js"></script>
+<script>
+    $(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            // headingsOffset: -205,
+            headingSelector: 'h1, h2, h3, h4, h5, h6'
+        });
+
+        // modify the toc link href to support Chinese.
+        let i = 0;
+        let tocHeading = 'toc-heading-';
+        $('#toc-content a').each(function () {
+            $(this).attr('href', '#' + tocHeading + (++i));
+        });
+
+        // modify the heading title id to support Chinese.
+        i = 0;
+        $('#articleContent').children('h1, h2, h3, h4, h5, h6').each(function () {
+            $(this).attr('id', tocHeading + (++i));
+        });
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+
+        
+        /* 修复文章卡片 div 的宽度. */
+        let fixPostCardWidth = function (srcId, targetId) {
+            let srcDiv = $('#' + srcId);
+            if (srcDiv.length === 0) {
+                return;
+            }
+
+            let w = srcDiv.width();
+            if (w >= 450) {
+                w = w + 21;
+            } else if (w >= 350 && w < 450) {
+                w = w + 18;
+            } else if (w >= 300 && w < 350) {
+                w = w + 16;
+            } else {
+                w = w + 14;
+            }
+            $('#' + targetId).width(w);
+        };
+
+        // 切换TOC目录展开收缩的相关操作.
+        const expandedClass = 'expanded';
+        let $tocAside = $('#toc-aside');
+        let $mainContent = $('#main-content');
+        $('#floating-toc-btn .btn-floating').click(function () {
+            if ($tocAside.hasClass(expandedClass)) {
+                $tocAside.removeClass(expandedClass).slideUp(500);
+                $mainContent.removeClass('l9');
+            } else {
+                $tocAside.addClass(expandedClass).slideDown(500);
+                $mainContent.addClass('l9');
+            }
+            fixPostCardWidth('artDetail', 'prenext-posts');
+        });
+        
+    });
+</script>
+    
+
+</main>
+
+
+<footer class="page-footer bg-color">
+    <div class="container row center-align">
+        <div class="col s12 m8 l8 copy-right">
+            本站由&copy;<a href="https://hmlr123.com/" target="_blank">hmlr123</a>基于
+            <a href="https://hexo.io/" target="_blank">Hexo</a> 的
+            <a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">hexo-theme-matery</a>主题搭建.
+
+            
+                &nbsp;<i class="fa fa-area-chart"></i>&nbsp;站点总字数:&nbsp;
+                <span class="white-color">82.2k</span>
+            
+
+            
+			
+                <br>
+                
+                <span id="busuanzi_container_site_pv">
+                    <i class="fa fa-heart-o"></i>
+                    本站总访问量 <span id="busuanzi_value_site_pv" class="white-color"></span>
+                </span>
+                
+                
+                <span id="busuanzi_container_site_uv">
+                    <i class="fa fa-users"></i>
+                    次,&nbsp;访客数 <span id="busuanzi_value_site_uv" class="white-color"></span> 人.
+                </span>
+                
+            
+        </div>
+        <div class="col s12 m4 l4 social-link social-statis">
+    <a href="hmlr123" class="tooltipped" target="_blank" data-tooltip="访问我的GitHub" data-position="top" data-delay="50">
+        <i class="fa fa-github"></i>
+    </a>
+
+
+
+    <a href="mailto:2870027009@qq.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+        <i class="fa fa-envelope-open"></i>
+    </a>
+
+
+
+    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=2870027009" class="tooltipped" data-tooltip="QQ联系我: 2870027009" data-position="top" data-delay="50">
+        <i class="fa fa-qq"></i>
+    </a>
+
+
+
+    <a href="/atom.xml" class="tooltipped" target="_blank" data-tooltip="RSS 订阅" data-position="top" data-delay="50">
+        <i class="fa fa-rss"></i>
+    </a>
+</div>
+    </div>
+</footer>
+
+<div class="progress-bar"></div>
+
+
+<!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fa fa-search"></i>&nbsp;&nbsp;搜索</span>
+            <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字"
+                   class="search-input">
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<script src="/js/search.js"></script>
+<script type="text/javascript">
+$(function () {
+    searchFunc("/" + "search.xml", 'searchInput', 'searchResult');
+});
+</script>
+<!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fa fa-angle-up"></i>
+    </a>
+</div>
+
+
+<script src="/libs/materialize/materialize.min.js"></script>
+<script src="/libs/masonry/masonry.pkgd.min.js"></script>
+<script src="/libs/aos/aos.js"></script>
+<script src="/libs/scrollprogress/scrollProgress.min.js"></script>
+<script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
+<script src="/js/matery.js"></script>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+
+
+
+    <script src="/libs/others/clicklove.js"></script>
+
+
+    <script async src="/libs/others/busuanzi.pure.mini.js"></script>
+
+
+</body>
+</html>

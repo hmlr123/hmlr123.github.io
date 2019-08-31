@@ -1,0 +1,1179 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+
+
+<head><meta name="generator" content="Hexo 3.9.0">
+    <meta charset="utf-8">
+    <meta name="keywords" content="深入浅出MYSQL-事务控制和锁定语句, hmlr123">
+    <meta name="description" content="对比java、spring的锁、事务机制思考学习
+
+
+
+
+存储类型与锁
+授之以渔锁：https://dev.mysql.com/doc/refman/5.7/en/lock-tables.html
+事务：https://dev.mysql.">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <title>深入浅出MYSQL-事务控制和锁定语句 | hmlr123</title>
+    <link rel="icon" type="image/png" href="/favicon.png">
+
+    <link rel="stylesheet" type="text/css" href="/libs/awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/materialize/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
+    <link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/matery.css">
+    <link rel="stylesheet" type="text/css" href="/css/my.css">
+    <style type="text/css">
+        
+    </style>
+
+    <script src="/libs/jquery/jquery-2.2.0.min.js"></script>
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"></head>
+
+
+<body>
+
+<header class="navbar-fixed">
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="nav-wrapper container">
+            <div class="brand-logo">
+                <a href="/" class="waves-effect waves-light">
+                    
+                    <img src="/medias/logo.png" class="logo-img" alt="LOGO">
+                    
+                    <span class="logo-span">hmlr123</span>
+                </a>
+            </div>
+            
+
+<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fa fa-navicon"></i></a>
+<ul class="right">
+    
+    <li class="hide-on-med-and-down">
+        <a href="/" class="waves-effect waves-light">
+            
+            <i class="fa fa-home"></i>
+            
+            <span>首页</span>
+        </a>
+    </li>
+    
+    <li class="hide-on-med-and-down">
+        <a href="/tags" class="waves-effect waves-light">
+            
+            <i class="fa fa-tags"></i>
+            
+            <span>标签</span>
+        </a>
+    </li>
+    
+    <li class="hide-on-med-and-down">
+        <a href="/categories" class="waves-effect waves-light">
+            
+            <i class="fa fa-bookmark"></i>
+            
+            <span>分类</span>
+        </a>
+    </li>
+    
+    <li class="hide-on-med-and-down">
+        <a href="/archives" class="waves-effect waves-light">
+            
+            <i class="fa fa-archive"></i>
+            
+            <span>归档</span>
+        </a>
+    </li>
+    
+    <li class="hide-on-med-and-down">
+        <a href="/about" class="waves-effect waves-light">
+            
+            <i class="fa fa-user-circle-o"></i>
+            
+            <span>关于</span>
+        </a>
+    </li>
+    
+    <li class="hide-on-med-and-down">
+        <a href="/friends" class="waves-effect waves-light">
+            
+            <i class="fa fa-address-book"></i>
+            
+            <span>友情链接</span>
+        </a>
+    </li>
+    
+    <li>
+        <a href="#searchModal" class="modal-trigger waves-effect waves-light">
+            <i id="searchIcon" class="fa fa-search" title="搜索"></i>
+        </a>
+    </li>
+</ul>
+
+<div id="mobile-nav" class="side-nav sidenav">
+
+    <div class="mobile-head bg-color">
+        
+        <img src="/medias/logo.png" class="logo-img circle responsive-img">
+        
+        <div class="logo-name">hmlr123</div>
+        <div class="logo-desc">
+            
+            走走停停，记录滴滴点点
+            
+        </div>
+    </div>
+
+    
+
+    <ul class="menu-list mobile-menu-list">
+        
+        <li>
+            <a href="/" class="waves-effect waves-light">
+                
+                <i class="fa fa-fw fa-home"></i>
+                
+                首页
+            </a>
+        </li>
+        
+        <li>
+            <a href="/tags" class="waves-effect waves-light">
+                
+                <i class="fa fa-fw fa-tags"></i>
+                
+                标签
+            </a>
+        </li>
+        
+        <li>
+            <a href="/categories" class="waves-effect waves-light">
+                
+                <i class="fa fa-fw fa-bookmark"></i>
+                
+                分类
+            </a>
+        </li>
+        
+        <li>
+            <a href="/archives" class="waves-effect waves-light">
+                
+                <i class="fa fa-fw fa-archive"></i>
+                
+                归档
+            </a>
+        </li>
+        
+        <li>
+            <a href="/about" class="waves-effect waves-light">
+                
+                <i class="fa fa-fw fa-user-circle-o"></i>
+                
+                关于
+            </a>
+        </li>
+        
+        <li>
+            <a href="/friends" class="waves-effect waves-light">
+                
+                <i class="fa fa-fw fa-address-book"></i>
+                
+                友情链接
+            </a>
+        </li>
+        
+        
+    </ul>
+</div>
+
+        </div>
+
+        
+    </nav>
+
+</header>
+
+
+
+
+
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/12.jpg')">
+    <div class="container">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <div class="description center-align post-title">
+                        深入浅出MYSQL-事务控制和锁定语句
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<main class="post-container content">
+
+    
+    <link rel="stylesheet" href="/libs/tocbot/tocbot.css">
+<style>
+    #articleContent h1::before,
+    #articleContent h2::before,
+    #articleContent h3::before,
+    #articleContent h4::before,
+    #articleContent h5::before,
+    #articleContent h6::before {
+        display: block;
+        content: " ";
+        height: 100px;
+        margin-top: -100px;
+        visibility: hidden;
+    }
+
+    #articleContent :focus {
+        outline: none;
+    }
+
+    .toc-fixed {
+        position: fixed;
+        top: 64px;
+    }
+
+    .toc-widget {
+        padding-left: 20px;
+    }
+
+    .toc-widget .toc-title {
+        margin: 35px 0 15px 0;
+        padding-left: 17px;
+        font-size: 1.5rem;
+        font-weight: bold;
+        line-height: 1.5rem;
+    }
+
+    .toc-widget ol {
+        padding: 0;
+        list-style: none;
+    }
+
+    #toc-content ol {
+        padding-left: 10px;
+    }
+
+    #toc-content ol li {
+        padding-left: 10px;
+    }
+
+    #toc-content .toc-link:hover {
+        color: #42b983;
+        font-weight: 700;
+        text-decoration: underline;
+    }
+
+    #toc-content .toc-link::before {
+        background-color: transparent;
+        max-height: 25px;
+    }
+
+    #toc-content .is-active-link {
+        color: #42b983;
+    }
+
+    #toc-content .is-active-link::before {
+        background-color: #42b983;
+    }
+
+    #floating-toc-btn {
+        position: fixed;
+        right: 20px;
+        bottom: 76px;
+        padding-top: 15px;
+        margin-bottom: 0;
+        z-index: 998;
+    }
+
+    #floating-toc-btn .btn-floating {
+        width: 48px;
+        height: 48px;
+    }
+
+    #floating-toc-btn .btn-floating i {
+        line-height: 48px;
+        font-size: 1.4rem;
+    }
+</style>
+<div class="row">
+    <div id="main-content" class="col s12 m12 l9">
+        <!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                    <div class="article-tag">
+                        
+                            <a href="/tags/MySQL/" target="_blank">
+                                <span class="chip bg-color">MySQL</span>
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fa fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/categories/读书笔记/" class="post-category" target="_blank">
+                                读书笔记
+                            </a>
+                        
+                            <a href="/categories/读书笔记/深入浅出MySQL/" class="post-category" target="_blank">
+                                深入浅出MySQL
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+
+            <div class="post-info">
+                <div class="post-date info-break-policy">
+                    <i class="fa fa-calendar-minus-o fa-fw"></i>发布日期:&nbsp;&nbsp;
+                    2019-04-11
+                </div>
+
+                
+                    
+                    <div class="info-break-policy">
+                        <i class="fa fa-file-word-o fa-fw"></i>文章字数:&nbsp;&nbsp;
+                        4.2k
+                    </div>
+                    
+
+                    
+                    <div class="info-break-policy">
+                        <i class="fa fa-clock-o fa-fw"></i>阅读时长:&nbsp;&nbsp;
+                        17 分
+                    </div>
+                    
+                
+				
+				
+                    <div id="busuanzi_container_page_pv" class="info-break-policy">
+                        <i class="fa fa-eye fa-fw"></i>阅读次数:&nbsp;&nbsp;
+                        <span id="busuanzi_value_page_pv"></span>
+                    </div>
+				
+            </div>
+        </div>
+        <hr class="clearfix">
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <p>对比java、spring的锁、事务机制思考学习</p>
+<a id="more"></a>
+
+
+
+<h1 id="存储类型与锁"><a href="#存储类型与锁" class="headerlink" title="存储类型与锁"></a>存储类型与锁</h1><p><img src="https://i.loli.net/2019/04/06/5ca8300abac34.png" alt></p>
+<h1 id="授之以渔"><a href="#授之以渔" class="headerlink" title="授之以渔"></a>授之以渔</h1><p>锁：<a href="https://dev.mysql.com/doc/refman/5.7/en/lock-tables.html" target="_blank" rel="noopener">https://dev.mysql.com/doc/refman/5.7/en/lock-tables.html</a></p>
+<p>事务：<a href="https://dev.mysql.com/doc/refman/5.7/en/commit.html" target="_blank" rel="noopener">https://dev.mysql.com/doc/refman/5.7/en/commit.html</a></p>
+<h1 id="锁"><a href="#锁" class="headerlink" title="锁"></a>锁</h1><p>类似java的锁机制，java中可以用Lock锁住资源，如果当前锁被其他线程获取，该线程将进入等待队列，直到使用当前锁的线程释放当前锁。</p>
+<p>mysql使用<code>lock tables</code>可以锁定当前线程的表，当表被锁定，当前线程就会等待，直到获取锁为止。</p>
+<p>使用<code>unlock tables</code>可以释放当前线程获得任意锁，当前线程执行另一个<code>lick tables</code>时，或当前与服务器的连接被关闭的时候，所有的锁会隐式解锁。</p>
+<pre class=" language-mysql"><code class="language-mysql">LOCK TABLES
+    tbl_name [[AS] alias] lock_type
+    [, tbl_name [[AS] alias] lock_type] ...
+
+lock_type: {
+    READ [LOCAL]
+  | [LOW_PRIORITY] WRITE
+}
+
+UNLOCK TABLES</code></pre>
+<ul>
+<li><p>可以看出一次可以锁定多个表</p>
+</li>
+<li><p><code>lock_type</code>  <span style="color:red">重点</span></p>
+<p>查询是读，修改、增加、删除是写。</p>
+<p>write：写锁，当前线程使用写锁时，当前线程读写，即可以CRUD操作；其他线程读写操作会等待，直到当前持有锁的线程释放锁。</p>
+<p>read：读锁，当前线程使用读锁时，当前线程可以读内容，但是不能写，即只能读。其他线程可以读写，但是写操作会等待，直到占用锁的线程释放锁。</p>
+</li>
+</ul>
+<p>栗子：</p>
+<p>使用表：</p>
+<pre class=" language-mysql"><code class="language-mysql">mysql> select * from emp;
++-------+------------+----------+--------+
+| ename | hiredate   | sal      | deptno |
++-------+------------+----------+--------+
+| tom   | 2003-12-02 |   200.00 |      3 |
+| dony  | 2005-02-02 |   100.00 |      2 |
+| tom   | 2003-12-02 |   200.00 |      1 |
+| dony  | 2005-02-02 |   100.00 |      2 |
+| za    | 2005-02-03 | 30000.00 |      3 |
++-------+------------+----------+--------+
+5 rows in set (0.07 sec)</code></pre>
+<p>比较说明，A：当前线程，B：其他线程</p>
+<p><strong>读锁</strong></p>
+<p>第一步：</p>
+<p>A: 给当前线程的表emp加读锁</p>
+<pre class=" language-mysql"><code class="language-mysql">mysql> lock table emp read;
+Query OK, 0 rows affected (0.00 sec)</code></pre>
+<p>B:无操作</p>
+<p>第二步：</p>
+<p>A:查询</p>
+<pre class=" language-mysql"><code class="language-mysql">mysql> select * from emp where deptno=1;
++-------+------------+--------+--------+
+| ename | hiredate   | sal    | deptno |
++-------+------------+--------+--------+
+| tom   | 2003-12-02 | 200.00 |      1 |
++-------+------------+--------+--------+
+1 row in set (0.00 sec)</code></pre>
+<p>B:查询</p>
+<pre class=" language-mysql"><code class="language-mysql">mysql> select * from emp where deptno=1;
++-------+------------+--------+--------+
+| ename | hiredate   | sal    | deptno |
++-------+------------+--------+--------+
+| tom   | 2003-12-02 | 200.00 |      1 |
++-------+------------+--------+--------+
+1 row in set (0.00 sec)</code></pre>
+<p><strong>说明读锁的情况下，其他线程也可以读</strong></p>
+<p>第三步：</p>
+<p>A：给当前表插入数据</p>
+<pre class=" language-mysql"><code class="language-mysql">mysql> insert into emp values('hello','1002%1%1',246.666,6);
+ERROR 1099 (HY000): Table 'emp' was locked with a READ lock and can't be updated</code></pre>
+<p><strong>说明读锁，当前线程不允许写操作</strong></p>
+<p>B：给当前表插入数据</p>
+<pre class=" language-mysql"><code class="language-mysql">mysql> insert into emp values('hello','1002%1%1',246.666,6);</code></pre>
+<p>进入等待状态；</p>
+<p><strong>说明其他线程可以读写，但是写操作会等待</strong></p>
+<p>第四步：</p>
+<p>A:释放锁</p>
+<pre class=" language-mysql"><code class="language-mysql">mysql> unlock tables;
+Query OK, 0 rows affected (0.00 sec)</code></pre>
+<p>B：可以进行写操作</p>
+<pre class=" language-mysql"><code class="language-mysql">Query OK, 1 row affected, 1 warning (2 min 41.82 sec)</code></pre>
+<p><strong>说明占用锁的线程释放锁后，其他线程可以写操作</strong></p>
+<p><strong>写锁</strong></p>
+<p>第一步：</p>
+<p>A:加写锁</p>
+<pre class=" language-mysql"><code class="language-mysql">mysql> lock tables emp write;
+Query OK, 0 rows affected (0.00 sec)</code></pre>
+<p>B:无任何操作</p>
+<p>第二步：</p>
+<p>A:查询</p>
+<pre class=" language-mysql"><code class="language-mysql">mysql> select * from emp where deptno=1;
++-------+------------+--------+--------+
+| ename | hiredate   | sal    | deptno |
++-------+------------+--------+--------+
+| tom   | 2003-12-02 | 200.00 |      1 |
++-------+------------+--------+--------+
+1 row in set (0.00 sec)</code></pre>
+<p>B:查询</p>
+<pre class=" language-mysql"><code class="language-mysql">select * from emp where deptno=1;</code></pre>
+<p>其他线程读等待。</p>
+<p>说明，当前线程持有锁的时候可以读，其他线程读操作会等待。</p>
+<p>第三步：</p>
+<p>A:释放锁</p>
+<pre class=" language-mysql"><code class="language-mysql">mysql> unlock tables;
+Query OK, 0 rows affected (0.00 sec)</code></pre>
+<p>B:无任何操作</p>
+<pre class=" language-mysql"><code class="language-mysql">+-------+------------+--------+--------+
+| ename | hiredate   | sal    | deptno |
++-------+------------+--------+--------+
+| tom   | 2003-12-02 | 200.00 |      1 |
++-------+------------+--------+--------+
+1 row in set (1 min 33.69 sec)</code></pre>
+<p>说明当前线程占用写锁的时候，其他线程的读操作会等待，直到当前锁被释放，其他线程可以读。</p>
+<p>第四步：</p>
+<p>A:写操作</p>
+<pre class=" language-mysql"><code class="language-mysql">mysql> insert into emp values('hello','1002%1%1',246.666,6);
+Query OK, 1 row affected, 1 warning (0.07 sec)</code></pre>
+<p>B：写操作</p>
+<pre class=" language-mysql"><code class="language-mysql">mysql> insert into emp values('hello','1002%1%1',246.666,6);</code></pre>
+<p>说明，当前线程持有锁的时候可以读，其他线程写操作会等待。</p>
+<p>第五步：</p>
+<p>A:释放锁</p>
+<pre class=" language-mysql"><code class="language-mysql">mysql> unlock tables;
+Query OK, 0 rows affected (0.00 sec)</code></pre>
+<p>B:无任何操作</p>
+<pre class=" language-mysql"><code class="language-mysql">mysql> insert into emp values('hello','1002%1%1',246.666,6);
+Query OK, 1 row affected, 1 warning (2 min 43.79 sec)</code></pre>
+<p>说明当前线程占用写锁的时候，其他线程的写操作会等待，直到当前锁被释放，其他线程可以写。</p>
+<h1 id="事务控制"><a href="#事务控制" class="headerlink" title="事务控制"></a>事务控制</h1><p>通过set autocommit、start transaction、commit、rollback等语句支持本地事务。</p>
+<pre class=" language-mysql"><code class="language-mysql">START TRANSACTION
+    [transaction_characteristic [, transaction_characteristic] ...]
+
+transaction_characteristic: {
+    WITH CONSISTENT SNAPSHOT
+  | READ WRITE
+  | READ ONLY
+}
+
+BEGIN [WORK]
+COMMIT [WORK] [AND [NO] CHAIN] [[NO] RELEASE]
+ROLLBACK [WORK] [AND [NO] CHAIN] [[NO] RELEASE]
+SET autocommit = {0 | 1}</code></pre>
+<p>默认情况下，mysql是<code>autocommit</code>的，如果需要通过明确的<code>commit</code>和<code>rollback</code>来提交和回滚事务，那么需要通过明确的事务控制命令来开始事务</p>
+<ul>
+<li><code>start transaction</code>或<code>begin</code>语句可以开始一项新的事务。</li>
+<li><code>commit</code>和<code>rollback</code>用来提交或者回滚事务。</li>
+<li><code>chain</code>和<code>release</code>子句分别用来定义在事务提交或者回滚之后的操作，<code>chain</code>会立即启动一个新事物，并且和刚才的事务具有相同的隔离级别，<code>release</code>则会断开和客户端的连接。</li>
+<li>SET AUTOCOMMIT可以修改当前连接的提交方式，如果设置了<code>set autocommit=0</code>，则设置<br>之后的所有事务都需要通过明确的命令进行提交或者回滚。</li>
+</ul>
+<h2 id="事务例子"><a href="#事务例子" class="headerlink" title="事务例子"></a>事务例子</h2><p>栗子：</p>
+<p>使用的表：</p>
+<pre class=" language-mysql"><code class="language-mysql">mysql> desc emp;
++----------+---------------+------+-----+---------+-------+
+| Field    | Type          | Null | Key | Default | Extra |
++----------+---------------+------+-----+---------+-------+
+| ename    | varchar(10)   | YES  |     | NULL    |       |
+| hiredate | date          | YES  |     | NULL    |       |
+| sal      | decimal(10,2) | YES  |     | NULL    |       |
+| deptno   | int(2)        | YES  |     | NULL    |       |
++----------+---------------+------+-----+---------+-------+
+4 rows in set (0.01 sec)</code></pre>
+<p>空表</p>
+<p>A：当前线程</p>
+<p>B：其他线程</p>
+<p>A:开启事务</p>
+<pre class=" language-mysql"><code class="language-mysql">mysql> start transaction;
+Query OK, 0 rows affected (0.00 sec)</code></pre>
+<p>A:插入数据</p>
+<pre class=" language-mysql"><code class="language-mysql">mysql> insert into emp values('hello','1234*12(4',12.12,1);
+Query OK, 1 row affected (0.00 sec)</code></pre>
+<p>A:查询数据</p>
+<pre class=" language-mysql"><code class="language-mysql">mysql> select * from emp;
++-------+------------+-------+--------+
+| ename | hiredate   | sal   | deptno |
++-------+------------+-------+--------+
+| hello | 1234-12-04 | 12.12 |      1 |
++-------+------------+-------+--------+
+1 row in set (0.00 sec)</code></pre>
+<p>B:插入数据</p>
+<pre class=" language-mysql"><code class="language-mysql">mysql> insert into emp values('hello','1234*12(4',12.12,2);
+Query OK, 1 row affected (0.07 sec)</code></pre>
+<p>说明可以插入数据</p>
+<p>B:查询数据</p>
+<pre class=" language-mysql"><code class="language-mysql">mysql> select * from emp;
++-------+------------+-------+--------+
+| ename | hiredate   | sal   | deptno |
++-------+------------+-------+--------+
+| hello | 1234-12-04 | 12.12 |      2 |
++-------+------------+-------+--------+
+1 row in set (0.00 sec)</code></pre>
+<p>可以看出A线程插入的数据没有显示,B插入的数据显示了</p>
+<p>A:查询数据</p>
+<pre class=" language-mysql"><code class="language-mysql">mysql> select * from emp;
++-------+------------+-------+--------+
+| ename | hiredate   | sal   | deptno |
++-------+------------+-------+--------+
+| hello | 1234-12-04 | 12.12 |      1 |
++-------+------------+-------+--------+
+1 row in set (0.00 sec)</code></pre>
+<p>发现B线程插入的数据没有显示？？？这是什么鬼？？？</p>
+<p>A:提交事务</p>
+<pre class=" language-mysql"><code class="language-mysql">mysql> commit;
+Query OK, 0 rows affected (0.07 sec)</code></pre>
+<p>A:查询数据</p>
+<pre class=" language-mysql"><code class="language-mysql">mysql> select * from emp;
++-------+------------+-------+--------+
+| ename | hiredate   | sal   | deptno |
++-------+------------+-------+--------+
+| hello | 1234-12-04 | 12.12 |      1 |
+| hello | 1234-12-04 | 12.12 |      2 |
++-------+------------+-------+--------+
+2 rows in set (0.00 sec)</code></pre>
+<p>B：查询数据</p>
+<pre class=" language-mysql"><code class="language-mysql">mysql> select * from emp;
++-------+------------+-------+--------+
+| ename | hiredate   | sal   | deptno |
++-------+------------+-------+--------+
+| hello | 1234-12-04 | 12.12 |      1 |
+| hello | 1234-12-04 | 12.12 |      2 |
++-------+------------+-------+--------+
+2 rows in set (0.00 sec)</code></pre>
+<p>到这里是不是发现一些奇怪的问题，为什么A开启事务后没办法查询到B对表的操作，B也没办法查询到A的操作？？？</p>
+<p>类比java多线程的内存模型就知道，java的内存模型存在线程内存和主内存。MySQL也是一样的，我们对一个线程开启事务，然后对他进行的操作是在操作系统的内存中进行的，而没开启事务则是在硬盘的存储空间中（这点不一样，java是在主存中，mysql是在硬盘的存储中，其实也一样，可以把mysql的硬盘存储理解成java中的主内存）。</p>
+<p>那么现在问题迎刃而解了，事务的处理是在内存中的，所有读写操作都在内存中，而非事务的处理是在硬盘的存储中。两种情况针对的数据不同，自然读写出来的结果不一样了。</p>
+<p>当事务提交后，当前线程在内存中读写数据就会写入到硬盘的存储中，其他其他县城也就可以访问该数据了，当前线程也可以访问表的其他数据。</p>
+<h2 id="lock是否可以回滚"><a href="#lock是否可以回滚" class="headerlink" title="lock是否可以回滚"></a>lock是否可以回滚</h2><p>栗子二：</p>
+<p>使用相同的表，数据为空</p>
+<p>A:加写锁</p>
+<pre class=" language-mysql"><code class="language-mysql">mysql> lock tables emp write;
+Query OK, 0 rows affected (0.00 sec)</code></pre>
+<p>A：插入数据</p>
+<pre class=" language-mysql"><code class="language-mysql">mysql> insert into emp values('hello','1234*12(4',12.12,1);
+Query OK, 1 row affected (0.07 sec)</code></pre>
+<p>B:查询数据</p>
+<pre class=" language-mysql"><code class="language-mysql">mysql> select * from emp;</code></pre>
+<p>进入等待</p>
+<p>A：回滚记录</p>
+<pre class=" language-mysql"><code class="language-mysql">mysql> rollback;
+Query OK, 0 rows affected (0.00 sec)</code></pre>
+<p>B:还是等待状态</p>
+<p>A:查询数据</p>
+<pre class=" language-mysql"><code class="language-mysql">mysql> select * from emp;
++-------+------------+-------+--------+
+| ename | hiredate   | sal   | deptno |
++-------+------------+-------+--------+
+| hello | 1234-12-04 | 12.12 |      1 |
++-------+------------+-------+--------+
+1 row in set (0.00 sec)</code></pre>
+<p>A:提交解锁</p>
+<pre class=" language-mysql"><code class="language-mysql">mysql> unlock tables;
+Query OK, 0 rows affected (0.00 sec)</code></pre>
+<p>B:等待结束</p>
+<pre class=" language-mysql"><code class="language-mysql">+-------+------------+-------+--------+
+| ename | hiredate   | sal   | deptno |
++-------+------------+-------+--------+
+| hello | 1234-12-04 | 12.12 |      1 |
++-------+------------+-------+--------+
+1 row in set (1 min 20.08 sec)</code></pre>
+<p><strong>说明对<code>lock</code>不能回滚，回滚无效</strong></p>
+<p>为什么事务可以回滚，锁不能呢？？</p>
+<p>个人认为：锁是作用在硬盘的存储上，写操作就会将内容写进磁盘，没有回滚的余地；事务是作用在内存中，有回滚的余地。</p>
+<h2 id="锁情况下开启事务"><a href="#锁情况下开启事务" class="headerlink" title="锁情况下开启事务"></a>锁情况下开启事务</h2><blockquote>
+<p>如果在锁表期间，用<code>start transaction</code>开启了一个新事务，会造成一个隐式的<code>unlock tables</code>被执行</p>
+</blockquote>
+<p>栗子三：验证锁情况下开启事务</p>
+<p>A：写锁</p>
+<pre class=" language-mysql"><code class="language-mysql">mysql> lock tables emp write;
+Query OK, 0 rows affected (0.00 sec)</code></pre>
+<p>B:查询 进入等待状态</p>
+<pre class=" language-mysql"><code class="language-mysql">mysql> select * from emp;</code></pre>
+<p>A:插入数据</p>
+<pre class=" language-mysql"><code class="language-mysql">mysql> insert into emp values('hello','1234*12(4',12.12,1);
+Query OK, 1 row affected (0.07 sec)</code></pre>
+<p>B:等待状态</p>
+<p>A:回滚</p>
+<pre class=" language-mysql"><code class="language-mysql">mysql> rollback;
+Query OK, 0 rows affected (0.00 sec)</code></pre>
+<p>B:等待状态</p>
+<p>A：开启事务</p>
+<pre class=" language-mysql"><code class="language-mysql">mysql> start transaction
+    -> ;
+Query OK, 0 rows affected (0.00 sec)</code></pre>
+<p>B：等待解除</p>
+<pre class=" language-mysql"><code class="language-mysql">+-------+------------+-------+--------+
+| ename | hiredate   | sal   | deptno |
++-------+------------+-------+--------+
+| hello | 1234-12-04 | 12.12 |      1 |
++-------+------------+-------+--------+
+1 row in set (1 min 46.22 sec)</code></pre>
+<p>可以看到开启新事务后，lock就被解除了。</p>
+<blockquote>
+<p>因此，在同一个事务中，最好不使用不同存储引擎的表，否则rollback时需要对非事务<br>类型的表进行特别的处理，因为commit、rollback只能对事务类型的表进行提交和回滚。</p>
+<p>通常情况下，只对提交的事务纪录到二进制的日志中，但是如果一个事务中包含非事务<br>类型的表，那么回滚操作也会被记录到二进制日志中，以确保非事务类型表的更新可以被复<br>制到从的数据库中。</p>
+</blockquote>
+<p>那么为什么开启新事物锁就被解除了呢？？？</p>
+<p>个人理解：开启新事物就意味着该线程可以读写该表内容，可以理解成事务的优先级比锁高。</p>
+<h2 id="savepoint回滚"><a href="#savepoint回滚" class="headerlink" title="savepoint回滚"></a><code>savepoint</code>回滚</h2><blockquote>
+<p>在事务中可以通过定义<code>savepoint</code>，指定回滚事务的一个部分，但是不能指定提交事务<br>的一个部分。对于复杂的应用，可以定义多个不同的<code>savepoint</code>，满足不同的条件时，回滚<br>不同的<code>savepoint</code>。需要注意的是，如果定义了相同名字的<code>savepoint</code>，则后面定义的<br>savepoint会覆盖之前的定义。对于不再需要使用的<code>savepoint</code>，可以通过<code>release savepoint</code><br>命令删除<code>savepoint</code>，删除后的<code>savepoint</code>，不能再执行<code>rollback to savepoint</code>命令。</p>
+</blockquote>
+<p>栗子四：</p>
+<p>A:开启事务</p>
+<pre class=" language-mysql"><code class="language-mysql">mysql> start transaction;
+Query OK, 0 rows affected (0.07 sec)</code></pre>
+<p>A:插入数据</p>
+<pre class=" language-mysql"><code class="language-mysql">mysql> insert into emp values('hello','1234*12(4',12.12,1);
+Query OK, 1 row affected (0.00 sec)</code></pre>
+<p>A:查询数据</p>
+<pre class=" language-mysql"><code class="language-mysql">mysql> select * from emp;
++-------+------------+-------+--------+
+| ename | hiredate   | sal   | deptno |
++-------+------------+-------+--------+
+| hello | 1234-12-04 | 12.12 |      1 |
++-------+------------+-------+--------+
+1 row in set (0.00 sec)</code></pre>
+<p>B:查询数据</p>
+<pre class=" language-mysql"><code class="language-mysql">mysql> select * from emp;
+Empty set (0.00 sec)</code></pre>
+<p>A:启用<code>savepoint</code>指定部分回滚内容</p>
+<pre class=" language-mysql"><code class="language-mysql">mysql> savepoint test;
+Query OK, 0 rows affected (0.00 sec)</code></pre>
+<p>A:插入数据</p>
+<pre class=" language-mysql"><code class="language-mysql">mysql> insert into emp values('hello','1234*12(4',12.12,2);
+Query OK, 1 row affected (0.00 sec)</code></pre>
+<p>A:查询数据</p>
+<pre class=" language-mysql"><code class="language-mysql">mysql> select * from emp;
++-------+------------+-------+--------+
+| ename | hiredate   | sal   | deptno |
++-------+------------+-------+--------+
+| hello | 1234-12-04 | 12.12 |      1 |
+| hello | 1234-12-04 | 12.12 |      2 |
++-------+------------+-------+--------+
+2 rows in set (0.00 sec)</code></pre>
+<p>A:回滚部分数据</p>
+<pre class=" language-mysql"><code class="language-mysql">mysql> rollback to savepoint test;
+Query OK, 0 rows affected (0.00 sec)</code></pre>
+<p>A:提交事务</p>
+<pre class=" language-mysql"><code class="language-mysql">mysql> commit
+    -> ;
+Query OK, 0 rows affected (0.06 sec)</code></pre>
+<p>B:查询数据</p>
+<pre class=" language-mysql"><code class="language-mysql">mysql> select * from emp;
++-------+------------+-------+--------+
+| ename | hiredate   | sal   | deptno |
++-------+------------+-------+--------+
+| hello | 1234-12-04 | 12.12 |      1 |
++-------+------------+-------+--------+
+1 row in set (0.00 sec)</code></pre>
+<p>A:查询数据</p>
+<pre class=" language-mysql"><code class="language-mysql">mysql> select * from emp;
++-------+------------+-------+--------+
+| ename | hiredate   | sal   | deptno |
++-------+------------+-------+--------+
+| hello | 1234-12-04 | 12.12 |      1 |
++-------+------------+-------+--------+
+1 row in set (0.00 sec)</code></pre>
+<h1 id="分布式事务"><a href="#分布式事务" class="headerlink" title="分布式事务"></a>分布式事务</h1><p><del>用的少，不做介绍，自己看书去，mmp，手都酸了。</del></p>
+<p>目前阶段我还用不上，但是了解下相关概念，为以后打下基础。</p>
+<p>在开发中，为了降低单点压力，通常会根据业务情况进行分表分库，将表分布在不同的库中（库可能分布在不同的机器上）。在这种场景下，事务的提交会变得相对复杂，因为多个节点（库）的存在，可能存在部分节点提交失败的情况，即事务的ACID特性需要在各个不同的数据库实例中保证。比如更新db1库的A表时，必须同步更新db2库的B表，两个更新形成一个事务，要么都成功，要么都失败。</p>
+<h2 id="分布式服务器用途"><a href="#分布式服务器用途" class="headerlink" title="分布式服务器用途"></a>分布式服务器用途</h2><p>了解下分布式服务器的用途：<a href="https://juejin.im/entry/589abc01128fe10058fc542c" target="_blank" rel="noopener">https://juejin.im/entry/589abc01128fe10058fc542c</a> </p>
+<h2 id="分布式事务原理"><a href="#分布式事务原理" class="headerlink" title="分布式事务原理"></a>分布式事务原理</h2><p>当前分布式事务只支持InnoDB存储引擎</p>
+<p>在MySQL中，使用分布式事务的应用程序涉及到一个或多个资源管理器和一个事务管理器。</p>
+<ul>
+<li><p><strong>资源管理器（resource manager）</strong>：用来管理系统资源，是通向事务资源的途径。数据库就是一种资源管理器。资源管理还应该具有管理事务提交或回滚的能力。</p>
+</li>
+<li><p><strong>事务管理器（transaction manager）：</strong>事务管理器是分布式事务的核心管理者。事务管理器与每个资源管理器（resource manager）进行通信，协调并完成事务的处理。事务的各个分支由唯一命名进行标识。</p>
+</li>
+</ul>
+<p><strong>mysql在执行分布式事务（外部XA）的时候，mysql服务器相当于xa事务资源管理器，与mysql链接的客户端相当于事务管理器。</strong></p>
+<p>分布式事务分为两个阶段：</p>
+<p><strong>阶段一为准备（prepare）阶段</strong>。即所有的参与者准备执行事务并锁住需要的资源。参与者ready时，向transaction manager报告已准备就绪。 </p>
+<p><strong>阶段二为提交阶段（commit）</strong>。当transaction manager确认所有参与者都ready后，向所有参与者发送commit命令。<br>如下图所示： </p>
+<p><img src="https://img-blog.csdn.net/20170425103341298?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvc29vbmZseQ==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt></p>
+<h2 id="事务协调者transaction-manager"><a href="#事务协调者transaction-manager" class="headerlink" title="事务协调者transaction manager"></a>事务协调者transaction manager</h2><p>因为XA 事务是基于两阶段提交协议的，所以需要有一个事务协调者（transaction manager）来保证所有的事务参与者都完成了准备工作(第一阶段)。如果事务协调者（transaction manager）收到所有参与者都准备好的消息，就会通知所有的事务都可以提交了（第二阶段）。MySQL 在这个XA事务中扮演的是参与者的角色，而不是事务协调者（transaction manager）。</p>
+<h2 id="Mysql的XA事务分为外部XA和内部XA"><a href="#Mysql的XA事务分为外部XA和内部XA" class="headerlink" title="Mysql的XA事务分为外部XA和内部XA"></a>Mysql的XA事务分为外部XA和内部XA</h2><ul>
+<li><p>外部XA用于跨多MySQL实例的分布式事务，需要应用层作为协调者，通俗的说就是比如我们在PHP中写代码，那么PHP书写的逻辑就是协调者。应用层负责决定提交还是回滚，崩溃时的悬挂事务。MySQL数据库外部XA可以用在分布式数据库代理层，实现对MySQL数据库的分布式事务支持，例如开源的代理工具：网易的DDB，淘宝的TDDL等等。</p>
+</li>
+<li><p>内部XA事务用于同一实例下跨多引擎事务，由Binlog作为协调者，比如在一个存储引擎提交时，需要将提交信息写入二进制日志，这就是一个分布式内部XA事务，只不过二进制日志的参与者是MySQL本身。Binlog作为内部XA的协调者，在binlog中出现的内部xid，在crash recover时，由binlog负责提交。(这是因为，binlog不进行prepare，只进行commit，因此在binlog中出现的内部xid，一定能够保证其在底层各存储引擎中已经完成prepare)。</p>
+</li>
+</ul>
+<p>以上内容摘自：<a href="https://blog.csdn.net/soonfly/article/details/70677138" target="_blank" rel="noopener">https://blog.csdn.net/soonfly/article/details/70677138</a></p>
+<h2 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h2><pre class=" language-mysql"><code class="language-mysql">XA {START|BEGIN} xid [JOIN|RESUME] 
+#启动xid事务 (xid 必须是一个唯一值; 不支持[JOIN|RESUME]子句) 
+XA END xid [SUSPEND [FOR MIGRATE]] 
+#结束xid事务 ( 不支持[SUSPEND [FOR MIGRATE]] 子句) 
+XA PREPARE xid 
+#准备、预提交xid事务 
+XA COMMIT xid [ONE PHASE] 
+#提交xid事务 
+XA ROLLBACK xid 
+#回滚xid事务 
+XA recover
+#返回当前数据库中处于prepare状态的分支事务的详细信息</code></pre>
+<p>xid:事务标识符，用来标识一个分布式事务，一般有客户端会MySQL服务器生成，包括三部分</p>
+<pre class=" language-mysql"><code class="language-mysql">xid: gtrid [, bqual [, formatID ]]</code></pre>
+<p>gtrid:分布式事务标识符</p>
+<p>bqual:分支限定符，默认空串。</p>
+<p>formatID:数字，标识gtrid和bqual值，默认1。</p>
+<p>例子就不上了，自行百度。</p>
+<h1 id="少用他，性能低，又麻烦，还不安全，不完善"><a href="#少用他，性能低，又麻烦，还不安全，不完善" class="headerlink" title="少用他，性能低，又麻烦，还不安全，不完善"></a>少用他，性能低，又麻烦，还不安全，不完善</h1><p>XA的性能很低。一个数据库的事务和多个数据库间的XA事务性能对比可发现，性能差10倍左右。因此要尽量避免XA事务，例如可以将数据写入本地，用高性能的消息系统分发数据。或使用数据库复制等技术。只有在这些都无法实现，且性能不是瓶颈时才应该使用XA。</p>
+
+            </div>
+            <hr/>
+
+            
+
+            <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+
+<div id="article-share">
+    
+    <div class="social-share" data-disabled="qzone" data-wechat-qrcode-helper="<p>微信里点“发现”->“扫一扫”二维码便可查看分享。</p>"></div>
+    
+</div>
+
+<script src="/libs/share/js/social-share.min.js"></script>
+
+            
+
+    <div class="reprint" id="reprint-statement">
+        <p class="reprint-tip">
+            <i class="fa fa-exclamation-triangle"></i>&nbsp;&nbsp;
+            <span>转载规则</span>
+        </p>
+        
+            <div class="center-align">
+                <a rel="license" href="https://creativecommons.org/licenses/by/4.0/deed.zh">
+                    <img alt=""
+                         style="border-width:0"
+                         src="https://i.creativecommons.org/l/by/4.0/88x31.png"/>
+                </a>
+            </div>
+            <br/>
+            <span xmlns:dct="http://purl.org/dc/terms/" href="http://purl.org/dc/dcmitype/Text"
+                  property="dct:title" rel="dct:type">
+                    《深入浅出MYSQL-事务控制和锁定语句》
+                </span> 由
+            <a xmlns:cc="http://creativecommons.org/ns#" href="/2019/04/11/shen-ru-qian-chu-mysql-shi-wu-kong-zhi-he-suo-ding-yu-ju/" property="cc:attributionName"
+               rel="cc:attributionURL">
+                hmlr123
+            </a> 采用
+            <a rel="license" href="https://creativecommons.org/licenses/by/4.0/deed.zh">
+                知识共享署名 4.0 国际许可协议
+            </a>进行许可。
+        
+    </div>
+
+    <script async defer>
+      document.addEventListener("copy", function (e) {
+        let toastHTML = '<span>复制成功，请遵循本文的转载规则</span><button class="btn-flat toast-action" onclick="navToReprintStatement()" style="font-size: smaller">查看</a>';
+        M.toast({html: toastHTML})
+      });
+
+      function navToReprintStatement() {
+        $("html, body").animate({scrollTop: $("#reprint-statement").offset().top - 80}, 800);
+      }
+    </script>
+
+
+        </div>
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge left-badge text-color">
+                <i class="fa fa-chevron-left"></i>&nbsp;上一篇</div>
+            <div class="card">
+                <a href="/2019/04/11/shen-ru-qian-chu-mysql-mysql-fen-qu/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/6.jpg" class="responsive-img" alt="深入浅出MySQL-MySQL分区">
+                        
+                        <span class="card-title">深入浅出MySQL-MySQL分区</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            分区优化数据库表解决的问题、实现的原理、实现的过程及优点
+
+
+英语词汇coalesce         联合联结
+为什么分区问题很多情况下，我们的一个表达到了上万条，甚至过亿，这时候我们查询时，无论有没有索引，消耗的时间都是极大的，占用的内
+                        
+                    </div>
+                    <div class="publish-info">
+                        <span class="publish-date">
+                            <i class="fa fa-clock-o fa-fw icon-date"></i>2019-04-11
+                        </span>
+                        <span class="publish-author">
+                            
+                            <i class="fa fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/读书笔记/" class="post-category" target="_blank">
+                                    读书笔记
+                                </a>
+                            
+                            <a href="/categories/读书笔记/深入浅出MySQL/" class="post-category" target="_blank">
+                                    深入浅出MySQL
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/MySQL/" target="_blank">
+                        <span class="chip bg-color">MySQL</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fa fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2019/04/08/shen-ru-qian-chu-mysql-cun-chu-guo-cheng-he-han-shu/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/1.jpg" class="responsive-img" alt="深入浅出MySQL-存储过程和函数">
+                        
+                        <span class="card-title">深入浅出MySQL-存储过程和函数</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            重点是存储过程、函数，他们的书写格式，以及控制流程
+有些作用，多练习！
+
+
+
+
+存储过程、函数用来干什么？个人意愿是从事java开发，但是java开发无法避免涉及到数据库，很多时候我们需要一些测试数据，我们不可能一条一条的输入，这时候我们需
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="fa fa-clock-o fa-fw icon-date"></i>2019-04-08
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fa fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/读书笔记/" class="post-category" target="_blank">
+                                    读书笔记
+                                </a>
+                            
+                            <a href="/categories/读书笔记/深入浅出MySQL/" class="post-category" target="_blank">
+                                    深入浅出MySQL
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/MySQL/" target="_blank">
+                        <span class="chip bg-color">MySQL</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+</article>
+</div>
+
+
+
+    </div>
+    <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
+        <div class="toc-widget">
+            <div class="toc-title"><i class="fa fa-list-alt"></i>&nbsp;&nbsp;目录</div>
+            <div id="toc-content"></div>
+        </div>
+    </div>
+</div>
+
+<!-- TOC 悬浮按钮. -->
+
+<div id="floating-toc-btn" class="hide-on-med-and-down">
+    <a class="btn-floating btn-large bg-color">
+        <i class="fa fa-list"></i>
+    </a>
+</div>
+
+
+<script src="/libs/tocbot/tocbot.min.js"></script>
+<script>
+    $(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            // headingsOffset: -205,
+            headingSelector: 'h1, h2, h3, h4, h5, h6'
+        });
+
+        // modify the toc link href to support Chinese.
+        let i = 0;
+        let tocHeading = 'toc-heading-';
+        $('#toc-content a').each(function () {
+            $(this).attr('href', '#' + tocHeading + (++i));
+        });
+
+        // modify the heading title id to support Chinese.
+        i = 0;
+        $('#articleContent').children('h1, h2, h3, h4, h5, h6').each(function () {
+            $(this).attr('id', tocHeading + (++i));
+        });
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+
+        
+        /* 修复文章卡片 div 的宽度. */
+        let fixPostCardWidth = function (srcId, targetId) {
+            let srcDiv = $('#' + srcId);
+            if (srcDiv.length === 0) {
+                return;
+            }
+
+            let w = srcDiv.width();
+            if (w >= 450) {
+                w = w + 21;
+            } else if (w >= 350 && w < 450) {
+                w = w + 18;
+            } else if (w >= 300 && w < 350) {
+                w = w + 16;
+            } else {
+                w = w + 14;
+            }
+            $('#' + targetId).width(w);
+        };
+
+        // 切换TOC目录展开收缩的相关操作.
+        const expandedClass = 'expanded';
+        let $tocAside = $('#toc-aside');
+        let $mainContent = $('#main-content');
+        $('#floating-toc-btn .btn-floating').click(function () {
+            if ($tocAside.hasClass(expandedClass)) {
+                $tocAside.removeClass(expandedClass).slideUp(500);
+                $mainContent.removeClass('l9');
+            } else {
+                $tocAside.addClass(expandedClass).slideDown(500);
+                $mainContent.addClass('l9');
+            }
+            fixPostCardWidth('artDetail', 'prenext-posts');
+        });
+        
+    });
+</script>
+    
+
+</main>
+
+
+<footer class="page-footer bg-color">
+    <div class="container row center-align">
+        <div class="col s12 m8 l8 copy-right">
+            本站由&copy;<a href="https://hmlr123.com/" target="_blank">hmlr123</a>基于
+            <a href="https://hexo.io/" target="_blank">Hexo</a> 的
+            <a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">hexo-theme-matery</a>主题搭建.
+
+            
+                &nbsp;<i class="fa fa-area-chart"></i>&nbsp;站点总字数:&nbsp;
+                <span class="white-color">82.2k</span>
+            
+
+            
+			
+                <br>
+                
+                <span id="busuanzi_container_site_pv">
+                    <i class="fa fa-heart-o"></i>
+                    本站总访问量 <span id="busuanzi_value_site_pv" class="white-color"></span>
+                </span>
+                
+                
+                <span id="busuanzi_container_site_uv">
+                    <i class="fa fa-users"></i>
+                    次,&nbsp;访客数 <span id="busuanzi_value_site_uv" class="white-color"></span> 人.
+                </span>
+                
+            
+        </div>
+        <div class="col s12 m4 l4 social-link social-statis">
+    <a href="hmlr123" class="tooltipped" target="_blank" data-tooltip="访问我的GitHub" data-position="top" data-delay="50">
+        <i class="fa fa-github"></i>
+    </a>
+
+
+
+    <a href="mailto:2870027009@qq.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+        <i class="fa fa-envelope-open"></i>
+    </a>
+
+
+
+    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=2870027009" class="tooltipped" data-tooltip="QQ联系我: 2870027009" data-position="top" data-delay="50">
+        <i class="fa fa-qq"></i>
+    </a>
+
+
+
+    <a href="/atom.xml" class="tooltipped" target="_blank" data-tooltip="RSS 订阅" data-position="top" data-delay="50">
+        <i class="fa fa-rss"></i>
+    </a>
+</div>
+    </div>
+</footer>
+
+<div class="progress-bar"></div>
+
+
+<!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fa fa-search"></i>&nbsp;&nbsp;搜索</span>
+            <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字"
+                   class="search-input">
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<script src="/js/search.js"></script>
+<script type="text/javascript">
+$(function () {
+    searchFunc("/" + "search.xml", 'searchInput', 'searchResult');
+});
+</script>
+<!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fa fa-angle-up"></i>
+    </a>
+</div>
+
+
+<script src="/libs/materialize/materialize.min.js"></script>
+<script src="/libs/masonry/masonry.pkgd.min.js"></script>
+<script src="/libs/aos/aos.js"></script>
+<script src="/libs/scrollprogress/scrollProgress.min.js"></script>
+<script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
+<script src="/js/matery.js"></script>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+
+
+
+    <script src="/libs/others/clicklove.js"></script>
+
+
+    <script async src="/libs/others/busuanzi.pure.mini.js"></script>
+
+
+</body>
+</html>

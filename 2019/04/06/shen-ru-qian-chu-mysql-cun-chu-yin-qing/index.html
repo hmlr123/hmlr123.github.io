@@ -1,0 +1,930 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+
+
+<head><meta name="generator" content="Hexo 3.9.0">
+    <meta charset="utf-8">
+    <meta name="keywords" content="深入浅出MySQL-存储引擎, hmlr123">
+    <meta name="description" content="常见MySQL存储引擎比较，及使用情况
+
+
+英语词汇：
+restrict        限制
+constraint       约束
+cascade           串联
+optimize             优化
+查看数据库引擎查">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <title>深入浅出MySQL-存储引擎 | hmlr123</title>
+    <link rel="icon" type="image/png" href="/favicon.png">
+
+    <link rel="stylesheet" type="text/css" href="/libs/awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/materialize/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
+    <link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/matery.css">
+    <link rel="stylesheet" type="text/css" href="/css/my.css">
+    <style type="text/css">
+        
+    </style>
+
+    <script src="/libs/jquery/jquery-2.2.0.min.js"></script>
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"></head>
+
+
+<body>
+
+<header class="navbar-fixed">
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="nav-wrapper container">
+            <div class="brand-logo">
+                <a href="/" class="waves-effect waves-light">
+                    
+                    <img src="/medias/logo.png" class="logo-img" alt="LOGO">
+                    
+                    <span class="logo-span">hmlr123</span>
+                </a>
+            </div>
+            
+
+<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fa fa-navicon"></i></a>
+<ul class="right">
+    
+    <li class="hide-on-med-and-down">
+        <a href="/" class="waves-effect waves-light">
+            
+            <i class="fa fa-home"></i>
+            
+            <span>首页</span>
+        </a>
+    </li>
+    
+    <li class="hide-on-med-and-down">
+        <a href="/tags" class="waves-effect waves-light">
+            
+            <i class="fa fa-tags"></i>
+            
+            <span>标签</span>
+        </a>
+    </li>
+    
+    <li class="hide-on-med-and-down">
+        <a href="/categories" class="waves-effect waves-light">
+            
+            <i class="fa fa-bookmark"></i>
+            
+            <span>分类</span>
+        </a>
+    </li>
+    
+    <li class="hide-on-med-and-down">
+        <a href="/archives" class="waves-effect waves-light">
+            
+            <i class="fa fa-archive"></i>
+            
+            <span>归档</span>
+        </a>
+    </li>
+    
+    <li class="hide-on-med-and-down">
+        <a href="/about" class="waves-effect waves-light">
+            
+            <i class="fa fa-user-circle-o"></i>
+            
+            <span>关于</span>
+        </a>
+    </li>
+    
+    <li class="hide-on-med-and-down">
+        <a href="/friends" class="waves-effect waves-light">
+            
+            <i class="fa fa-address-book"></i>
+            
+            <span>友情链接</span>
+        </a>
+    </li>
+    
+    <li>
+        <a href="#searchModal" class="modal-trigger waves-effect waves-light">
+            <i id="searchIcon" class="fa fa-search" title="搜索"></i>
+        </a>
+    </li>
+</ul>
+
+<div id="mobile-nav" class="side-nav sidenav">
+
+    <div class="mobile-head bg-color">
+        
+        <img src="/medias/logo.png" class="logo-img circle responsive-img">
+        
+        <div class="logo-name">hmlr123</div>
+        <div class="logo-desc">
+            
+            走走停停，记录滴滴点点
+            
+        </div>
+    </div>
+
+    
+
+    <ul class="menu-list mobile-menu-list">
+        
+        <li>
+            <a href="/" class="waves-effect waves-light">
+                
+                <i class="fa fa-fw fa-home"></i>
+                
+                首页
+            </a>
+        </li>
+        
+        <li>
+            <a href="/tags" class="waves-effect waves-light">
+                
+                <i class="fa fa-fw fa-tags"></i>
+                
+                标签
+            </a>
+        </li>
+        
+        <li>
+            <a href="/categories" class="waves-effect waves-light">
+                
+                <i class="fa fa-fw fa-bookmark"></i>
+                
+                分类
+            </a>
+        </li>
+        
+        <li>
+            <a href="/archives" class="waves-effect waves-light">
+                
+                <i class="fa fa-fw fa-archive"></i>
+                
+                归档
+            </a>
+        </li>
+        
+        <li>
+            <a href="/about" class="waves-effect waves-light">
+                
+                <i class="fa fa-fw fa-user-circle-o"></i>
+                
+                关于
+            </a>
+        </li>
+        
+        <li>
+            <a href="/friends" class="waves-effect waves-light">
+                
+                <i class="fa fa-fw fa-address-book"></i>
+                
+                友情链接
+            </a>
+        </li>
+        
+        
+    </ul>
+</div>
+
+        </div>
+
+        
+    </nav>
+
+</header>
+
+
+
+
+
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/19.jpg')">
+    <div class="container">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <div class="description center-align post-title">
+                        深入浅出MySQL-存储引擎
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<main class="post-container content">
+
+    
+    <link rel="stylesheet" href="/libs/tocbot/tocbot.css">
+<style>
+    #articleContent h1::before,
+    #articleContent h2::before,
+    #articleContent h3::before,
+    #articleContent h4::before,
+    #articleContent h5::before,
+    #articleContent h6::before {
+        display: block;
+        content: " ";
+        height: 100px;
+        margin-top: -100px;
+        visibility: hidden;
+    }
+
+    #articleContent :focus {
+        outline: none;
+    }
+
+    .toc-fixed {
+        position: fixed;
+        top: 64px;
+    }
+
+    .toc-widget {
+        padding-left: 20px;
+    }
+
+    .toc-widget .toc-title {
+        margin: 35px 0 15px 0;
+        padding-left: 17px;
+        font-size: 1.5rem;
+        font-weight: bold;
+        line-height: 1.5rem;
+    }
+
+    .toc-widget ol {
+        padding: 0;
+        list-style: none;
+    }
+
+    #toc-content ol {
+        padding-left: 10px;
+    }
+
+    #toc-content ol li {
+        padding-left: 10px;
+    }
+
+    #toc-content .toc-link:hover {
+        color: #42b983;
+        font-weight: 700;
+        text-decoration: underline;
+    }
+
+    #toc-content .toc-link::before {
+        background-color: transparent;
+        max-height: 25px;
+    }
+
+    #toc-content .is-active-link {
+        color: #42b983;
+    }
+
+    #toc-content .is-active-link::before {
+        background-color: #42b983;
+    }
+
+    #floating-toc-btn {
+        position: fixed;
+        right: 20px;
+        bottom: 76px;
+        padding-top: 15px;
+        margin-bottom: 0;
+        z-index: 998;
+    }
+
+    #floating-toc-btn .btn-floating {
+        width: 48px;
+        height: 48px;
+    }
+
+    #floating-toc-btn .btn-floating i {
+        line-height: 48px;
+        font-size: 1.4rem;
+    }
+</style>
+<div class="row">
+    <div id="main-content" class="col s12 m12 l9">
+        <!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                    <div class="article-tag">
+                        
+                            <a href="/tags/MySQL/" target="_blank">
+                                <span class="chip bg-color">MySQL</span>
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fa fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/categories/读书笔记/" class="post-category" target="_blank">
+                                读书笔记
+                            </a>
+                        
+                            <a href="/categories/读书笔记/深入浅出MySQL/" class="post-category" target="_blank">
+                                深入浅出MySQL
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+
+            <div class="post-info">
+                <div class="post-date info-break-policy">
+                    <i class="fa fa-calendar-minus-o fa-fw"></i>发布日期:&nbsp;&nbsp;
+                    2019-04-06
+                </div>
+
+                
+                    
+                    <div class="info-break-policy">
+                        <i class="fa fa-file-word-o fa-fw"></i>文章字数:&nbsp;&nbsp;
+                        2.4k
+                    </div>
+                    
+
+                    
+                    <div class="info-break-policy">
+                        <i class="fa fa-clock-o fa-fw"></i>阅读时长:&nbsp;&nbsp;
+                        8 分
+                    </div>
+                    
+                
+				
+				
+                    <div id="busuanzi_container_page_pv" class="info-break-policy">
+                        <i class="fa fa-eye fa-fw"></i>阅读次数:&nbsp;&nbsp;
+                        <span id="busuanzi_value_page_pv"></span>
+                    </div>
+				
+            </div>
+        </div>
+        <hr class="clearfix">
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <p>常见MySQL存储引擎比较，及使用情况</p>
+<a id="more"></a>
+
+<p>英语词汇：</p>
+<p>restrict        限制</p>
+<p>constraint       约束</p>
+<p>cascade           串联</p>
+<p>optimize             优化</p>
+<h1 id="查看数据库引擎"><a href="#查看数据库引擎" class="headerlink" title="查看数据库引擎"></a>查看数据库引擎</h1><p>查看当前的默认存储引擎，可以使用如下的命令：</p>
+<pre class=" language-mysql"><code class="language-mysql"> mysql > show variables like ‘table_type’;</code></pre>
+<p>查看<code>mysql</code>提供的引擎</p>
+<pre class=" language-mysql"><code class="language-mysql">show engines \G;</code></pre>
+<pre class=" language-mysql"><code class="language-mysql">show variables like 'have%';</code></pre>
+<p>查看当前默认引擎</p>
+<pre class=" language-mysql"><code class="language-mysql">show variables like '%storage_engine%';</code></pre>
+<p>查看某个表使用什么引擎</p>
+<pre class=" language-mysql"><code class="language-mysql">show create table 表名</code></pre>
+<h1 id="各种引擎特点"><a href="#各种引擎特点" class="headerlink" title="各种引擎特点"></a>各种引擎特点</h1><p><img src="https://i.loli.net/2019/04/06/5ca8300abac34.png" alt></p>
+<h2 id="MyISAM"><a href="#MyISAM" class="headerlink" title="MyISAM"></a>MyISAM</h2><p><strong><code>MyISAM</code>不支持事务，也不支持外键，其优势是访问的速度快，对事务完整性没有要求或者以<code>SELECT、INSERT</code>为主的应用基本上都可以使用这个引擎来创建表；</strong></p>
+<p>MyISAM磁盘上存储成三个文件，文件名和表名都一样，扩展名分别是：</p>
+<ul>
+<li><code>.frm</code>（存储表定义）</li>
+<li><code>.DYD</code>（MYdata 存储数据）</li>
+<li><code>.MYI</code>（MYIndex 存储引擎）</li>
+</ul>
+<p>数据文件和索引文件可以放置在不同的目录，需要在创建表的时候通过<code>DATA DIRECTORY</code>和<code>INDEX DIRECTORY</code>语句指定，也就是说不同的<code>MyISAM</code>表的索引文件和数据文件可以防止到不同的路径下。文件路径需要的是绝对路径，并且具有访问权限</p>
+<p>MyISAM的表还支持3中不同的存储格式，分别是：</p>
+<ol>
+<li><p>静态（字段都是固定长度）表；</p>
+</li>
+<li><p>动态表；</p>
+</li>
+<li><p>压缩表；</p>
+</li>
+</ol>
+<p>静态表<strong>默认存储方式，里面的字段是非变长字段，</strong>这样每个记录都是固定长度，优点是<strong>存储迅速，容易缓存，出现故障容易恢复；缺点占用空间大</strong>。<strong>数据在存储时，需要保存的内容后面用空格补充，返回值的时候，后面不带空格。</strong></p>
+<p>动态表是<strong>变长字段，频繁的更新删除记录会产生碎片</strong>，需要定期执行<code>optimize table</code> 或者 <code>myisamchk-r</code>来改善性能。但是出现故障时恢复难</p>
+<p>压缩表，每个记录都是单独压缩的</p>
+<h2 id="InnoDB"><a href="#InnoDB" class="headerlink" title="InnoDB"></a>InnoDB</h2><p><code>InnoDB</code>存储引擎提供了<strong>具有提交、回滚和崩溃恢复能力的事务安全</strong>。但是对比<code>MyISAM</code>的存储引擎，<code>InnoDB</code><strong>写的处理效率差一些，并且会占用更多的磁盘空间以保留数据和索引</strong>；</p>
+<h3 id="自动增长"><a href="#自动增长" class="headerlink" title="自动增长"></a>自动增长</h3><ul>
+<li><p>自动增长字段如果为null 或者0，实际增长的值就是自动增长后的值</p>
+</li>
+<li><p>每次自动增长都会是从最大的那个值开始自增</p>
+</li>
+<li><p>使用<code>alter table *** auto_increment=n;</code>时语句强制设置成自动增长，默认从1开始，但是<strong>该修改是保存在内存中的，如果数据重启，默认值会丢失，需要重新设置</strong></p>
+</li>
+<li><p><code>last_insert_id()</code>查询当前线程最后插入记录的值</p>
+</li>
+<li><p>如果一次插入多个值，返回的是第一条记录使用的自动增长</p>
+</li>
+<li><p><strong>自动增长必须是索引，如果是组合索引，也必须是组合索引的第一列</strong>，<code>MyISAM</code>没有这个限制</p>
+</li>
+</ul>
+<h3 id="外键约束"><a href="#外键约束" class="headerlink" title="外键约束"></a>外键约束</h3><p>创建外键</p>
+<pre class=" language-mysql"><code class="language-mysql">mysql> create table city(
+    -> city_id smallint unsigned not null auto_increment,
+    -> city varchar(50) not null,
+    -> country_id smallint unsigned not null,
+    -> last_update timestamp not null default current_timestamp on update current_timestamp,
+    -> primary key(city_id)
+    -> key idx_fk_country_id (country_id),
+    -> constraint 'fk_city_country' foreign key(country_id) references country (country_id) on delete restrict on update cascade
+    -> )engine=innodb default charset=utf8;</code></pre>
+<ul>
+<li>父表必须要有对应的索引，子表在创建外键的时候也会自动创建对应夫人索引</li>
+<li>在创建子表索引时，可以指定删除、修改父表时，字表的相应操作，包括<code>restrict</code>、<code>cascade</code>、<code>set null</code>、<code>no action</code>。<code>restrict</code>和<code>no action</code>作用一样，限制在子表有关联的情况下父表不能更新，<code>cascade</code>表父表在更新或删除的时候，更新或删除子表对应记录。<code>set null</code>表示父表在更新或删除的时候，子表对应字段被<code>set null</code></li>
+<li>当某个表被其他表创建外键参照的时候，该表的对应索引或者主键禁止被删除</li>
+<li>导入数据的时候，可以关闭外键约束<code>set foreign_key_checks=0;</code>导入数据完成之后，使用<code>set foreign_key_checks=0;</code>恢复</li>
+</ul>
+<h3 id="存储方式"><a href="#存储方式" class="headerlink" title="存储方式"></a>存储方式</h3><p>MySQL的Innodb包含两种表空间文件模式，默认的共享表空间和每个表分离的独立表空间。</p>
+<p><strong>一般来说，当数据量很小的时候建议使用共享表空间的管理方式。数据量很大的时候建议使用独立表空间的管理方式。</strong></p>
+<p><strong>共享表空间：</strong> </p>
+<p><strong>Innodb的所有数据保存在一个单独的表空间里面</strong>，而这个表空间可以由很多个文件组成，一个表可以跨多个文件存在，所以其大小限制不再是文件大小的限制，而是其自身的限制。</p>
+<blockquote>
+<p>从Innodb的官方文档中可以看到，其表空间的最大限制为64TB，也就是说，Innodb的单表限制基本上也在64TB左右了，当然这个大小是包括这个表的所有索引等其他相关数据。</p>
+</blockquote>
+<p>优点：</p>
+<ol>
+<li>以放表空间分成多个文件存放到各个磁盘上（表空间文件大小不受表大小的限制，如一个表可以分布在不同的文件上）。</li>
+<li>表数据和表描述放在一起方便管理。</li>
+</ol>
+<p>缺点：所有的数据和索引存放到一个文件中，将有一个很庞大的文件，虽然可以把一个大文件分成多个小文件，但是多个表及索引在表空间中混合存储，这样对于一个表做了大量删除操作后表空间中将会有大量的空隙，特别是对于统计分析，日志系统这类应用最不适合用共享表空间</p>
+<p><strong>独立表空间（在配置文件（my.cnf）中设置innodb_file_per_table=1）：</strong></p>
+<p>独立表空间是每个表都有独立的多个数据文件，而且做到了索引和数据的分离，每一个表都有一个<code>.frm</code>表描述文件，还有一个<code>.ibd</code>文件(这个文件包括了单独一个表的数据内容以及索引内容)。</p>
+<p>优点：</p>
+<ol>
+<li><p>每个表都有自已独立的表空间。</p>
+</li>
+<li><p>每个表的数据和索引都会存在自已的表空间中。</p>
+</li>
+<li><p>可以实现单表在不同的数据库中移动</p>
+</li>
+<li><p>空间可以回收。</p>
+<blockquote>
+<p>对于使用独立表空间的表，不管怎么删除，表空间的碎片不会太严重的影响性能，而且还有机会处理（表空不能自已回收）,处理方式如下：<br><code>Drop table</code>操作自动回收表空间</p>
+<p>如果对于统计分析或是日志表，删除大量数据后可以通过:<code>alter table TableName engine=innodb;</code>回收不用的空间<br>对于使<code>innodb-plugin</code>的<code>Innodb</code>使用<code>turncate table</code>也会使空间收缩</p>
+</blockquote>
+</li>
+<li><p>使用独占表空间的效率以及性能会更高一点。</p>
+</li>
+</ol>
+<p>缺点：单表增加过大，如超过100个G</p>
+<blockquote>
+<p>当使用独享表空间来存放Innodb的表的时候，每个表的数据以一个单独的文件来存放，这个时候的单表限制，又变成文件系统的大小限制了。</p>
+</blockquote>
+<p>参考链接：<a href="https://blog.csdn.net/nawenqiang/article/details/80010675" target="_blank" rel="noopener">https://blog.csdn.net/nawenqiang/article/details/80010675</a></p>
+<h2 id="MEMORY"><a href="#MEMORY" class="headerlink" title="MEMORY"></a>MEMORY</h2><p>MEMORY存储引擎使用存在于内存中的内容来创建表，每个MEMORY表只实际对应一个磁盘文件，格式为<code>.frm</code>。MEMORY类型的表访问非常的快，因为它的数据值放在内存中的，并且<strong>默认使用<code>HASH</code>索引</strong>，但是一旦服务关闭，表中的数据就会丢失掉；</p>
+<p>MEMORY表主要是用于那些内容变化不频繁的代码表，或者作为统计操作的中间结果表，便于高效地对中间结果进行分析并得到最终的统计结果。对存储引擎为MEMORY的表进行更新操作需要谨慎，因为数据并没有实际写入到磁盘中，所以一定要对下次重新启动服务之后如何获取这些修改后的数据所考虑；</p>
+<h2 id="MERGE"><a href="#MERGE" class="headerlink" title="MERGE"></a>MERGE</h2><p>MERGE存储引擎把一组MyISAM数据表当做一个逻辑单元来对待，让我们可以同时对他们进行查询。构成一个MERGE数据表结构的各成员MyISAM数据表必须具有完全一样的结构。每一个成员数据表的数据列必须按照同样的顺序定义同样的名字和类型，索引也必须按照同样的顺序和同样的方式定义。</p>
+<p>常用于多表合并。查询时他会把所有表中的数据查询出来，插入数据时需要指定表</p>
+<p>假设日志数据表的当前集合包括 log_2004、log_2005、log_2006、log_2007 ，而你可以创建一个如下所示的MERGE数据表把他们归拢为一个逻辑单元：</p>
+<pre class=" language-mysql"><code class="language-mysql">CREATE TABLE log_YY  
+
+(  
+
+  dt  DATETIME NOT NULL,  
+
+  info VARCHAR(100) NOT NULL,  
+
+  INDEX (dt)  
+
+) ENGINE = MyISAM;  </code></pre>
+<pre class=" language-mysql"><code class="language-mysql">CREATE TABLE log_merge  
+
+(  
+
+    dt DATETIME NOT NULL,  
+
+    info VARCHAR(100) NOT NULL,  
+
+    INDEX(dt)  
+
+) ENGINE = MERGE UNION = (log_2004, log_2005, log_2006, log_2007);  </code></pre>
+<h2 id="TokuDB"><a href="#TokuDB" class="headerlink" title="TokuDB"></a>TokuDB</h2><p>第三方存储引擎</p>
+<p>特性：</p>
+<ul>
+<li>Fractal树索引保证高效的插入性能</li>
+<li>优秀的压缩性能，比InnoDB高近10倍</li>
+<li>支持在线创建索引和田间删除属性列等DDL操作</li>
+<li>使用Bulk Loader快速加载数据</li>
+<li>主从延迟消除技术</li>
+<li>支持ACID和MVCC</li>
+</ul>
+<p>适用情况：</p>
+<ol>
+<li>日志数据，日志数据通常插入平凡，存储量大</li>
+<li>历史数据，通常不会有写数据，利用TokuDB的高压缩特性存储</li>
+<li>在线DDL较频繁的场景，提高可用性</li>
+</ol>
+<h1 id="引擎选择"><a href="#引擎选择" class="headerlink" title="引擎选择"></a>引擎选择</h1><p><img src="https://i.loli.net/2019/04/06/5ca8520169b52.png" alt></p>
+<p>注意：5.5以前默认引擎是MyISAM，5.5之后是InnoDB</p>
+
+            </div>
+            <hr/>
+
+            
+
+            <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+
+<div id="article-share">
+    
+    <div class="social-share" data-disabled="qzone" data-wechat-qrcode-helper="<p>微信里点“发现”->“扫一扫”二维码便可查看分享。</p>"></div>
+    
+</div>
+
+<script src="/libs/share/js/social-share.min.js"></script>
+
+            
+
+    <div class="reprint" id="reprint-statement">
+        <p class="reprint-tip">
+            <i class="fa fa-exclamation-triangle"></i>&nbsp;&nbsp;
+            <span>转载规则</span>
+        </p>
+        
+            <div class="center-align">
+                <a rel="license" href="https://creativecommons.org/licenses/by/4.0/deed.zh">
+                    <img alt=""
+                         style="border-width:0"
+                         src="https://i.creativecommons.org/l/by/4.0/88x31.png"/>
+                </a>
+            </div>
+            <br/>
+            <span xmlns:dct="http://purl.org/dc/terms/" href="http://purl.org/dc/dcmitype/Text"
+                  property="dct:title" rel="dct:type">
+                    《深入浅出MySQL-存储引擎》
+                </span> 由
+            <a xmlns:cc="http://creativecommons.org/ns#" href="/2019/04/06/shen-ru-qian-chu-mysql-cun-chu-yin-qing/" property="cc:attributionName"
+               rel="cc:attributionURL">
+                hmlr123
+            </a> 采用
+            <a rel="license" href="https://creativecommons.org/licenses/by/4.0/deed.zh">
+                知识共享署名 4.0 国际许可协议
+            </a>进行许可。
+        
+    </div>
+
+    <script async defer>
+      document.addEventListener("copy", function (e) {
+        let toastHTML = '<span>复制成功，请遵循本文的转载规则</span><button class="btn-flat toast-action" onclick="navToReprintStatement()" style="font-size: smaller">查看</a>';
+        M.toast({html: toastHTML})
+      });
+
+      function navToReprintStatement() {
+        $("html, body").animate({scrollTop: $("#reprint-statement").offset().top - 80}, 800);
+      }
+    </script>
+
+
+        </div>
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge left-badge text-color">
+                <i class="fa fa-chevron-left"></i>&nbsp;上一篇</div>
+            <div class="card">
+                <a href="/2019/04/06/shen-ru-qian-chu-mysql-xuan-ze-he-gua-shu-ju-lei-xing-he-zi-fu-ji/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/9.jpg" class="responsive-img" alt="深入浅出MySQL-选择合适数据类型和字符集">
+                        
+                        <span class="card-title">深入浅出MySQL-选择合适数据类型和字符集</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            合适的才是最好的！
+
+
+选择合适字符类型char与varchar
+char列数据在检索的时候会删除尾部的空格，对长度变化不大，并且对查询速度速度有较高要求的可以考虑使用char
+varchar列数据 ‘’表示一个字节
+char处理速度比va
+                        
+                    </div>
+                    <div class="publish-info">
+                        <span class="publish-date">
+                            <i class="fa fa-clock-o fa-fw icon-date"></i>2019-04-06
+                        </span>
+                        <span class="publish-author">
+                            
+                            <i class="fa fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/读书笔记/" class="post-category" target="_blank">
+                                    读书笔记
+                                </a>
+                            
+                            <a href="/categories/读书笔记/深入浅出MySQL/" class="post-category" target="_blank">
+                                    深入浅出MySQL
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/MySQL/" target="_blank">
+                        <span class="chip bg-color">MySQL</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fa fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2019/04/06/shen-ru-qian-chu-mysql-chang-yong-han-shu/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/17.jpg" class="responsive-img" alt="深入浅出MySQL-常用函数">
+                        
+                        <span class="card-title">深入浅出MySQL-常用函数</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            很多函数很有用，多百度，不要死记硬背
+
+
+授人以渔https://dev.mysql.com/doc/refman/5.5/en/date-and-time-functions.html
+相关函数请看官方文档，比我这还详细，谷歌翻译是个好东
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="fa fa-clock-o fa-fw icon-date"></i>2019-04-06
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fa fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/读书笔记/" class="post-category" target="_blank">
+                                    读书笔记
+                                </a>
+                            
+                            <a href="/categories/读书笔记/深入浅出MySQL/" class="post-category" target="_blank">
+                                    深入浅出MySQL
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/MySQL/" target="_blank">
+                        <span class="chip bg-color">MySQL</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+</article>
+</div>
+
+
+
+    </div>
+    <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
+        <div class="toc-widget">
+            <div class="toc-title"><i class="fa fa-list-alt"></i>&nbsp;&nbsp;目录</div>
+            <div id="toc-content"></div>
+        </div>
+    </div>
+</div>
+
+<!-- TOC 悬浮按钮. -->
+
+<div id="floating-toc-btn" class="hide-on-med-and-down">
+    <a class="btn-floating btn-large bg-color">
+        <i class="fa fa-list"></i>
+    </a>
+</div>
+
+
+<script src="/libs/tocbot/tocbot.min.js"></script>
+<script>
+    $(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            // headingsOffset: -205,
+            headingSelector: 'h1, h2, h3, h4, h5, h6'
+        });
+
+        // modify the toc link href to support Chinese.
+        let i = 0;
+        let tocHeading = 'toc-heading-';
+        $('#toc-content a').each(function () {
+            $(this).attr('href', '#' + tocHeading + (++i));
+        });
+
+        // modify the heading title id to support Chinese.
+        i = 0;
+        $('#articleContent').children('h1, h2, h3, h4, h5, h6').each(function () {
+            $(this).attr('id', tocHeading + (++i));
+        });
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+
+        
+        /* 修复文章卡片 div 的宽度. */
+        let fixPostCardWidth = function (srcId, targetId) {
+            let srcDiv = $('#' + srcId);
+            if (srcDiv.length === 0) {
+                return;
+            }
+
+            let w = srcDiv.width();
+            if (w >= 450) {
+                w = w + 21;
+            } else if (w >= 350 && w < 450) {
+                w = w + 18;
+            } else if (w >= 300 && w < 350) {
+                w = w + 16;
+            } else {
+                w = w + 14;
+            }
+            $('#' + targetId).width(w);
+        };
+
+        // 切换TOC目录展开收缩的相关操作.
+        const expandedClass = 'expanded';
+        let $tocAside = $('#toc-aside');
+        let $mainContent = $('#main-content');
+        $('#floating-toc-btn .btn-floating').click(function () {
+            if ($tocAside.hasClass(expandedClass)) {
+                $tocAside.removeClass(expandedClass).slideUp(500);
+                $mainContent.removeClass('l9');
+            } else {
+                $tocAside.addClass(expandedClass).slideDown(500);
+                $mainContent.addClass('l9');
+            }
+            fixPostCardWidth('artDetail', 'prenext-posts');
+        });
+        
+    });
+</script>
+    
+
+</main>
+
+
+<footer class="page-footer bg-color">
+    <div class="container row center-align">
+        <div class="col s12 m8 l8 copy-right">
+            本站由&copy;<a href="https://hmlr123.com/" target="_blank">hmlr123</a>基于
+            <a href="https://hexo.io/" target="_blank">Hexo</a> 的
+            <a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">hexo-theme-matery</a>主题搭建.
+
+            
+                &nbsp;<i class="fa fa-area-chart"></i>&nbsp;站点总字数:&nbsp;
+                <span class="white-color">82.2k</span>
+            
+
+            
+			
+                <br>
+                
+                <span id="busuanzi_container_site_pv">
+                    <i class="fa fa-heart-o"></i>
+                    本站总访问量 <span id="busuanzi_value_site_pv" class="white-color"></span>
+                </span>
+                
+                
+                <span id="busuanzi_container_site_uv">
+                    <i class="fa fa-users"></i>
+                    次,&nbsp;访客数 <span id="busuanzi_value_site_uv" class="white-color"></span> 人.
+                </span>
+                
+            
+        </div>
+        <div class="col s12 m4 l4 social-link social-statis">
+    <a href="hmlr123" class="tooltipped" target="_blank" data-tooltip="访问我的GitHub" data-position="top" data-delay="50">
+        <i class="fa fa-github"></i>
+    </a>
+
+
+
+    <a href="mailto:2870027009@qq.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+        <i class="fa fa-envelope-open"></i>
+    </a>
+
+
+
+    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=2870027009" class="tooltipped" data-tooltip="QQ联系我: 2870027009" data-position="top" data-delay="50">
+        <i class="fa fa-qq"></i>
+    </a>
+
+
+
+    <a href="/atom.xml" class="tooltipped" target="_blank" data-tooltip="RSS 订阅" data-position="top" data-delay="50">
+        <i class="fa fa-rss"></i>
+    </a>
+</div>
+    </div>
+</footer>
+
+<div class="progress-bar"></div>
+
+
+<!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fa fa-search"></i>&nbsp;&nbsp;搜索</span>
+            <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字"
+                   class="search-input">
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<script src="/js/search.js"></script>
+<script type="text/javascript">
+$(function () {
+    searchFunc("/" + "search.xml", 'searchInput', 'searchResult');
+});
+</script>
+<!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fa fa-angle-up"></i>
+    </a>
+</div>
+
+
+<script src="/libs/materialize/materialize.min.js"></script>
+<script src="/libs/masonry/masonry.pkgd.min.js"></script>
+<script src="/libs/aos/aos.js"></script>
+<script src="/libs/scrollprogress/scrollProgress.min.js"></script>
+<script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
+<script src="/js/matery.js"></script>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+
+
+
+    <script src="/libs/others/clicklove.js"></script>
+
+
+    <script async src="/libs/others/busuanzi.pure.mini.js"></script>
+
+
+</body>
+</html>

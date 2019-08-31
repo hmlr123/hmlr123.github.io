@@ -1,0 +1,881 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+
+
+<head><meta name="generator" content="Hexo 3.9.0">
+    <meta charset="utf-8">
+    <meta name="keywords" content="Centos7.6mini版-网络配置, hmlr123">
+    <meta name="description" content="踩了一天的坑终于centos7.6无法访问外网的原因了
+踩坑两个文件
+/etc/sysconofig/network
+/etc/sysconofig/network
+
+
+
+
+查看ipip addr
+默认网卡信息：进入配置文件
+cd /etc">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <title>Centos7.6mini版-网络配置 | hmlr123</title>
+    <link rel="icon" type="image/png" href="/favicon.png">
+
+    <link rel="stylesheet" type="text/css" href="/libs/awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/materialize/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
+    <link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/matery.css">
+    <link rel="stylesheet" type="text/css" href="/css/my.css">
+    <style type="text/css">
+        
+    </style>
+
+    <script src="/libs/jquery/jquery-2.2.0.min.js"></script>
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"></head>
+
+
+<body>
+
+<header class="navbar-fixed">
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="nav-wrapper container">
+            <div class="brand-logo">
+                <a href="/" class="waves-effect waves-light">
+                    
+                    <img src="/medias/logo.png" class="logo-img" alt="LOGO">
+                    
+                    <span class="logo-span">hmlr123</span>
+                </a>
+            </div>
+            
+
+<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fa fa-navicon"></i></a>
+<ul class="right">
+    
+    <li class="hide-on-med-and-down">
+        <a href="/" class="waves-effect waves-light">
+            
+            <i class="fa fa-home"></i>
+            
+            <span>首页</span>
+        </a>
+    </li>
+    
+    <li class="hide-on-med-and-down">
+        <a href="/tags" class="waves-effect waves-light">
+            
+            <i class="fa fa-tags"></i>
+            
+            <span>标签</span>
+        </a>
+    </li>
+    
+    <li class="hide-on-med-and-down">
+        <a href="/categories" class="waves-effect waves-light">
+            
+            <i class="fa fa-bookmark"></i>
+            
+            <span>分类</span>
+        </a>
+    </li>
+    
+    <li class="hide-on-med-and-down">
+        <a href="/archives" class="waves-effect waves-light">
+            
+            <i class="fa fa-archive"></i>
+            
+            <span>归档</span>
+        </a>
+    </li>
+    
+    <li class="hide-on-med-and-down">
+        <a href="/about" class="waves-effect waves-light">
+            
+            <i class="fa fa-user-circle-o"></i>
+            
+            <span>关于</span>
+        </a>
+    </li>
+    
+    <li class="hide-on-med-and-down">
+        <a href="/friends" class="waves-effect waves-light">
+            
+            <i class="fa fa-address-book"></i>
+            
+            <span>友情链接</span>
+        </a>
+    </li>
+    
+    <li>
+        <a href="#searchModal" class="modal-trigger waves-effect waves-light">
+            <i id="searchIcon" class="fa fa-search" title="搜索"></i>
+        </a>
+    </li>
+</ul>
+
+<div id="mobile-nav" class="side-nav sidenav">
+
+    <div class="mobile-head bg-color">
+        
+        <img src="/medias/logo.png" class="logo-img circle responsive-img">
+        
+        <div class="logo-name">hmlr123</div>
+        <div class="logo-desc">
+            
+            走走停停，记录滴滴点点
+            
+        </div>
+    </div>
+
+    
+
+    <ul class="menu-list mobile-menu-list">
+        
+        <li>
+            <a href="/" class="waves-effect waves-light">
+                
+                <i class="fa fa-fw fa-home"></i>
+                
+                首页
+            </a>
+        </li>
+        
+        <li>
+            <a href="/tags" class="waves-effect waves-light">
+                
+                <i class="fa fa-fw fa-tags"></i>
+                
+                标签
+            </a>
+        </li>
+        
+        <li>
+            <a href="/categories" class="waves-effect waves-light">
+                
+                <i class="fa fa-fw fa-bookmark"></i>
+                
+                分类
+            </a>
+        </li>
+        
+        <li>
+            <a href="/archives" class="waves-effect waves-light">
+                
+                <i class="fa fa-fw fa-archive"></i>
+                
+                归档
+            </a>
+        </li>
+        
+        <li>
+            <a href="/about" class="waves-effect waves-light">
+                
+                <i class="fa fa-fw fa-user-circle-o"></i>
+                
+                关于
+            </a>
+        </li>
+        
+        <li>
+            <a href="/friends" class="waves-effect waves-light">
+                
+                <i class="fa fa-fw fa-address-book"></i>
+                
+                友情链接
+            </a>
+        </li>
+        
+        
+    </ul>
+</div>
+
+        </div>
+
+        
+    </nav>
+
+</header>
+
+
+
+
+
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/3.jpg')">
+    <div class="container">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <div class="description center-align post-title">
+                        Centos7.6mini版-网络配置
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<main class="post-container content">
+
+    
+    <link rel="stylesheet" href="/libs/tocbot/tocbot.css">
+<style>
+    #articleContent h1::before,
+    #articleContent h2::before,
+    #articleContent h3::before,
+    #articleContent h4::before,
+    #articleContent h5::before,
+    #articleContent h6::before {
+        display: block;
+        content: " ";
+        height: 100px;
+        margin-top: -100px;
+        visibility: hidden;
+    }
+
+    #articleContent :focus {
+        outline: none;
+    }
+
+    .toc-fixed {
+        position: fixed;
+        top: 64px;
+    }
+
+    .toc-widget {
+        padding-left: 20px;
+    }
+
+    .toc-widget .toc-title {
+        margin: 35px 0 15px 0;
+        padding-left: 17px;
+        font-size: 1.5rem;
+        font-weight: bold;
+        line-height: 1.5rem;
+    }
+
+    .toc-widget ol {
+        padding: 0;
+        list-style: none;
+    }
+
+    #toc-content ol {
+        padding-left: 10px;
+    }
+
+    #toc-content ol li {
+        padding-left: 10px;
+    }
+
+    #toc-content .toc-link:hover {
+        color: #42b983;
+        font-weight: 700;
+        text-decoration: underline;
+    }
+
+    #toc-content .toc-link::before {
+        background-color: transparent;
+        max-height: 25px;
+    }
+
+    #toc-content .is-active-link {
+        color: #42b983;
+    }
+
+    #toc-content .is-active-link::before {
+        background-color: #42b983;
+    }
+
+    #floating-toc-btn {
+        position: fixed;
+        right: 20px;
+        bottom: 76px;
+        padding-top: 15px;
+        margin-bottom: 0;
+        z-index: 998;
+    }
+
+    #floating-toc-btn .btn-floating {
+        width: 48px;
+        height: 48px;
+    }
+
+    #floating-toc-btn .btn-floating i {
+        line-height: 48px;
+        font-size: 1.4rem;
+    }
+</style>
+<div class="row">
+    <div id="main-content" class="col s12 m12 l9">
+        <!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                    <div class="article-tag">
+                        
+                            <a href="/tags/linux/" target="_blank">
+                                <span class="chip bg-color">linux</span>
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                </div>
+            </div>
+
+            <div class="post-info">
+                <div class="post-date info-break-policy">
+                    <i class="fa fa-calendar-minus-o fa-fw"></i>发布日期:&nbsp;&nbsp;
+                    2019-03-14
+                </div>
+
+                
+                    
+                    <div class="info-break-policy">
+                        <i class="fa fa-file-word-o fa-fw"></i>文章字数:&nbsp;&nbsp;
+                        2.7k
+                    </div>
+                    
+
+                    
+                    <div class="info-break-policy">
+                        <i class="fa fa-clock-o fa-fw"></i>阅读时长:&nbsp;&nbsp;
+                        10 分
+                    </div>
+                    
+                
+				
+				
+                    <div id="busuanzi_container_page_pv" class="info-break-policy">
+                        <i class="fa fa-eye fa-fw"></i>阅读次数:&nbsp;&nbsp;
+                        <span id="busuanzi_value_page_pv"></span>
+                    </div>
+				
+            </div>
+        </div>
+        <hr class="clearfix">
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <p>踩了一天的坑终于centos7.6无法访问外网的原因了</p>
+<p>踩坑两个文件</p>
+<pre class=" language-shell"><code class="language-shell">/etc/sysconofig/network
+/etc/sysconofig/network</code></pre>
+<a id="more"></a>
+
+
+
+<h2 id="查看ip"><a href="#查看ip" class="headerlink" title="查看ip"></a>查看ip</h2><pre class=" language-shell"><code class="language-shell">ip addr</code></pre>
+<h2 id="默认网卡信息："><a href="#默认网卡信息：" class="headerlink" title="默认网卡信息："></a>默认网卡信息：</h2><p>进入配置文件</p>
+<pre class=" language-shell"><code class="language-shell">cd /etc/sysconfig/network-scripts/</code></pre>
+<p>找到配置文件ifcfg-*** ,这样的文件有两个，另一个是ifcfg-lo(里面的配置的是centos系统自身的网络配置信息，不用管他)。</p>
+<p>我的是这个</p>
+<pre class=" language-shell"><code class="language-shell">vi ifcfg-ens33 </code></pre>
+<p>然后配置里面信息（默认配置信息如下）</p>
+<pre><code>TYPE=Ethernet                # 网卡类型：为以太网
+PROXY_METHOD=none            # 代理方式：关闭状态
+BROWSER_ONLY=no                # 只是浏览器：否
+BOOTPROTO=dhcp                # 网卡的引导协议：DHCP[中文名称: 动态主机配置协议]
+DEFROUTE=yes                # 默认路由：是, 不明白的可以百度关键词 `默认路由` 
+IPV4_FAILURE_FATAL=no        # 是不开启IPV4致命错误检测：否
+IPV6INIT=yes                # IPV6是否自动初始化: 是[不会有任何影响, 现在还没用到IPV6]
+IPV6_AUTOCONF=yes            # IPV6是否自动配置：是[不会有任何影响, 现在还没用到IPV6]
+IPV6_DEFROUTE=yes            # IPV6是否可以为默认路由：是[不会有任何影响, 现在还没用到IPV6]
+IPV6_FAILURE_FATAL=no        # 是不开启IPV6致命错误检测：否
+IPV6_ADDR_GEN_MODE=stable-privacy            # IPV6地址生成模型：stable-privacy [这只一种生成IPV6的策略]
+NAME=ens33                    # 网卡物理设备名称
+UUID=f47bde51-fa78-4f79-b68f-d5dd90cfc698    # 通用唯一识别码, 每一个网卡都会有, 不能重复, 否两台linux只有一台网卡可用
+DEVICE=ens33                    # 网卡设备名称, 必须和 `NAME` 值一样
+ONBOOT=no                        # 是否开机启动， 要想网卡开机就启动或通过 `systemctl restart network`控制网卡,必须设置为 `yes` </code></pre><p>这里有两个个比较重要的概念：</p>
+<p>BOOTPROTO    IP分配方式 ；dhcp为系统分配，static 静态IP</p>
+<p>ONBOOT        设置开机自启</p>
+<h2 id="配置网卡为静态IP"><a href="#配置网卡为静态IP" class="headerlink" title="配置网卡为静态IP"></a>配置网卡为静态IP</h2><p>设置网卡引导协议为静态</p>
+<pre class=" language-shell"><code class="language-shell">BOOTPROTO=static</code></pre>
+<p>设置开机自启</p>
+<pre class=" language-shell"><code class="language-shell">ONBOOT=yes</code></pre>
+<p>配置IP/子网掩码/网关/DNS</p>
+<pre class=" language-shell"><code class="language-shell">IPADDR=192.168.140.4        #网段内的任意都行
+PREFIX=24                    #设置子网掩码，也可以用NETMASK=24    24代表255.255.255.0
+GATEWAT=192.168.140.2        #设置网关    
+DNS1=211.67.140.2            #设置DNS
+DNS2=114.114.114.114
+DNS3=8.8.8.8</code></pre>
+<p>注：这里都可以变量后面都可以加上数字，和DNS一样，表示有多个DNS解析，但是优先第一个</p>
+<h2 id="获取IP-子网掩码-网关-DNS"><a href="#获取IP-子网掩码-网关-DNS" class="headerlink" title="获取IP/子网掩码/网关/DNS"></a>获取IP/子网掩码/网关/DNS</h2><p><img src="https://i.loli.net/2019/03/14/5c8a3df14546c.jpg" alt></p>
+<p><img src="https://i.loli.net/2019/03/14/5c8a42cc2fc01.png" alt></p>
+<p>记住框框里的内容</p>
+<p>子网ip就是你的那个网段，可以分配192.168.140.0——192.168.140.255 但是一般不会用0 1 2 255</p>
+<p>0是代表哪个网段 1或者2代表着网关，就是虚拟机连接宿主机的那个ip 255是广播ip不能用，其他的你可以随便用于你的系统ip</p>
+<p>这样我们就获得centos ip 、子网掩码</p>
+<p>还记得我们框框里的东西：那个网管就是我们在网络配置里的网关。</p>
+<p>接下来我们获取dns， dns就是对域名的解析，不懂自行baidu。</p>
+<p>常用的dns：公用干净的114.114.114.114国内通用，8.8.8.8是google的；这里我添加了宿机局域网的dns（不知道是那根筋错了，加上去了）。</p>
+<p>这样我们要的东西就齐了</p>
+<h2 id="重启服务"><a href="#重启服务" class="headerlink" title="重启服务"></a>重启服务</h2><p>有两种命令：</p>
+<pre class=" language-shell"><code class="language-shell">service network restart</code></pre>
+<pre class=" language-shell"><code class="language-shell">systemctl restart network</code></pre>
+<p>两种命令都可以</p>
+<p>然后我们ping 8.8.8.8 或者<a href="http://www.baidu.com都可以，看能不能ping外网" target="_blank" rel="noopener">www.baidu.com都可以，看能不能ping外网</a></p>
+<h2 id="我就是在这里栽的，"><a href="#我就是在这里栽的，" class="headerlink" title="我就是在这里栽的，"></a>我就是在这里栽的，</h2><p>无法ping外网 如果出现无法ping外网</p>
+<p>首先查看</p>
+<pre class=" language-shell"><code class="language-shell">cat /etc/resolv.conf</code></pre>
+<p>看dns配置信息加载进去没有，没有自己手动添加</p>
+<pre class=" language-shell"><code class="language-shell">nameserver 114.114.114.114
+nameserver 8.8.8.8</code></pre>
+<p>然后查看</p>
+<pre class=" language-shell"><code class="language-shell">cat /etc/sysconofig/network</code></pre>
+<p>看网关信息添加进去没有，没有手动添加</p>
+<pre class=" language-shell"><code class="language-shell">GATEWAY=192.168.140.2</code></pre>
+<p>然后就可以愉快的访问外网了，哭兮兮，整了一天，惨不忍睹</p>
+<h2 id="扩展知识："><a href="#扩展知识：" class="headerlink" title="扩展知识："></a>扩展知识：</h2><table>
+<thead>
+<tr>
+<th>选择网络连接属性</th>
+<th>意义</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Use bridged networking（使用桥接网络）</td>
+<td>使用（连接）VMnet0虚拟交换机，此时虚拟机相当于网络上的一台<strong>独立计算机，与主机一样</strong>，拥有一个独立的IP地址，效果如图2-56所示</td>
+</tr>
+<tr>
+<td>Use network address translation（NAT）（使用NAT网络）</td>
+<td>使用（连接）VMnet8虚拟交换机，此时<strong>虚拟机可以通过主机单向访问网络上的其他工作站（包括Internet网络），其他工作站不能访问虚拟机</strong></td>
+</tr>
+<tr>
+<td>Use Host-Only networking（使用主机网络）</td>
+<td>使用（连接）VMnet1虚拟交换机，此时<strong>虚拟机只能与虚拟机、主机互连，与网络上的其他工作站不能访问</strong></td>
+</tr>
+<tr>
+<td>Do not use a network connection</td>
+<td>虚拟机中没有网卡，相当于“单机”使用</td>
+</tr>
+</tbody></table>
+<h3 id="桥接："><a href="#桥接：" class="headerlink" title="桥接："></a>桥接：</h3><p> 桥接网络是指本地物理网卡和虚拟网卡通过VMnet0虚拟交换机进行桥接，物理网卡和虚拟网卡在拓扑图上处于同等地位，那么物理网卡和虚拟网卡就相当于处于同一个网段，虚拟交换机就相当于一台现实网络中的交换机,所以两个网卡的IP地址也要设置为同一网段。</p>
+<p>   所以当我们要在局域网使用虚拟机，对局域网其他pc提供服务时，例如提供ftp，提供ssh，提供http服务，那么就要选择桥接模式。</p>
+<p>   例如大学宿舍里有一个路由器，宿舍里四个人连接这个路由器，路由器的wanip就不理会了，这个ip是动态获取的，而lanip默认是192.168.1.1,子网掩码是255.255.255.0。而其他四个人是自动获取ip，假设四个人的ip是:</p>
+<p>   A:192.168.1.100/255.255.255.0,  B:192.168.1.101/255.255.255.0,  C:192.168.1.102/255.255.255.0,  D:192.168.1.103/255.255.255.0</p>
+<p>   那么虚拟机的ip可以设置的ip地址是192.168.1.2-192.168.1.99,192.168.1.104-192.168.1.254(网络地址全0和全1的除外，再除去ABCD四个人的ip地址)</p>
+<p>  那么虚拟机的ip地址可以设置为192.168.1.98/255.255.255.0,设置了这个ip地址，ABCD这四个人就可以通过192.168.1.98访问虚拟机了，如果虚拟机需要上外网，那么还需要配置虚拟机的路由地址，就是192.168.1.1了，这样，虚拟机就可以上外网了，但是，上网我们一般是通过域名去访问外网的，所以我们还需要为虚拟机配置一个dns服务器，我们可以简单点，把dns服务器地址配置为google的dns服务器:8.8.8.8,到此，虚拟机就可以上网了</p>
+<h3 id="NAT"><a href="#NAT" class="headerlink" title="NAT"></a>NAT</h3><p>AT模式中，就是让虚拟机借助NAT(<strong>网络地址转换</strong>)功能，<strong>通过宿主机器所在的网络来访问公网</strong>。</p>
+<p>   NAT模式中，虚拟机的网卡和物理网卡的网络，不在同一个网络，虚拟机的网卡，是在vmware提供的一个虚拟网络。</p>
+<p>   NAT和桥接的比较:</p>
+<p>   (1) NAT模式和桥接模式虚拟机都可以上外网。</p>
+<p>   (2) 由于NAT的网络在vmware提供的一个虚拟网络里，所以局域网其他主机是无法访问虚拟机的，而宿主机可以访问虚拟机，虚拟机可以访问局域网的所有主机，因为真实的局域网相对于NAT的虚拟网络，就是NAT的虚拟网络的外网，不懂的人可以查查NAT的相关知识。</p>
+<p>   (3) 桥接模式下，多个虚拟机之间可以互相访问；NAT模式下，多个虚拟机之间也可以相互访问。</p>
+<p>   如果你建一个虚拟机，只是给自己用，不需要给局域网其他人用，那么可以选择NAT，毕竟NAT模式下的虚拟系统的TCP/IP配置信息是由VMnet8(NAT)虚拟网络的DHCP服务器提供的，只要虚拟机的网路配置是DHCP，那么你不需要进行任何其他的配置，只需要宿主机器能访问互联网即可，就可以让虚拟机联网了。</p>
+<p>  例如你想建多个虚拟机集群，作为测试使用，而宿主机可能是一个笔记本，ip不固定。这种应用场景，我们需要采用nat模式了，但是我们要考虑一个问题，虚拟机之间是需要互访的，默认采用dhcp，虚拟机的ip每次重启，ip都是不固定的，所以我们需要手工设置虚拟机的ip地址。</p>
+<p>  但是我们对虚拟机网卡所在的虚拟网络的信息还一无所知，例如虚拟机网络的路由地址，子网掩码，所以我们需要先查下nat虚拟网络的信息。</p>
+<p>  使用vmware,在Edit-&gt;Virtual Network Editor中配置好虚拟网络信息后看到下图所示，注意VMnet8，VMnet8相当于是本机的一个路由，虚拟机设置NAT后就通过这个路由进行上网的，可以查看其网络地址，路由地址，子网掩码。</p>
+<p>  选择VMnet8-&gt;NAT设置,可以看到子网ip显示为192.168.233.0，子网掩码是255.255.255.0，那路由地址呢，其实就是网关IP了，都是同个东西，这里是192.168.233.2。</p>
+<p>  接下来就好办了，在对应的虚拟机设置好ip，子网掩码，路由地址就可以上外网了，至于dns可以设置为8.8.8.8.</p>
+<h3 id="Host-Only"><a href="#Host-Only" class="headerlink" title="Host-Only"></a>Host-Only</h3><p>在Host-Only模式下，虚拟网络是一个全封闭的网络，它唯一能够访问的就是主机。其实Host-Only网络和NAT网络很相似，不同的地方就是Host-Only网络没有NAT服务，所以虚拟网络不能连接到Internet。主机和虚拟机之间的通信是通过VMware Network Adepter VMnet1虚拟网卡来实现的。</p>
+<p>　　Host-Only的宗旨就是建立一个与外界隔绝的内部网络，来提高内网的安全性。这个功能或许对普通用户来说没有多大意义，但大型服务商会常常利用这个功能。如果你想为VMnet1网段提供路由功能，那就需要使用RRAS，而不能使用XP或2000的ICS，因为ICS会把内网的IP地址改为192.168.0.1，但虚拟机是不会给VMnet1虚拟网卡分配这个地址的，那么主机和虚拟机之间就不能通信了。</p>
+<p>参考链接：</p>
+<p>写的不好，优先参考这个链接<a href="https://segmentfault.com/a/1190000011954814" target="_blank" rel="noopener">https://segmentfault.com/a/1190000011954814</a></p>
+<p><a href="http://www.cnblogs.com/ggjucheng/archive/2012/08/19/2646007.html" target="_blank" rel="noopener">http://www.cnblogs.com/ggjucheng/archive/2012/08/19/2646007.html</a></p>
+
+            </div>
+            <hr/>
+
+            
+
+            <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+
+<div id="article-share">
+    
+    <div class="social-share" data-disabled="qzone" data-wechat-qrcode-helper="<p>微信里点“发现”->“扫一扫”二维码便可查看分享。</p>"></div>
+    
+</div>
+
+<script src="/libs/share/js/social-share.min.js"></script>
+
+            
+
+    <div class="reprint" id="reprint-statement">
+        <p class="reprint-tip">
+            <i class="fa fa-exclamation-triangle"></i>&nbsp;&nbsp;
+            <span>转载规则</span>
+        </p>
+        
+            <div class="center-align">
+                <a rel="license" href="https://creativecommons.org/licenses/by/4.0/deed.zh">
+                    <img alt=""
+                         style="border-width:0"
+                         src="https://i.creativecommons.org/l/by/4.0/88x31.png"/>
+                </a>
+            </div>
+            <br/>
+            <span xmlns:dct="http://purl.org/dc/terms/" href="http://purl.org/dc/dcmitype/Text"
+                  property="dct:title" rel="dct:type">
+                    《Centos7.6mini版-网络配置》
+                </span> 由
+            <a xmlns:cc="http://creativecommons.org/ns#" href="/2019/03/14/centos7-6mini-ban-wang-luo-pei-zhi/" property="cc:attributionName"
+               rel="cc:attributionURL">
+                hmlr123
+            </a> 采用
+            <a rel="license" href="https://creativecommons.org/licenses/by/4.0/deed.zh">
+                知识共享署名 4.0 国际许可协议
+            </a>进行许可。
+        
+    </div>
+
+    <script async defer>
+      document.addEventListener("copy", function (e) {
+        let toastHTML = '<span>复制成功，请遵循本文的转载规则</span><button class="btn-flat toast-action" onclick="navToReprintStatement()" style="font-size: smaller">查看</a>';
+        M.toast({html: toastHTML})
+      });
+
+      function navToReprintStatement() {
+        $("html, body").animate({scrollTop: $("#reprint-statement").offset().top - 80}, 800);
+      }
+    </script>
+
+
+        </div>
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge left-badge text-color">
+                <i class="fa fa-chevron-left"></i>&nbsp;上一篇</div>
+            <div class="card">
+                <a href="/2019/03/15/dao-kui-tong-hua/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/3.jpg" class="responsive-img" alt="刀 葵 童话">
+                        
+                        <span class="card-title">刀 葵 童话</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            很炸的一首电音
+《刀，葵，童话》    ——太一
+
+
+
+                        
+                    </div>
+                    <div class="publish-info">
+                        <span class="publish-date">
+                            <i class="fa fa-clock-o fa-fw icon-date"></i>2019-03-15
+                        </span>
+                        <span class="publish-author">
+                            
+                            <i class="fa fa-user fa-fw"></i>
+                            hmlr123
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/音乐/" target="_blank">
+                        <span class="chip bg-color">音乐</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fa fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2019/03/12/java-he-xin-juan-i-fan-xing/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/15.jpg" class="responsive-img" alt="java核心卷Ⅰ-泛型">
+                        
+                        <span class="card-title">java核心卷Ⅰ-泛型</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            本章节主要讲java核心卷Ⅰ泛型
+
+
+定义简单泛型类public class Pair&lt;T>
+{
+    private T first;
+    private T second;
+
+
+    public Pair(){
+    
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="fa fa-clock-o fa-fw icon-date"></i>2019-03-12
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fa fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/读书笔记/" class="post-category" target="_blank">
+                                    读书笔记
+                                </a>
+                            
+                            <a href="/categories/读书笔记/java核心卷1/" class="post-category" target="_blank">
+                                    java核心卷1
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/java/" target="_blank">
+                        <span class="chip bg-color">java</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+</article>
+</div>
+
+
+
+    </div>
+    <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
+        <div class="toc-widget">
+            <div class="toc-title"><i class="fa fa-list-alt"></i>&nbsp;&nbsp;目录</div>
+            <div id="toc-content"></div>
+        </div>
+    </div>
+</div>
+
+<!-- TOC 悬浮按钮. -->
+
+<div id="floating-toc-btn" class="hide-on-med-and-down">
+    <a class="btn-floating btn-large bg-color">
+        <i class="fa fa-list"></i>
+    </a>
+</div>
+
+
+<script src="/libs/tocbot/tocbot.min.js"></script>
+<script>
+    $(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            // headingsOffset: -205,
+            headingSelector: 'h1, h2, h3, h4, h5, h6'
+        });
+
+        // modify the toc link href to support Chinese.
+        let i = 0;
+        let tocHeading = 'toc-heading-';
+        $('#toc-content a').each(function () {
+            $(this).attr('href', '#' + tocHeading + (++i));
+        });
+
+        // modify the heading title id to support Chinese.
+        i = 0;
+        $('#articleContent').children('h1, h2, h3, h4, h5, h6').each(function () {
+            $(this).attr('id', tocHeading + (++i));
+        });
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+
+        
+        /* 修复文章卡片 div 的宽度. */
+        let fixPostCardWidth = function (srcId, targetId) {
+            let srcDiv = $('#' + srcId);
+            if (srcDiv.length === 0) {
+                return;
+            }
+
+            let w = srcDiv.width();
+            if (w >= 450) {
+                w = w + 21;
+            } else if (w >= 350 && w < 450) {
+                w = w + 18;
+            } else if (w >= 300 && w < 350) {
+                w = w + 16;
+            } else {
+                w = w + 14;
+            }
+            $('#' + targetId).width(w);
+        };
+
+        // 切换TOC目录展开收缩的相关操作.
+        const expandedClass = 'expanded';
+        let $tocAside = $('#toc-aside');
+        let $mainContent = $('#main-content');
+        $('#floating-toc-btn .btn-floating').click(function () {
+            if ($tocAside.hasClass(expandedClass)) {
+                $tocAside.removeClass(expandedClass).slideUp(500);
+                $mainContent.removeClass('l9');
+            } else {
+                $tocAside.addClass(expandedClass).slideDown(500);
+                $mainContent.addClass('l9');
+            }
+            fixPostCardWidth('artDetail', 'prenext-posts');
+        });
+        
+    });
+</script>
+    
+
+</main>
+
+
+<footer class="page-footer bg-color">
+    <div class="container row center-align">
+        <div class="col s12 m8 l8 copy-right">
+            本站由&copy;<a href="https://hmlr123.com/" target="_blank">hmlr123</a>基于
+            <a href="https://hexo.io/" target="_blank">Hexo</a> 的
+            <a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">hexo-theme-matery</a>主题搭建.
+
+            
+                &nbsp;<i class="fa fa-area-chart"></i>&nbsp;站点总字数:&nbsp;
+                <span class="white-color">82.2k</span>
+            
+
+            
+			
+                <br>
+                
+                <span id="busuanzi_container_site_pv">
+                    <i class="fa fa-heart-o"></i>
+                    本站总访问量 <span id="busuanzi_value_site_pv" class="white-color"></span>
+                </span>
+                
+                
+                <span id="busuanzi_container_site_uv">
+                    <i class="fa fa-users"></i>
+                    次,&nbsp;访客数 <span id="busuanzi_value_site_uv" class="white-color"></span> 人.
+                </span>
+                
+            
+        </div>
+        <div class="col s12 m4 l4 social-link social-statis">
+    <a href="hmlr123" class="tooltipped" target="_blank" data-tooltip="访问我的GitHub" data-position="top" data-delay="50">
+        <i class="fa fa-github"></i>
+    </a>
+
+
+
+    <a href="mailto:2870027009@qq.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+        <i class="fa fa-envelope-open"></i>
+    </a>
+
+
+
+    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=2870027009" class="tooltipped" data-tooltip="QQ联系我: 2870027009" data-position="top" data-delay="50">
+        <i class="fa fa-qq"></i>
+    </a>
+
+
+
+    <a href="/atom.xml" class="tooltipped" target="_blank" data-tooltip="RSS 订阅" data-position="top" data-delay="50">
+        <i class="fa fa-rss"></i>
+    </a>
+</div>
+    </div>
+</footer>
+
+<div class="progress-bar"></div>
+
+
+<!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fa fa-search"></i>&nbsp;&nbsp;搜索</span>
+            <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字"
+                   class="search-input">
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<script src="/js/search.js"></script>
+<script type="text/javascript">
+$(function () {
+    searchFunc("/" + "search.xml", 'searchInput', 'searchResult');
+});
+</script>
+<!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fa fa-angle-up"></i>
+    </a>
+</div>
+
+
+<script src="/libs/materialize/materialize.min.js"></script>
+<script src="/libs/masonry/masonry.pkgd.min.js"></script>
+<script src="/libs/aos/aos.js"></script>
+<script src="/libs/scrollprogress/scrollProgress.min.js"></script>
+<script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
+<script src="/js/matery.js"></script>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+
+
+
+    <script src="/libs/others/clicklove.js"></script>
+
+
+    <script async src="/libs/others/busuanzi.pure.mini.js"></script>
+
+
+</body>
+</html>

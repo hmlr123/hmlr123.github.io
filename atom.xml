@@ -1,0 +1,452 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>hmlr123</title>
+  
+  <subtitle>唯有骑车与撸代码最执情</subtitle>
+  <link href="/atom.xml" rel="self"/>
+  
+  <link href="http://yoursite.com/"/>
+  <updated>2019-08-25T09:43:07.222Z</updated>
+  <id>http://yoursite.com/</id>
+  
+  <author>
+    <name>hmlr123</name>
+    
+  </author>
+  
+  <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Hello World</title>
+    <link href="http://yoursite.com/2019/08/25/hello-world/"/>
+    <id>http://yoursite.com/2019/08/25/hello-world/</id>
+    <published>2019-08-25T09:43:07.222Z</published>
+    <updated>2019-08-25T09:43:07.222Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;p&gt;Welcome to &lt;a href=&quot;https://hexo.io/&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;Hexo&lt;/a&gt;! This is your very first post. Check &lt;a
+        
+      
+    
+    </summary>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>全面理解java并发编程</title>
+    <link href="http://yoursite.com/2019/07/20/quan-mian-li-jie-java-bing-fa-bian-cheng/"/>
+    <id>http://yoursite.com/2019/07/20/quan-mian-li-jie-java-bing-fa-bian-cheng/</id>
+    <published>2019-07-20T07:44:59.000Z</published>
+    <updated>2019-07-20T07:48:37.475Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;来自公交上的学习&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="java" scheme="http://yoursite.com/tags/java/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>你做了些什么？</title>
+    <link href="http://yoursite.com/2019/07/20/ni-zuo-liao-xie-shi-me/"/>
+    <id>http://yoursite.com/2019/07/20/ni-zuo-liao-xie-shi-me/</id>
+    <published>2019-07-20T06:56:10.000Z</published>
+    <updated>2019-07-20T07:38:36.943Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;记录一下2019这半年我做了些什么？&lt;/p&gt;
+&lt;p&gt;我又收获了那些？&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="总结" scheme="http://yoursite.com/tags/%E6%80%BB%E7%BB%93/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>自定义Mybatis</title>
+    <link href="http://yoursite.com/2019/06/06/zi-ding-yi-mybatis/"/>
+    <id>http://yoursite.com/2019/06/06/zi-ding-yi-mybatis/</id>
+    <published>2019-06-06T13:34:02.000Z</published>
+    <updated>2019-06-06T13:48:55.687Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;根据一套黑马视频写的，有所收获，记录一下&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="MyBatis" scheme="http://yoursite.com/categories/MyBatis/"/>
+    
+    
+      <category term="java" scheme="http://yoursite.com/tags/java/"/>
+    
+      <category term="MyBatis" scheme="http://yoursite.com/tags/MyBatis/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>飘向北方</title>
+    <link href="http://yoursite.com/2019/05/27/piao-xiang-bei-fang/"/>
+    <id>http://yoursite.com/2019/05/27/piao-xiang-bei-fang/</id>
+    <published>2019-05-27T04:57:18.000Z</published>
+    <updated>2019-05-27T05:03:32.304Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;a id=&quot;more&quot;&gt;&lt;/a&gt;
+
+&lt;iframe width=&quot;560&quot; height=&quot;315&quot; src=&quot;https://www.youtube.com/embed/qIF8xvSA0Gw&quot; frameborder=&quot;0&quot; allow=&quot;accelerometer;
+        
+      
+    
+    </summary>
+    
+    
+      <category term="音乐" scheme="http://yoursite.com/tags/%E9%9F%B3%E4%B9%90/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>一些应该知道HTTP知识</title>
+    <link href="http://yoursite.com/2019/05/22/yi-xie-ying-gai-zhi-dao-http-zhi-shi/"/>
+    <id>http://yoursite.com/2019/05/22/yi-xie-ying-gai-zhi-dao-http-zhi-shi/</id>
+    <published>2019-05-22T06:50:45.000Z</published>
+    <updated>2019-05-22T07:24:06.723Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;主要是常见状态码以及请求方法&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="网络原理" scheme="http://yoursite.com/tags/%E7%BD%91%E7%BB%9C%E5%8E%9F%E7%90%86/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>HTTP首部字段</title>
+    <link href="http://yoursite.com/2019/05/21/http-shou-bu-zi-duan/"/>
+    <id>http://yoursite.com/2019/05/21/http-shou-bu-zi-duan/</id>
+    <published>2019-05-21T03:28:36.000Z</published>
+    <updated>2019-05-22T07:33:40.972Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;这一块一直是空白，刚好看书补补，记录一下&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="网络原理" scheme="http://yoursite.com/tags/%E7%BD%91%E7%BB%9C%E5%8E%9F%E7%90%86/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>双重校验锁实现对象单例</title>
+    <link href="http://yoursite.com/2019/05/20/shuang-chong-xiao-yan-suo-shi-xian-dui-xiang-dan-li/"/>
+    <id>http://yoursite.com/2019/05/20/shuang-chong-xiao-yan-suo-shi-xian-dui-xiang-dan-li/</id>
+    <published>2019-05-20T02:37:15.000Z</published>
+    <updated>2019-05-20T02:38:24.879Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;干干干货&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="java" scheme="http://yoursite.com/tags/java/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>ArrayList源码</title>
+    <link href="http://yoursite.com/2019/05/20/arraylist-yuan-ma/"/>
+    <id>http://yoursite.com/2019/05/20/arraylist-yuan-ma/</id>
+    <published>2019-05-20T02:34:00.000Z</published>
+    <updated>2019-05-20T02:36:21.420Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;面试前突击看的，感觉还行，看懂了，更要多看&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="java" scheme="http://yoursite.com/tags/java/"/>
+    
+      <category term="Spring" scheme="http://yoursite.com/tags/Spring/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>linux-tomcat配置</title>
+    <link href="http://yoursite.com/2019/05/19/linux-tomcat-pei-zhi/"/>
+    <id>http://yoursite.com/2019/05/19/linux-tomcat-pei-zhi/</id>
+    <published>2019-05-19T09:32:09.000Z</published>
+    <updated>2019-05-19T09:34:00.497Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;怕忘记了&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="linux" scheme="http://yoursite.com/tags/linux/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>大话数据结构-线索二叉树中序线索化</title>
+    <link href="http://yoursite.com/2019/05/11/da-hua-shu-ju-jie-gou-xian-suo-er-cha-shu-zhong-xu-xian-suo-hua/"/>
+    <id>http://yoursite.com/2019/05/11/da-hua-shu-ju-jie-gou-xian-suo-er-cha-shu-zhong-xu-xian-suo-hua/</id>
+    <published>2019-05-11T06:51:37.000Z</published>
+    <updated>2019-05-11T07:15:01.269Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;理解什么事线索二叉树，怎么将二叉树线索化，线索化的二叉树怎么遍历&lt;/p&gt;
+&lt;p&gt;拓展，前序线索二叉树遍历，后序线索二叉树遍历&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="读书笔记" scheme="http://yoursite.com/categories/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/"/>
+    
+      <category term="大话数据结构" scheme="http://yoursite.com/categories/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/%E5%A4%A7%E8%AF%9D%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"/>
+    
+    
+      <category term="java" scheme="http://yoursite.com/tags/java/"/>
+    
+      <category term="数据结构与算法" scheme="http://yoursite.com/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>大话数据结构-二叉树前中后序遍历</title>
+    <link href="http://yoursite.com/2019/05/09/da-hua-shu-ju-jie-gou-er-cha-shu-qian-zhong-hou-xu-bian-li/"/>
+    <id>http://yoursite.com/2019/05/09/da-hua-shu-ju-jie-gou-er-cha-shu-qian-zhong-hou-xu-bian-li/</id>
+    <published>2019-05-09T04:41:22.000Z</published>
+    <updated>2019-05-09T13:07:36.485Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;重点在于 二叉树的构建，满二叉树怎么构建，完全二叉树怎么构建&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="读书笔记" scheme="http://yoursite.com/categories/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/"/>
+    
+      <category term="大话数据结构" scheme="http://yoursite.com/categories/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/%E5%A4%A7%E8%AF%9D%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"/>
+    
+    
+      <category term="java" scheme="http://yoursite.com/tags/java/"/>
+    
+      <category term="数据结构与算法" scheme="http://yoursite.com/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>大话数据结构-二叉树</title>
+    <link href="http://yoursite.com/2019/05/08/da-hua-shu-ju-jie-gou-er-cha-shu/"/>
+    <id>http://yoursite.com/2019/05/08/da-hua-shu-ju-jie-gou-er-cha-shu/</id>
+    <published>2019-05-08T06:55:35.000Z</published>
+    <updated>2019-05-08T07:08:33.253Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;纯理论，了解一下&lt;/p&gt;
+&lt;p&gt;搬砖，&lt;a href=&quot;&lt;https://www.jianshu.com/p/bf73c8d50dc2&gt;&quot;&gt;摘自&lt;/a&gt;&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="读书笔记" scheme="http://yoursite.com/categories/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/"/>
+    
+      <category term="大话数据结构" scheme="http://yoursite.com/categories/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/%E5%A4%A7%E8%AF%9D%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"/>
+    
+    
+      <category term="java" scheme="http://yoursite.com/tags/java/"/>
+    
+      <category term="数据结构与算法" scheme="http://yoursite.com/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>面向对象思想</title>
+    <link href="http://yoursite.com/2019/05/06/mian-xiang-dui-xiang-si-xiang/"/>
+    <id>http://yoursite.com/2019/05/06/mian-xiang-dui-xiang-si-xiang/</id>
+    <published>2019-05-06T06:39:12.000Z</published>
+    <updated>2019-05-06T07:46:20.165Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;我对面向对象的认识，踩坑！&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="java" scheme="http://yoursite.com/tags/java/"/>
+    
+      <category term="面试" scheme="http://yoursite.com/tags/%E9%9D%A2%E8%AF%95/"/>
+    
+      <category term="思想" scheme="http://yoursite.com/tags/%E6%80%9D%E6%83%B3/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>面试</title>
+    <link href="http://yoursite.com/2019/05/06/mian-shi/"/>
+    <id>http://yoursite.com/2019/05/06/mian-shi/</id>
+    <published>2019-05-06T06:26:09.000Z</published>
+    <updated>2019-05-06T06:29:55.386Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;记录一下自己的不足&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="面试" scheme="http://yoursite.com/tags/%E9%9D%A2%E8%AF%95/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>树的存储结构</title>
+    <link href="http://yoursite.com/2019/05/06/shu-de-cun-chu-jie-gou/"/>
+    <id>http://yoursite.com/2019/05/06/shu-de-cun-chu-jie-gou/</id>
+    <published>2019-05-06T03:21:13.000Z</published>
+    <updated>2019-05-06T04:28:22.413Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;纯理论，让我们了解一下先人的智慧，各种树的存储结构，后面有大作用。不懂多看大话数据结构那部分内容&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="读书笔记" scheme="http://yoursite.com/categories/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/"/>
+    
+      <category term="大话数据结构" scheme="http://yoursite.com/categories/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/%E5%A4%A7%E8%AF%9D%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"/>
+    
+    
+      <category term="java" scheme="http://yoursite.com/tags/java/"/>
+    
+      <category term="数据结构与算法" scheme="http://yoursite.com/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>大话数据结构-顺序队列</title>
+    <link href="http://yoursite.com/2019/05/03/da-hua-shu-ju-jie-gou-shun-xu-dui-lie/"/>
+    <id>http://yoursite.com/2019/05/03/da-hua-shu-ju-jie-gou-shun-xu-dui-lie/</id>
+    <published>2019-05-03T06:24:50.000Z</published>
+    <updated>2019-05-03T06:27:54.341Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;渣渣威，每日一法&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="读书笔记" scheme="http://yoursite.com/categories/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/"/>
+    
+      <category term="大话数据结构" scheme="http://yoursite.com/categories/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/%E5%A4%A7%E8%AF%9D%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"/>
+    
+    
+      <category term="java" scheme="http://yoursite.com/tags/java/"/>
+    
+      <category term="数据结构与算法" scheme="http://yoursite.com/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>大话数据结构-四则运算</title>
+    <link href="http://yoursite.com/2019/05/01/da-hua-shu-ju-jie-gou-si-ze-yun-suan/"/>
+    <id>http://yoursite.com/2019/05/01/da-hua-shu-ju-jie-gou-si-ze-yun-suan/</id>
+    <published>2019-05-01T07:22:36.000Z</published>
+    <updated>2019-05-01T07:28:43.806Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;使用栈实现四则运算，理解原理，实现过程&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="读书笔记" scheme="http://yoursite.com/categories/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/"/>
+    
+      <category term="大话数据结构" scheme="http://yoursite.com/categories/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/%E5%A4%A7%E8%AF%9D%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"/>
+    
+    
+      <category term="java" scheme="http://yoursite.com/tags/java/"/>
+    
+      <category term="数据结构与算法" scheme="http://yoursite.com/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>大话数据结构-链栈</title>
+    <link href="http://yoursite.com/2019/04/29/da-hua-shu-ju-jie-gou-lian-zhan/"/>
+    <id>http://yoursite.com/2019/04/29/da-hua-shu-ju-jie-gou-lian-zhan/</id>
+    <published>2019-04-29T04:33:42.000Z</published>
+    <updated>2019-04-29T04:53:20.503Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;biubiubiu，不难，就是有点麻烦，多种实现方式不能混了&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="读书笔记" scheme="http://yoursite.com/categories/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/"/>
+    
+      <category term="大话数据结构" scheme="http://yoursite.com/categories/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/%E5%A4%A7%E8%AF%9D%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"/>
+    
+    
+      <category term="java" scheme="http://yoursite.com/tags/java/"/>
+    
+      <category term="数据结构与算法" scheme="http://yoursite.com/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>大话数据结构-顺序栈</title>
+    <link href="http://yoursite.com/2019/04/29/da-hua-shu-ju-jie-gou-shun-xu-zhan/"/>
+    <id>http://yoursite.com/2019/04/29/da-hua-shu-ju-jie-gou-shun-xu-zhan/</id>
+    <published>2019-04-29T03:16:35.000Z</published>
+    <updated>2019-04-29T03:20:35.766Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;蛮简单的一种数据结构，栈先进后出 栈顶指针 ，顺序栈使用数组实现&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="读书笔记" scheme="http://yoursite.com/categories/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/"/>
+    
+      <category term="大话数据结构" scheme="http://yoursite.com/categories/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/%E5%A4%A7%E8%AF%9D%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"/>
+    
+    
+      <category term="java" scheme="http://yoursite.com/tags/java/"/>
+    
+      <category term="数据结构与算法" scheme="http://yoursite.com/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/"/>
+    
+  </entry>
+  
+</feed>

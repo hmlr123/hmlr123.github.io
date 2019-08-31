@@ -1,0 +1,942 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+
+
+<head><meta name="generator" content="Hexo 3.9.0">
+    <meta charset="utf-8">
+    <meta name="keywords" content="深入浅出MySQL-MySQL分区, hmlr123">
+    <meta name="description" content="分区优化数据库表解决的问题、实现的原理、实现的过程及优点
+
+
+英语词汇coalesce         联合联结
+为什么分区问题很多情况下，我们的一个表达到了上万条，甚至过亿，这时候我们查询时，无论有没有索引，消耗的时间都是极大的，占用的内">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <title>深入浅出MySQL-MySQL分区 | hmlr123</title>
+    <link rel="icon" type="image/png" href="/favicon.png">
+
+    <link rel="stylesheet" type="text/css" href="/libs/awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/materialize/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
+    <link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/matery.css">
+    <link rel="stylesheet" type="text/css" href="/css/my.css">
+    <style type="text/css">
+        
+    </style>
+
+    <script src="/libs/jquery/jquery-2.2.0.min.js"></script>
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"></head>
+
+
+<body>
+
+<header class="navbar-fixed">
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="nav-wrapper container">
+            <div class="brand-logo">
+                <a href="/" class="waves-effect waves-light">
+                    
+                    <img src="/medias/logo.png" class="logo-img" alt="LOGO">
+                    
+                    <span class="logo-span">hmlr123</span>
+                </a>
+            </div>
+            
+
+<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fa fa-navicon"></i></a>
+<ul class="right">
+    
+    <li class="hide-on-med-and-down">
+        <a href="/" class="waves-effect waves-light">
+            
+            <i class="fa fa-home"></i>
+            
+            <span>首页</span>
+        </a>
+    </li>
+    
+    <li class="hide-on-med-and-down">
+        <a href="/tags" class="waves-effect waves-light">
+            
+            <i class="fa fa-tags"></i>
+            
+            <span>标签</span>
+        </a>
+    </li>
+    
+    <li class="hide-on-med-and-down">
+        <a href="/categories" class="waves-effect waves-light">
+            
+            <i class="fa fa-bookmark"></i>
+            
+            <span>分类</span>
+        </a>
+    </li>
+    
+    <li class="hide-on-med-and-down">
+        <a href="/archives" class="waves-effect waves-light">
+            
+            <i class="fa fa-archive"></i>
+            
+            <span>归档</span>
+        </a>
+    </li>
+    
+    <li class="hide-on-med-and-down">
+        <a href="/about" class="waves-effect waves-light">
+            
+            <i class="fa fa-user-circle-o"></i>
+            
+            <span>关于</span>
+        </a>
+    </li>
+    
+    <li class="hide-on-med-and-down">
+        <a href="/friends" class="waves-effect waves-light">
+            
+            <i class="fa fa-address-book"></i>
+            
+            <span>友情链接</span>
+        </a>
+    </li>
+    
+    <li>
+        <a href="#searchModal" class="modal-trigger waves-effect waves-light">
+            <i id="searchIcon" class="fa fa-search" title="搜索"></i>
+        </a>
+    </li>
+</ul>
+
+<div id="mobile-nav" class="side-nav sidenav">
+
+    <div class="mobile-head bg-color">
+        
+        <img src="/medias/logo.png" class="logo-img circle responsive-img">
+        
+        <div class="logo-name">hmlr123</div>
+        <div class="logo-desc">
+            
+            走走停停，记录滴滴点点
+            
+        </div>
+    </div>
+
+    
+
+    <ul class="menu-list mobile-menu-list">
+        
+        <li>
+            <a href="/" class="waves-effect waves-light">
+                
+                <i class="fa fa-fw fa-home"></i>
+                
+                首页
+            </a>
+        </li>
+        
+        <li>
+            <a href="/tags" class="waves-effect waves-light">
+                
+                <i class="fa fa-fw fa-tags"></i>
+                
+                标签
+            </a>
+        </li>
+        
+        <li>
+            <a href="/categories" class="waves-effect waves-light">
+                
+                <i class="fa fa-fw fa-bookmark"></i>
+                
+                分类
+            </a>
+        </li>
+        
+        <li>
+            <a href="/archives" class="waves-effect waves-light">
+                
+                <i class="fa fa-fw fa-archive"></i>
+                
+                归档
+            </a>
+        </li>
+        
+        <li>
+            <a href="/about" class="waves-effect waves-light">
+                
+                <i class="fa fa-fw fa-user-circle-o"></i>
+                
+                关于
+            </a>
+        </li>
+        
+        <li>
+            <a href="/friends" class="waves-effect waves-light">
+                
+                <i class="fa fa-fw fa-address-book"></i>
+                
+                友情链接
+            </a>
+        </li>
+        
+        
+    </ul>
+</div>
+
+        </div>
+
+        
+    </nav>
+
+</header>
+
+
+
+
+
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/6.jpg')">
+    <div class="container">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <div class="description center-align post-title">
+                        深入浅出MySQL-MySQL分区
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<main class="post-container content">
+
+    
+    <link rel="stylesheet" href="/libs/tocbot/tocbot.css">
+<style>
+    #articleContent h1::before,
+    #articleContent h2::before,
+    #articleContent h3::before,
+    #articleContent h4::before,
+    #articleContent h5::before,
+    #articleContent h6::before {
+        display: block;
+        content: " ";
+        height: 100px;
+        margin-top: -100px;
+        visibility: hidden;
+    }
+
+    #articleContent :focus {
+        outline: none;
+    }
+
+    .toc-fixed {
+        position: fixed;
+        top: 64px;
+    }
+
+    .toc-widget {
+        padding-left: 20px;
+    }
+
+    .toc-widget .toc-title {
+        margin: 35px 0 15px 0;
+        padding-left: 17px;
+        font-size: 1.5rem;
+        font-weight: bold;
+        line-height: 1.5rem;
+    }
+
+    .toc-widget ol {
+        padding: 0;
+        list-style: none;
+    }
+
+    #toc-content ol {
+        padding-left: 10px;
+    }
+
+    #toc-content ol li {
+        padding-left: 10px;
+    }
+
+    #toc-content .toc-link:hover {
+        color: #42b983;
+        font-weight: 700;
+        text-decoration: underline;
+    }
+
+    #toc-content .toc-link::before {
+        background-color: transparent;
+        max-height: 25px;
+    }
+
+    #toc-content .is-active-link {
+        color: #42b983;
+    }
+
+    #toc-content .is-active-link::before {
+        background-color: #42b983;
+    }
+
+    #floating-toc-btn {
+        position: fixed;
+        right: 20px;
+        bottom: 76px;
+        padding-top: 15px;
+        margin-bottom: 0;
+        z-index: 998;
+    }
+
+    #floating-toc-btn .btn-floating {
+        width: 48px;
+        height: 48px;
+    }
+
+    #floating-toc-btn .btn-floating i {
+        line-height: 48px;
+        font-size: 1.4rem;
+    }
+</style>
+<div class="row">
+    <div id="main-content" class="col s12 m12 l9">
+        <!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                    <div class="article-tag">
+                        
+                            <a href="/tags/MySQL/" target="_blank">
+                                <span class="chip bg-color">MySQL</span>
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fa fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/categories/读书笔记/" class="post-category" target="_blank">
+                                读书笔记
+                            </a>
+                        
+                            <a href="/categories/读书笔记/深入浅出MySQL/" class="post-category" target="_blank">
+                                深入浅出MySQL
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+
+            <div class="post-info">
+                <div class="post-date info-break-policy">
+                    <i class="fa fa-calendar-minus-o fa-fw"></i>发布日期:&nbsp;&nbsp;
+                    2019-04-11
+                </div>
+
+                
+                    
+                    <div class="info-break-policy">
+                        <i class="fa fa-file-word-o fa-fw"></i>文章字数:&nbsp;&nbsp;
+                        2.6k
+                    </div>
+                    
+
+                    
+                    <div class="info-break-policy">
+                        <i class="fa fa-clock-o fa-fw"></i>阅读时长:&nbsp;&nbsp;
+                        9 分
+                    </div>
+                    
+                
+				
+				
+                    <div id="busuanzi_container_page_pv" class="info-break-policy">
+                        <i class="fa fa-eye fa-fw"></i>阅读次数:&nbsp;&nbsp;
+                        <span id="busuanzi_value_page_pv"></span>
+                    </div>
+				
+            </div>
+        </div>
+        <hr class="clearfix">
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <p>分区优化数据库表解决的问题、实现的原理、实现的过程及优点</p>
+<a id="more"></a>
+
+<h1 id="英语词汇"><a href="#英语词汇" class="headerlink" title="英语词汇"></a>英语词汇</h1><p>coalesce         联合联结</p>
+<h1 id="为什么分区"><a href="#为什么分区" class="headerlink" title="为什么分区"></a>为什么分区</h1><h2 id="问题"><a href="#问题" class="headerlink" title="问题"></a>问题</h2><p>很多情况下，我们的一个表达到了上万条，甚至过亿，这时候我们查询时，无论有没有索引，消耗的时间都是极大的，占用的内存也是很浪费（一般索引会占一半的文件大小）。使用分区则可以解决这些问题</p>
+<h1 id="分区表的概念"><a href="#分区表的概念" class="headerlink" title="分区表的概念"></a>分区表的概念</h1><p>分区是根据一定的规则，数据库把一个表分解成多个更小的、更容易管理的部分。就访问数据库应用而言，逻辑上就只有一个表或者一个索引，但实际上这<strong>个表可能有N个物理分区对象组成，每个分区都是一个独立的对象</strong>，可以独立处理，可以作为表的一部分进行处理。分区对应用来说是完全透明的，不影响应用的业务逻辑。</p>
+<p>判断当前MySQL是否支持分区？</p>
+<pre class=" language-mysql"><code class="language-mysql">show variables like'%partition%' </code></pre>
+<p>MySQL支持大部分存储引擎（MyISAM、InnoDB、Memery等），不支持Merge、CSV等。</p>
+<p>同一分区表的不同分区存储引擎必须一致，不用分区表可以不同存储引擎。</p>
+<h1 id="分区表的原理"><a href="#分区表的原理" class="headerlink" title="分区表的原理"></a>分区表的原理</h1><p>分区表由多个相关的底层表实现，这些底层表是由句柄对象来表示，可以直接访问分区，<strong>分区表的索引只是在各个底层表上各自加上一个完全相同的索引，从存储引擎上看，分区表和普通表没有什么不同。</strong></p>
+<p>SELECT查询：<strong>打开并锁住所有的底层表</strong>，优化器判断是否会过滤部分分区，然后调用对应的存储引擎接口访问各个分区的数据。</p>
+<p>INSERT操作：打开并锁住所有底层表，确定哪个分区接收记录，写入底层表</p>
+<p>DELETE操作：打开并锁住所有底层表，确定数据对应的分区，删除操作。</p>
+<p>UPDATE操作：打开并锁住所有的底层表，确定更新的分区，取出更新，判断更新后的数据应该存放的分区位置，写入操作。</p>
+<h1 id="分区的种类"><a href="#分区的种类" class="headerlink" title="分区的种类"></a>分区的种类</h1><p><code>RANGE</code>分区：基于属于一个给定<strong>连续区间</strong>的列值，把多行分配给分区。</p>
+<p><code>LIST</code>分区：类似于按<code>RANGE</code>分区，区别在于<code>LIST</code>分区是<strong>基于列值匹配一个离散值集合中的某个值</strong>来进行选择。</p>
+<p><code>HASH</code>分区：基于用户定义的表达式的返回值来进行选择的分区，该表达式使用将要插入到表中的这些行的列值进行计算。这个函数可以包含<code>MySQL</code> 中<strong>有效的、产生非负整数值</strong>的任何表达式。</p>
+<p><code>KEY</code>分区：类似于按<code>HASH</code>分区，区别在于<code>KEY</code>分区只支持计算一列或多列，且<code>MySQL</code>服务器提供其自身的哈希函数。必须有<strong>一列或多列包含整数值。</strong></p>
+<p>重点：无论哪种分区，要么你分区表上没有主键/唯一键，要么<strong><span style="color:red">分区表的主键/唯一键都必须包含分区键，也就是说不能使用主键/唯一键字段之外的其它字段分区。</span></strong></p>
+<h2 id="RANGE分区"><a href="#RANGE分区" class="headerlink" title="RANGE分区"></a><code>RANGE</code>分区</h2><ul>
+<li>取值范围将数据分成区，区间连续且不重叠。</li>
+<li>分区键Null值会按最小值处理</li>
+</ul>
+<p>创建：</p>
+<pre class=" language-mysql"><code class="language-mysql">mysql> create table emp(
+    -> id int not null,
+    -> ename varchar(20),
+    -> hired date not null default '1123^12&23',
+    -> separated date not null default '1234+12+12',
+    -> job varchar(30) not null,
+    -> store_id int not null)
+    -> partition by range(store_id)(
+    -> partition p0 values less than (10),
+    -> partition p1 values less than (20),
+    -> partition p2 values less than (30)
+    -> );
+Query OK, 0 rows affected (0.19 sec)</code></pre>
+<p>修改：</p>
+<pre class=" language-mysql"><code class="language-mysql">mysql> alter table emp add partition (partition p3 values less than maxvalue);
+Query OK, 0 rows affected (0.41 sec)
+Records: 0  Duplicates: 0  Warnings: 0</code></pre>
+<p>删除：</p>
+<pre class=" language-mysql"><code class="language-mysql">alter table emp drop partition p0;</code></pre>
+<h2 id="LIST分区"><a href="#LIST分区" class="headerlink" title="LIST分区"></a><code>LIST</code>分区</h2><pre class=" language-mysql"><code class="language-mysql">mysql>  create table expenses(
+    -> expense_date date not null,
+    -> category int,
+    -> amount decimal (10,3)
+    -> )
+    -> partition by list(category)(
+    -> partition p0 values in (3,5),
+    -> partition p1 values in (1,10),
+    -> partition p2 values in (4,9),
+    -> partition p3 values in (2),
+    -> partition p4 values in (6)
+    -> );
+Query OK, 0 rows affected (0.20 sec)</code></pre>
+<h2 id="Columns分区"><a href="#Columns分区" class="headerlink" title="Columns分区"></a><code>Columns</code>分区</h2><p><strong>解决<code>list、range</code>分区只支持整数的问题。</strong></p>
+<ul>
+<li><p><code>columns</code>分区分为 <code>range columns</code>（基于<strong>元组的数据比较</strong>）和<code>list columns</code>分区,两种都支持整数、字符串、日期。，不支持浮点数，不支持text、blob;</p>
+</li>
+<li><p>columns分区<strong>支持多列分区</strong></p>
+</li>
+</ul>
+<p>栗子：</p>
+<pre class=" language-mysql"><code class="language-mysql">mysql> create table rc3(
+    -> a int,
+    -> b int)
+    -> partition by range columns(a,b)(
+    -> partition p01 values less than (0,10),
+    -> partition p02 values less than (10,10),
+    -> partition p03 values less than (10,20),
+    -> partition p04 values less than (10,35),
+    -> partition p05 values less than (10,maxvalue),
+    -> partition p06 values less than (maxvalue,maxvalue)
+    -> );
+Query OK, 0 rows affected (0.25 sec)</code></pre>
+<p>解释一下：</p>
+<p>元组的比较，(a,b) 、(c,d)比较</p>
+<p>如果a&gt;b，就不用比较b,d大小，否则，比较b,d;</p>
+<h2 id="HASH分区"><a href="#HASH分区" class="headerlink" title="HASH分区"></a><code>HASH</code>分区</h2><p>MySQL分为两种算法分区：</p>
+<ol>
+<li>常规Hash分区（取模）</li>
+<li>线性Hash分区（linear hash分区；线性的2的幂的运算法则）</li>
+</ol>
+<pre class=" language-mysql"><code class="language-mysql">create tables xxx ()
+partition by （linear） hash(expr) partitions num;
+#expr 分区列，num分几个区</code></pre>
+<p>expr可以是MySQL中有效的任何函数或者其他表达式，只要他们返回一个既非常数，又非随机的整数，每次增加删除修改的时候都要计算一次，影响性能。</p>
+<p>常规Hash分区和线性Hash分区区别</p>
+<ul>
+<li>常规HASH在分区管理上很麻烦，如果要增加分区，之前的分区就要重新计算，</li>
+<li>线性Hash分区维护的时候很方便，但是分区之间的数据分布不均匀，关于线性Hash分区算法自行看书，不难。</li>
+</ul>
+<p>注意：Hash分区只支持整数分区。明白他们的算法不是取模就是取最小2的幂值</p>
+<h2 id="KEY分区"><a href="#KEY分区" class="headerlink" title="KEY分区"></a><code>KEY</code>分区</h2><p>和Hash分区leisure，但是不允许用户使用自定义的表达式。使用MySQL服务器提供的Hash函数，支持除Blob、Text类型之外其他类型的列作为分区键。</p>
+<pre class=" language-mysql"><code class="language-mysql">create table xxx()
+partition by key(expr) partitions num;</code></pre>
+<p>expr 可以是0个或多个字段名的字段。</p>
+<p>默认是主键作为分区键，没有主键，默认使用唯一键（必须非空），</p>
+<h2 id="分区处理null方式"><a href="#分区处理null方式" class="headerlink" title="分区处理null方式"></a>分区处理null方式</h2><p>一般情况下分区把null当作空值，或者最小值处理。</p>
+<ul>
+<li><p><code>range</code>分区中，<code>null</code>当最小值处理</p>
+</li>
+<li><p><code>list</code>分区中，<code>null</code>必须出现在枚举列表中</p>
+</li>
+<li><p><code>hash\key</code>中，当作0处理</p>
+</li>
+</ul>
+<p>解决办法：使用非空字段、默认值绕开MySQL默认NULL值得处理</p>
+<h1 id="分区的管理"><a href="#分区的管理" class="headerlink" title="分区的管理"></a>分区的管理</h1><p><code>MySQL</code>中提供添加、删除、重定义、合并、拆分分区的命令，使用<code>alter table</code>实现。</p>
+<h2 id="range-amp-list分区管理"><a href="#range-amp-list分区管理" class="headerlink" title="range&amp;list分区管理"></a><code>range</code>&amp;<code>list</code>分区管理</h2><p><strong>删除</strong></p>
+<p>同时也会删除对应分区内的数据</p>
+<pre class=" language-mysql"><code class="language-mysql">alter table xxx drop partition partition_name;</code></pre>
+<p><strong>添加</strong></p>
+<p>range添加分区需要从最大值侧添加，类似磁盘分区</p>
+<p>list添加，不能出现重复内容</p>
+<p>range为例</p>
+<pre class=" language-mysql"><code class="language-mysql">alter table xxx add partition(partition partition_name value less than (xxx));</code></pre>
+<p><strong>重定义、合并、拆分分区</strong></p>
+<p><strong>拆分</strong></p>
+<pre class=" language-mysql"><code class="language-mysql">alter table xxx reorganize partition xxx into (partition p1 values xxx,partition p2 values xxx,)</code></pre>
+<p><strong>合并</strong></p>
+<pre class=" language-mysql"><code class="language-mysql">alter table xxx reorganize partition p1,p2,p3 into (partition p1 values xxx)</code></pre>
+<p><strong>查看分区</strong></p>
+<pre class=" language-mysql"><code class="language-mysql">mysql> explain partitions   select * from stu where id>40 \G;
+*************************** 1. row ***************************
+           id: 1
+  select_type: SIMPLE
+        table: stu
+   partitions: p2
+         type: ALL
+possible_keys: NULL
+          key: NULL
+      key_len: NULL
+          ref: NULL
+         rows: 4
+        Extra: Using where
+1 row in set (0.00 sec)
+
+ERROR:
+No query specified</code></pre>
+<ul>
+<li><p>list区间的添加，需要添加新的区间，然后重定义区间</p>
+</li>
+<li><p>重定义range分区的时候只能定义相邻的分区，重定义的分区区间必须和原分区区间覆盖相同的区间，不能改变区间类型。</p>
+</li>
+<li><p>重定义list分区的时候只能定义相邻的分区</p>
+</li>
+</ul>
+<ul>
+<li>单张表到单个文件：表的每一行都存储在同一个文件中。</li>
+<li>张表到多个文件：用于非常大的表或要求数据在存储级别并行物理分离的表。</li>
+<li>多张表到单个文件：用于小表(如查找表和代码表)。</li>
+</ul>
+<h2 id="hash-amp-key分区管理"><a href="#hash-amp-key分区管理" class="headerlink" title="hash&amp;key分区管理"></a><code>hash</code>&amp;<code>key</code>分区管理</h2><p>添加、删除分区直接修改分区个数</p>
+<pre class=" language-mysql"><code class="language-mysql">alter table xxx coalesce partition num;</code></pre>
+<h1 id="使用分区的优点"><a href="#使用分区的优点" class="headerlink" title="使用分区的优点"></a>使用分区的优点</h1><ol>
+<li>分区表的数据可以分布在不同的物理设备上，从而高效地利用多个硬件设备。</li>
+<li>和单个磁盘或者文件系统相比，可以存储更多数据</li>
+<li>优化查询。在where语句中包含分区条件时，可以只扫描一个或多个分区表来提高查询效率；涉及sum和count语句时，也可以在多个分区上并行处理，最后汇总结果。</li>
+<li>分区表更容易维护。例如：想批量删除大量数据可以清除整个分区。</li>
+<li>可以使用分区表来避免某些特殊的瓶颈，例如InnoDB的单个索引的互斥访问。</li>
+</ol>
+<h1 id="分区的限制"><a href="#分区的限制" class="headerlink" title="分区的限制"></a>分区的限制</h1><p>1.一个表最多只能有1024个分区</p>
+<p>2.如果分区字段中有主键或者唯一索引的列，那么多有主键列和唯一索引列都必须包含进来。即：分区字段要么不包含主键或者索引列，要么包含全部主键和索引列。</p>
+<p>3.<strong>分区表中无法使用外键约束</strong></p>
+<p>4.MySQL的分区适用于一个表的所有数据和索引，不能只对表数据分区而不对索引分区，也不能只对索引分区而不对表分区，也不能只对表的一部分数据分区。</p>
+<h1 id="区别分区和分表"><a href="#区别分区和分表" class="headerlink" title="区别分区和分表"></a>区别分区和分表</h1><h2 id="分表"><a href="#分表" class="headerlink" title="分表"></a>分表</h2><p>分表是将一个大表按照一定的规则分解成多张具有独立存储空间的实体表，我们可以称为子表，每个表都对应三个文件，MYD数据文件，.MYI索引文件，.frm表结构文件。这些子表可以分布在同一块磁盘上，也可以在不同的机器上。</p>
+<p>app读写的时候根据事先定义好的规则得到对应的子表名，然后去操作它。</p>
+<h2 id="分区"><a href="#分区" class="headerlink" title="分区"></a>分区</h2><p>分区和分表相似，都是按照规则分解表。不同在于分表将大表分解为若干个独立的实体表，<strong>而分区是将数据分段划分在多个位置存放</strong>，可以是同一块磁盘也可以在不同的机器。分区后，表面上还是一张表，但数据散列到多个位置了。</p>
+<p>app读写的时候操作的还是大表名字，db自动去组织分区的数据。</p>
+
+            </div>
+            <hr/>
+
+            
+
+            <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+
+<div id="article-share">
+    
+    <div class="social-share" data-disabled="qzone" data-wechat-qrcode-helper="<p>微信里点“发现”->“扫一扫”二维码便可查看分享。</p>"></div>
+    
+</div>
+
+<script src="/libs/share/js/social-share.min.js"></script>
+
+            
+
+    <div class="reprint" id="reprint-statement">
+        <p class="reprint-tip">
+            <i class="fa fa-exclamation-triangle"></i>&nbsp;&nbsp;
+            <span>转载规则</span>
+        </p>
+        
+            <div class="center-align">
+                <a rel="license" href="https://creativecommons.org/licenses/by/4.0/deed.zh">
+                    <img alt=""
+                         style="border-width:0"
+                         src="https://i.creativecommons.org/l/by/4.0/88x31.png"/>
+                </a>
+            </div>
+            <br/>
+            <span xmlns:dct="http://purl.org/dc/terms/" href="http://purl.org/dc/dcmitype/Text"
+                  property="dct:title" rel="dct:type">
+                    《深入浅出MySQL-MySQL分区》
+                </span> 由
+            <a xmlns:cc="http://creativecommons.org/ns#" href="/2019/04/11/shen-ru-qian-chu-mysql-mysql-fen-qu/" property="cc:attributionName"
+               rel="cc:attributionURL">
+                hmlr123
+            </a> 采用
+            <a rel="license" href="https://creativecommons.org/licenses/by/4.0/deed.zh">
+                知识共享署名 4.0 国际许可协议
+            </a>进行许可。
+        
+    </div>
+
+    <script async defer>
+      document.addEventListener("copy", function (e) {
+        let toastHTML = '<span>复制成功，请遵循本文的转载规则</span><button class="btn-flat toast-action" onclick="navToReprintStatement()" style="font-size: smaller">查看</a>';
+        M.toast({html: toastHTML})
+      });
+
+      function navToReprintStatement() {
+        $("html, body").animate({scrollTop: $("#reprint-statement").offset().top - 80}, 800);
+      }
+    </script>
+
+
+        </div>
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge left-badge text-color">
+                <i class="fa fa-chevron-left"></i>&nbsp;上一篇</div>
+            <div class="card">
+                <a href="/2019/04/20/mysql-jie-gou-ceng-ci/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/22.jpg" class="responsive-img" alt="MySQL结构层次">
+                        
+                        <span class="card-title">MySQL结构层次</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            MySQL的结构层次
+
+
+
+  　  1、Connectors指的是不同语言中与SQL的交互 
+　　2、Management Serveices &amp; Utilities： 系统管理和控制工具 
+　　3、Connection Pool
+                        
+                    </div>
+                    <div class="publish-info">
+                        <span class="publish-date">
+                            <i class="fa fa-clock-o fa-fw icon-date"></i>2019-04-20
+                        </span>
+                        <span class="publish-author">
+                            
+                            <i class="fa fa-user fa-fw"></i>
+                            hmlr123
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/MySQL/" target="_blank">
+                        <span class="chip bg-color">MySQL</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fa fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2019/04/11/shen-ru-qian-chu-mysql-shi-wu-kong-zhi-he-suo-ding-yu-ju/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/12.jpg" class="responsive-img" alt="深入浅出MYSQL-事务控制和锁定语句">
+                        
+                        <span class="card-title">深入浅出MYSQL-事务控制和锁定语句</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            对比java、spring的锁、事务机制思考学习
+
+
+
+
+存储类型与锁
+授之以渔锁：https://dev.mysql.com/doc/refman/5.7/en/lock-tables.html
+事务：https://dev.mysql.
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="fa fa-clock-o fa-fw icon-date"></i>2019-04-11
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fa fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/读书笔记/" class="post-category" target="_blank">
+                                    读书笔记
+                                </a>
+                            
+                            <a href="/categories/读书笔记/深入浅出MySQL/" class="post-category" target="_blank">
+                                    深入浅出MySQL
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/MySQL/" target="_blank">
+                        <span class="chip bg-color">MySQL</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+</article>
+</div>
+
+
+
+    </div>
+    <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
+        <div class="toc-widget">
+            <div class="toc-title"><i class="fa fa-list-alt"></i>&nbsp;&nbsp;目录</div>
+            <div id="toc-content"></div>
+        </div>
+    </div>
+</div>
+
+<!-- TOC 悬浮按钮. -->
+
+<div id="floating-toc-btn" class="hide-on-med-and-down">
+    <a class="btn-floating btn-large bg-color">
+        <i class="fa fa-list"></i>
+    </a>
+</div>
+
+
+<script src="/libs/tocbot/tocbot.min.js"></script>
+<script>
+    $(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            // headingsOffset: -205,
+            headingSelector: 'h1, h2, h3, h4, h5, h6'
+        });
+
+        // modify the toc link href to support Chinese.
+        let i = 0;
+        let tocHeading = 'toc-heading-';
+        $('#toc-content a').each(function () {
+            $(this).attr('href', '#' + tocHeading + (++i));
+        });
+
+        // modify the heading title id to support Chinese.
+        i = 0;
+        $('#articleContent').children('h1, h2, h3, h4, h5, h6').each(function () {
+            $(this).attr('id', tocHeading + (++i));
+        });
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+
+        
+        /* 修复文章卡片 div 的宽度. */
+        let fixPostCardWidth = function (srcId, targetId) {
+            let srcDiv = $('#' + srcId);
+            if (srcDiv.length === 0) {
+                return;
+            }
+
+            let w = srcDiv.width();
+            if (w >= 450) {
+                w = w + 21;
+            } else if (w >= 350 && w < 450) {
+                w = w + 18;
+            } else if (w >= 300 && w < 350) {
+                w = w + 16;
+            } else {
+                w = w + 14;
+            }
+            $('#' + targetId).width(w);
+        };
+
+        // 切换TOC目录展开收缩的相关操作.
+        const expandedClass = 'expanded';
+        let $tocAside = $('#toc-aside');
+        let $mainContent = $('#main-content');
+        $('#floating-toc-btn .btn-floating').click(function () {
+            if ($tocAside.hasClass(expandedClass)) {
+                $tocAside.removeClass(expandedClass).slideUp(500);
+                $mainContent.removeClass('l9');
+            } else {
+                $tocAside.addClass(expandedClass).slideDown(500);
+                $mainContent.addClass('l9');
+            }
+            fixPostCardWidth('artDetail', 'prenext-posts');
+        });
+        
+    });
+</script>
+    
+
+</main>
+
+
+<footer class="page-footer bg-color">
+    <div class="container row center-align">
+        <div class="col s12 m8 l8 copy-right">
+            本站由&copy;<a href="https://hmlr123.com/" target="_blank">hmlr123</a>基于
+            <a href="https://hexo.io/" target="_blank">Hexo</a> 的
+            <a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">hexo-theme-matery</a>主题搭建.
+
+            
+                &nbsp;<i class="fa fa-area-chart"></i>&nbsp;站点总字数:&nbsp;
+                <span class="white-color">82.2k</span>
+            
+
+            
+			
+                <br>
+                
+                <span id="busuanzi_container_site_pv">
+                    <i class="fa fa-heart-o"></i>
+                    本站总访问量 <span id="busuanzi_value_site_pv" class="white-color"></span>
+                </span>
+                
+                
+                <span id="busuanzi_container_site_uv">
+                    <i class="fa fa-users"></i>
+                    次,&nbsp;访客数 <span id="busuanzi_value_site_uv" class="white-color"></span> 人.
+                </span>
+                
+            
+        </div>
+        <div class="col s12 m4 l4 social-link social-statis">
+    <a href="hmlr123" class="tooltipped" target="_blank" data-tooltip="访问我的GitHub" data-position="top" data-delay="50">
+        <i class="fa fa-github"></i>
+    </a>
+
+
+
+    <a href="mailto:2870027009@qq.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+        <i class="fa fa-envelope-open"></i>
+    </a>
+
+
+
+    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=2870027009" class="tooltipped" data-tooltip="QQ联系我: 2870027009" data-position="top" data-delay="50">
+        <i class="fa fa-qq"></i>
+    </a>
+
+
+
+    <a href="/atom.xml" class="tooltipped" target="_blank" data-tooltip="RSS 订阅" data-position="top" data-delay="50">
+        <i class="fa fa-rss"></i>
+    </a>
+</div>
+    </div>
+</footer>
+
+<div class="progress-bar"></div>
+
+
+<!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fa fa-search"></i>&nbsp;&nbsp;搜索</span>
+            <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字"
+                   class="search-input">
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<script src="/js/search.js"></script>
+<script type="text/javascript">
+$(function () {
+    searchFunc("/" + "search.xml", 'searchInput', 'searchResult');
+});
+</script>
+<!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fa fa-angle-up"></i>
+    </a>
+</div>
+
+
+<script src="/libs/materialize/materialize.min.js"></script>
+<script src="/libs/masonry/masonry.pkgd.min.js"></script>
+<script src="/libs/aos/aos.js"></script>
+<script src="/libs/scrollprogress/scrollProgress.min.js"></script>
+<script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
+<script src="/js/matery.js"></script>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+
+
+
+    <script src="/libs/others/clicklove.js"></script>
+
+
+    <script async src="/libs/others/busuanzi.pure.mini.js"></script>
+
+
+</body>
+</html>

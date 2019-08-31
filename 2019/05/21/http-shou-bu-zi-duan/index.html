@@ -1,0 +1,949 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+
+
+<head><meta name="generator" content="Hexo 3.9.0">
+    <meta charset="utf-8">
+    <meta name="keywords" content="HTTP首部字段, hmlr123">
+    <meta name="description" content="这一块一直是空白，刚好看书补补，记录一下
+
+
+参考链接：https://www.cnblogs.com/jycboy/archive/2017/02/17/http_head.html
+授人以渔https://developer.mozil">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <title>HTTP首部字段 | hmlr123</title>
+    <link rel="icon" type="image/png" href="/favicon.png">
+
+    <link rel="stylesheet" type="text/css" href="/libs/awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/materialize/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
+    <link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/matery.css">
+    <link rel="stylesheet" type="text/css" href="/css/my.css">
+    <style type="text/css">
+        
+    </style>
+
+    <script src="/libs/jquery/jquery-2.2.0.min.js"></script>
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"></head>
+
+
+<body>
+
+<header class="navbar-fixed">
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="nav-wrapper container">
+            <div class="brand-logo">
+                <a href="/" class="waves-effect waves-light">
+                    
+                    <img src="/medias/logo.png" class="logo-img" alt="LOGO">
+                    
+                    <span class="logo-span">hmlr123</span>
+                </a>
+            </div>
+            
+
+<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fa fa-navicon"></i></a>
+<ul class="right">
+    
+    <li class="hide-on-med-and-down">
+        <a href="/" class="waves-effect waves-light">
+            
+            <i class="fa fa-home"></i>
+            
+            <span>首页</span>
+        </a>
+    </li>
+    
+    <li class="hide-on-med-and-down">
+        <a href="/tags" class="waves-effect waves-light">
+            
+            <i class="fa fa-tags"></i>
+            
+            <span>标签</span>
+        </a>
+    </li>
+    
+    <li class="hide-on-med-and-down">
+        <a href="/categories" class="waves-effect waves-light">
+            
+            <i class="fa fa-bookmark"></i>
+            
+            <span>分类</span>
+        </a>
+    </li>
+    
+    <li class="hide-on-med-and-down">
+        <a href="/archives" class="waves-effect waves-light">
+            
+            <i class="fa fa-archive"></i>
+            
+            <span>归档</span>
+        </a>
+    </li>
+    
+    <li class="hide-on-med-and-down">
+        <a href="/about" class="waves-effect waves-light">
+            
+            <i class="fa fa-user-circle-o"></i>
+            
+            <span>关于</span>
+        </a>
+    </li>
+    
+    <li class="hide-on-med-and-down">
+        <a href="/friends" class="waves-effect waves-light">
+            
+            <i class="fa fa-address-book"></i>
+            
+            <span>友情链接</span>
+        </a>
+    </li>
+    
+    <li>
+        <a href="#searchModal" class="modal-trigger waves-effect waves-light">
+            <i id="searchIcon" class="fa fa-search" title="搜索"></i>
+        </a>
+    </li>
+</ul>
+
+<div id="mobile-nav" class="side-nav sidenav">
+
+    <div class="mobile-head bg-color">
+        
+        <img src="/medias/logo.png" class="logo-img circle responsive-img">
+        
+        <div class="logo-name">hmlr123</div>
+        <div class="logo-desc">
+            
+            走走停停，记录滴滴点点
+            
+        </div>
+    </div>
+
+    
+
+    <ul class="menu-list mobile-menu-list">
+        
+        <li>
+            <a href="/" class="waves-effect waves-light">
+                
+                <i class="fa fa-fw fa-home"></i>
+                
+                首页
+            </a>
+        </li>
+        
+        <li>
+            <a href="/tags" class="waves-effect waves-light">
+                
+                <i class="fa fa-fw fa-tags"></i>
+                
+                标签
+            </a>
+        </li>
+        
+        <li>
+            <a href="/categories" class="waves-effect waves-light">
+                
+                <i class="fa fa-fw fa-bookmark"></i>
+                
+                分类
+            </a>
+        </li>
+        
+        <li>
+            <a href="/archives" class="waves-effect waves-light">
+                
+                <i class="fa fa-fw fa-archive"></i>
+                
+                归档
+            </a>
+        </li>
+        
+        <li>
+            <a href="/about" class="waves-effect waves-light">
+                
+                <i class="fa fa-fw fa-user-circle-o"></i>
+                
+                关于
+            </a>
+        </li>
+        
+        <li>
+            <a href="/friends" class="waves-effect waves-light">
+                
+                <i class="fa fa-fw fa-address-book"></i>
+                
+                友情链接
+            </a>
+        </li>
+        
+        
+    </ul>
+</div>
+
+        </div>
+
+        
+    </nav>
+
+</header>
+
+
+
+
+
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/8.jpg')">
+    <div class="container">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <div class="description center-align post-title">
+                        HTTP首部字段
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<main class="post-container content">
+
+    
+    <link rel="stylesheet" href="/libs/tocbot/tocbot.css">
+<style>
+    #articleContent h1::before,
+    #articleContent h2::before,
+    #articleContent h3::before,
+    #articleContent h4::before,
+    #articleContent h5::before,
+    #articleContent h6::before {
+        display: block;
+        content: " ";
+        height: 100px;
+        margin-top: -100px;
+        visibility: hidden;
+    }
+
+    #articleContent :focus {
+        outline: none;
+    }
+
+    .toc-fixed {
+        position: fixed;
+        top: 64px;
+    }
+
+    .toc-widget {
+        padding-left: 20px;
+    }
+
+    .toc-widget .toc-title {
+        margin: 35px 0 15px 0;
+        padding-left: 17px;
+        font-size: 1.5rem;
+        font-weight: bold;
+        line-height: 1.5rem;
+    }
+
+    .toc-widget ol {
+        padding: 0;
+        list-style: none;
+    }
+
+    #toc-content ol {
+        padding-left: 10px;
+    }
+
+    #toc-content ol li {
+        padding-left: 10px;
+    }
+
+    #toc-content .toc-link:hover {
+        color: #42b983;
+        font-weight: 700;
+        text-decoration: underline;
+    }
+
+    #toc-content .toc-link::before {
+        background-color: transparent;
+        max-height: 25px;
+    }
+
+    #toc-content .is-active-link {
+        color: #42b983;
+    }
+
+    #toc-content .is-active-link::before {
+        background-color: #42b983;
+    }
+
+    #floating-toc-btn {
+        position: fixed;
+        right: 20px;
+        bottom: 76px;
+        padding-top: 15px;
+        margin-bottom: 0;
+        z-index: 998;
+    }
+
+    #floating-toc-btn .btn-floating {
+        width: 48px;
+        height: 48px;
+    }
+
+    #floating-toc-btn .btn-floating i {
+        line-height: 48px;
+        font-size: 1.4rem;
+    }
+</style>
+<div class="row">
+    <div id="main-content" class="col s12 m12 l9">
+        <!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                    <div class="article-tag">
+                        
+                            <a href="/tags/网络原理/" target="_blank">
+                                <span class="chip bg-color">网络原理</span>
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                </div>
+            </div>
+
+            <div class="post-info">
+                <div class="post-date info-break-policy">
+                    <i class="fa fa-calendar-minus-o fa-fw"></i>发布日期:&nbsp;&nbsp;
+                    2019-05-21
+                </div>
+
+                
+                    
+                    <div class="info-break-policy">
+                        <i class="fa fa-file-word-o fa-fw"></i>文章字数:&nbsp;&nbsp;
+                        4.6k
+                    </div>
+                    
+
+                    
+                    <div class="info-break-policy">
+                        <i class="fa fa-clock-o fa-fw"></i>阅读时长:&nbsp;&nbsp;
+                        18 分
+                    </div>
+                    
+                
+				
+				
+                    <div id="busuanzi_container_page_pv" class="info-break-policy">
+                        <i class="fa fa-eye fa-fw"></i>阅读次数:&nbsp;&nbsp;
+                        <span id="busuanzi_value_page_pv"></span>
+                    </div>
+				
+            </div>
+        </div>
+        <hr class="clearfix">
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <p>这一块一直是空白，刚好看书补补，记录一下</p>
+<a id="more"></a>
+
+<p>参考链接：<a href="https://www.cnblogs.com/jycboy/archive/2017/02/17/http_head.html" target="_blank" rel="noopener">https://www.cnblogs.com/jycboy/archive/2017/02/17/http_head.html</a></p>
+<h1 id="授人以渔"><a href="#授人以渔" class="headerlink" title="授人以渔"></a>授人以渔</h1><p><a href="https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Headers" target="_blank" rel="noopener">https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Headers</a></p>
+<h1 id="HTTP报文首部"><a href="#HTTP报文首部" class="headerlink" title="HTTP报文首部"></a>HTTP报文首部</h1><h2 id="HTTP请求报文"><a href="#HTTP请求报文" class="headerlink" title="HTTP请求报文"></a>HTTP请求报文</h2><p>HTTP请求报文由方法、URI、HTTP版本、HTTP首部字段等组成</p>
+<p><img src="https://images2015.cnblogs.com/blog/747969/201702/747969-20170217213700816-2042027085.png" alt></p>
+<pre class=" language-http"><code class="language-http">:authority: www.jd.com
+:method: GET
+:path: /
+:scheme: https
+<span class="token header-name keyword">accept:</span> text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3
+<span class="token header-name keyword">accept-encoding:</span> gzip, deflate, br
+<span class="token header-name keyword">accept-language:</span> zh-CN,zh;q=0.9
+<span class="token header-name keyword">cache-control:</span> no-cache
+<span class="token header-name keyword">cookie:</span> o2Control=webp; __jda=122270672.15584083038411514702....
+<span class="token header-name keyword">pragma:</span> no-cache
+<span class="token header-name keyword">upgrade-insecure-requests:</span> 1
+<span class="token header-name keyword">user-agent:</span> Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/74.0.3729.157 Safari/537.36</code></pre>
+<h2 id="HTTP响应报文"><a href="#HTTP响应报文" class="headerlink" title="HTTP响应报文"></a>HTTP响应报文</h2><p>HTTP响应报文由HTTP版本、状态吗（数字和原因短语）、HTTP首部字段3部分组成</p>
+<p><img src="https://images2015.cnblogs.com/blog/747969/201702/747969-20170217213733316-1241530883.png" alt></p>
+<pre class=" language-http"><code class="language-http"><span class="token header-name keyword">age:</span> 10
+<span class="token header-name keyword">cache-control:</span> max-age=30
+<span class="token header-name keyword">content-encoding:</span> gzip
+<span class="token header-name keyword">content-length:</span> 31783
+<span class="token header-name keyword">content-type:</span> text/html; charset=utf-8
+<span class="token header-name keyword">date:</span> Tue, 21 May 2019 03:11:46 GMT
+<span class="token header-name keyword">expires:</span> Tue, 21 May 2019 03:12:06 GMT
+<span class="token header-name keyword">ser:</span> 4.126
+<span class="token header-name keyword">server:</span> JDWS/2.0
+<span class="token header-name keyword">status:</span> 200
+<span class="token header-name keyword">strict-transport-security:</span> max-age=7776000
+<span class="token header-name keyword">vary:</span> Accept-Encoding
+<span class="token header-name keyword">via:</span> BJ-Y-NX-110(EXPIRED), http/1.1 WH-CT-1-JCS-26 ( [cRs f ])</code></pre>
+<h1 id="HTTP首部字段"><a href="#HTTP首部字段" class="headerlink" title="HTTP首部字段"></a>HTTP首部字段</h1><p>使用首部字段是为了给浏览器和服务器提供报文主体大小、所使用的语言、认证信息等内容。</p>
+<h2 id="HTTP首部字段结构"><a href="#HTTP首部字段结构" class="headerlink" title="HTTP首部字段结构"></a>HTTP首部字段结构</h2><p>HTTP 首部字段是由首部字段名和字段值构成的，中间用冒号“:” 分隔。</p>
+<h2 id="四种HTTP首部字段类型"><a href="#四种HTTP首部字段类型" class="headerlink" title="四种HTTP首部字段类型"></a>四种HTTP首部字段类型</h2><p><strong>通用首部字段：</strong>请求报文和响应报文都会用的首部</p>
+<p><strong>请求首部字段：</strong>从客户端向服务器端发送请求报文时使用的首部。补充了请求的附加内容、客户端信息、响应内容相关优先级等信息。</p>
+<p><strong>响应首部字段：</strong>从服务器端向客户端返回响应报文时使用的首部。补充了响应的附加内容，也会要求客户端附加额外的内容信息。</p>
+<p><strong>实体首部字段：</strong>针对请求报文和响应报文的实体部分使用的首部。补充了资源内容更新时间等与实体有关的信息。</p>
+<h2 id="在有无缓存时HTTP的不同行为"><a href="#在有无缓存时HTTP的不同行为" class="headerlink" title="在有无缓存时HTTP的不同行为"></a>在有无缓存时HTTP的不同行为</h2><p>HTTP 首部字段将定义成缓存代理和非缓存代理的行为</p>
+<p><strong>端到端首部（End-to-end Header）:</strong>此类别中的首部会转发给请求 / 响应对应的最终接收目标，且必须保存在由缓存生成的响应中，另外规 定它必须被转发。（无缓存服务器）</p>
+<p><strong>逐跳首部（Hop-by-hop Header）:</strong>此类别中的首部只对单次转发有效，会因通过缓存或代理而不再转发。HTTP/1.1 和之后版本中，如果要使用 hop-by-hop 首部，需提供 Connection 首部字段。（有缓存无服务器）</p>
+<p>逐级首部字段：</p>
+<ul>
+<li>Connection</li>
+<li>Keep-Alive</li>
+<li>Proxy-Authenticate</li>
+<li>Proxy-Authorization</li>
+<li>Trailer</li>
+<li>TE</li>
+<li>Transfer-Encoding</li>
+<li>Upgrade</li>
+</ul>
+<h1 id="HTTP1-1通用首部字段"><a href="#HTTP1-1通用首部字段" class="headerlink" title="HTTP1.1通用首部字段"></a>HTTP1.1通用首部字段</h1><p><img src="https://images2015.cnblogs.com/blog/747969/201702/747969-20170217213940879-276855677.png" alt></p>
+<p>常见详解：</p>
+<h2 id="Cache-Control"><a href="#Cache-Control" class="headerlink" title="Cache-Control"></a><strong><code>Cache-Control</code></strong></h2><p>这部分涉及到Http缓存，前端的优化，请看<a href="https://www.cnblogs.com/chenqf/p/6386163.html" target="_blank" rel="noopener">https://www.cnblogs.com/chenqf/p/6386163.html</a></p>
+<h3 id="缓存了解一波"><a href="#缓存了解一波" class="headerlink" title="缓存了解一波"></a>缓存了解一波</h3><p><strong>保存资源的缓存</strong></p>
+<p>缓存是指代理服务器或客户端本地磁盘内保存的资源副本，利用缓存服务器减少对源服务器的的访问，节省通信流量和通信时间，减少服务器压力。</p>
+<p>缓存服务器是代理服务器的一种，归类在缓存代理类型中，换句话说，当代理转发从服务器返回响应时，代理服务器还保存一份副本</p>
+<p><strong>缓存的有效期限</strong></p>
+<ul>
+<li>源服务器资源改变，缓存资源更新</li>
+<li>客户要求请求最新资源，多久请求源服务器。。。</li>
+</ul>
+<p><strong>客户端缓存</strong></p>
+<p>缓存保存时间。服务器资源更新，本地缓存更新。</p>
+<h3 id="缓存请求指令"><a href="#缓存请求指令" class="headerlink" title="缓存请求指令"></a>缓存请求指令</h3><p><strong>指令                                  参数         说明</strong><br>no-cache                          无            强制向源服务器再次验证<br>no-store                           无             不缓存请求或响应的任何内容<br>max-age = [ 秒]             必需           响应的最大Age值<br>max-stale( = [ 秒])         可省           略接收已过期的响应<br>min-fresh = [ 秒]           必需           期望在指定时间内的响应仍有效<br>no-transform                无               代理不可更改媒体类型<br>only-if-cached               无              从缓存获取资源<br>cache-extension - 新指令标记（token）</p>
+<h3 id="缓存响应指令"><a href="#缓存响应指令" class="headerlink" title="缓存响应指令"></a>缓存响应指令</h3><p><strong>指令                                 参数           说明</strong><br>public                              无              可向任意方提供响应的缓存<br>private                            可省略        仅向特定用户返回响应<br>no-cache                        可省略        缓存前必须先确认其有效性<br>no-store                         无              不缓存请求或响应的任何内容<br>no-transform                 无               代理不可更改媒体类型<br>must-revalidate             无              可缓存但必须再向源服务器进行确认<br>proxy-revalidate            无              要求中间缓存服务器对缓存的响应有效性再进行 确认<br>max-age = [ 秒]            必需            响应的最大Age值<br>s-maxage = [ 秒]          必需             公共缓存服务器响应的最大Age值<br>cache-extension           -                 新指令标记（token）</p>
+<blockquote>
+<p>Cache-Control 是最重要的规则。常见的取值有private、public、no-cache、max-age，no-store，默认为private。<br>private:             客户端可以缓存<br>public:              客户端和代理服务器都可缓存（前端的同学，可以认为public和private是一样的）<br>max-age=xxx:   缓存的内容将在 xxx 秒后失效<br>no-cache:          需要使用对比缓存来验证缓存数据（后面介绍）<br>no-store:           所有内容都不会缓存，强制缓存，对比缓存都不会触发（对于前端开发来说，缓存越多越好，so…基本上和它说886）</p>
+</blockquote>
+<p><strong><code>no-cache</code></strong>：<br>使用<code>no-cache</code>目的是为了防止从缓存中弄返回过期资源。<br>如果客户端请求包含该指令，表示客户端将不会接受缓存过的响应。即，中间的缓存服务器必须把客户端请求转发给源服务器。<br>如果源服务器返回包含该指令，缓存服务器不能对资源进行缓存。源服务器也不会对缓存服务器请求提取资源有效性验证，且禁止响应资源进行缓存。<br>如果服务器响应首部报文包含该字段，切<code>no-cache</code>字段指定参数值，客户端接收到这个报文后，（客户端）就不能使用缓存。也就是说，客户端接收报文中<code>no-cache</code>字段有参数就不能缓存，没参数可以缓存。</p>
+<p><strong><code>no-store</code></strong>:<br>禁止缓存，不管是客户端还是缓存服务器，注意区分<code>no-cache</code></p>
+<h2 id="Connection"><a href="#Connection" class="headerlink" title="Connection"></a><code>Connection</code></h2><p>Connection 首部字段具备如下两个作用:</p>
+<ul>
+<li>控制不再转发给代理的首部字段 </li>
+<li>管理持久连接</li>
+</ul>
+<h3 id="控制不再转发给代理的首部字段"><a href="#控制不再转发给代理的首部字段" class="headerlink" title="控制不再转发给代理的首部字段"></a>控制不再转发给代理的首部字段</h3><p><img src="https://images2015.cnblogs.com/blog/747969/201702/747969-20170217214935269-1562584482.png" alt></p>
+<pre class=" language-http"><code class="language-http"><span class="token header-name keyword">Connection:</span> 不再转发的首部字段名</code></pre>
+<p>在客户端发送请求和服务器返回响应内，使用 Connection 首部字段，可控制不再转发给代理的首部字段（即 Hop-by-hop 首部）。</p>
+<h3 id="管理持久连接"><a href="#管理持久连接" class="headerlink" title="管理持久连接"></a>管理持久连接</h3><p><img src="https://images2015.cnblogs.com/blog/747969/201702/747969-20170217215009472-1047705671.png" alt></p>
+<p>HTTP/1.1 版本的默认连接都是持久连接。为此，客户端会在持久连接上连续发送请求。当服务器端想明确断开连接时，则指定 Connection 首部字段的值为 Close。</p>
+<p><img src="https://images2015.cnblogs.com/blog/747969/201702/747969-20170217215106738-1770984037.png" alt></p>
+<p>HTTP/1.1 之前的 HTTP 版本的默认连接都是非持久连接。为此，如果想<strong>在旧版本的 HTTP 协议上维持 持续连接，则需要指定 Connection 首部字段的值为 Keep-Alive</strong>。</p>
+<h2 id="Date-首部字段"><a href="#Date-首部字段" class="headerlink" title="Date 首部字段"></a>Date 首部字段</h2><p>Date 表明创建 HTTP 报文的日期和时间</p>
+<h2 id="Pragma"><a href="#Pragma" class="headerlink" title="Pragma"></a>Pragma</h2><p>历史遗留字段，自己看书</p>
+<h2 id="Trailer"><a href="#Trailer" class="headerlink" title="Trailer"></a>Trailer</h2><p>首部字段 Trailer 会事先说明在报文主体后记录了哪些首部字段。该首部字段可应用在 HTTP/1.1 版本分块传 输编码时。</p>
+<pre class=" language-http"><code class="language-http"><span class="token response-status">HTTP/1.1 <span class="token property">200 OK</span></span>
+<span class="token header-name keyword">Date:</span> Tue, 03 Jul 2012 04:40:56 GMT
+<span class="token header-name keyword">Content-Type:</span> text/html
+...
+<span class="token header-name keyword">Transfer-Encoding:</span> chunked
+<span class="token header-name keyword">Trailer:</span> Expires
+...(报文主体)...
+0
+<span class="token header-name keyword">Expires:</span> Tue, 28 Sep 2004 23:59:59 GMT</code></pre>
+<h2 id="Upgrade"><a href="#Upgrade" class="headerlink" title="Upgrade"></a>Upgrade</h2><p>首部字段 Upgrade 用于检测 HTTP 协议及其他协议是否可使用更高的版本进行通信，其参数值可以用来指定 一个完全不同的通信协议。</p>
+<h2 id="Via"><a href="#Via" class="headerlink" title="Via"></a>Via</h2><p>使用首部字段 Via 是为了追踪客户端与服务器之间的请求和响应报文的传输路径。</p>
+<p>经过多少个代理服务器。。。</p>
+<h1 id="请求首部字段"><a href="#请求首部字段" class="headerlink" title="请求首部字段"></a>请求首部字段</h1><p>请求首部字段是从客户端往服务器端发送请求报文中所使用的字段，用于补充请求的附加信息、客户端信 息、对响应内容相关的优先级等内容。</p>
+<p><strong>首部字段名                  说明</strong><br>Accept                         用户代理可处理的媒体类型<br>Accept-Charset            优先的字符集<br>Accept-Encoding         优先的内容编码<br>Accept-Language        优先的语言（自然语言）<br>Authorization               Web认证信息<br>Expect                          期待服务器的特定行为<br>From                             用户的电子邮箱地址<br>Host                              请求资源所在服务器，多个服务器的时候，访问特定服务器<br>If-Match                        比较实体标记（ETag）<br>If-Modified-Since          比较资源的更新时间<br>If-None-Match              比较实体标记（与 If-Match 相反）<br>If-Range                        资源未更新时发送实体 Byte 的范围请求<br>If-Unmodified-Since     比较资源的更新时间（与If-Modified-Since相反）<br>Max-Forwards               最大传输逐跳数<br>Proxy-Authorization     代理服务器要求客户端的认证信息<br>Range                           实体的字节范围请求<br>Referer                          对请求中 URI 的原始获取方<br>TE                                  传输编码的优先级<br>User-Agent                   HTTP 客户端程序的信息</p>
+<h2 id="Accept"><a href="#Accept" class="headerlink" title="Accept"></a>Accept</h2><pre class=" language-http"><code class="language-http"><span class="token header-name keyword">Accept:</span> text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8​</code></pre>
+<p>Accept 首部字段可通知服务器，用户代理能够处理的媒体类型及媒体类型的相对优先级。可使用 type/subtype 这种形式，一次指定多种媒体类型。</p>
+<p>比如，如果浏览器不支持 PNG 图片的显示，那 Accept 就不指定 image/png，而指定可处理的 image/gif 和 image/jpeg 等图片类型。 若想要给显示的媒体类型增加优先级，则使用 q= 来额外表示权重值 1，用分号（;）进行分隔。权重值 q 的 范围是 0~1（可精确到小数点后 3 位），且 1 为最大值。不指定权重 q 值时，默认权重为 q=1.0。</p>
+<p><code>Accept-Charset</code> 、<code>Accept-Encoding</code>、<code>Accept-Language</code> ，都可以采用优先级</p>
+<h2 id="Accept-Encoding"><a href="#Accept-Encoding" class="headerlink" title="Accept-Encoding"></a>Accept-Encoding</h2><pre class=" language-http"><code class="language-http"><span class="token header-name keyword">Accept-Encoding:</span> gzip, deflate​</code></pre>
+<p>Accept-Encoding 首部字段用来告知服务器用户代理支持的内容编码及内容编码的优先级顺序。可一次性指 定多种内容编码。</p>
+<p>不同的压缩算法</p>
+<h2 id="Form"><a href="#Form" class="headerlink" title="Form"></a>Form</h2><p>首部字段 From 用来告知服务器使用用户代理的用户的电子邮件地址。通常，其使用目的就是为了显示搜索 引擎等用户代理的负责人的电子邮件联系方式。使用代理时，应尽可能包含 From 首部字段（但可能会因代 理不同，将<strong>电子邮件地址记录在 User-Agent 首部字段内</strong>）。</p>
+<h1 id="响应首部字段"><a href="#响应首部字段" class="headerlink" title="响应首部字段"></a>响应首部字段</h1><p><strong>首部字段名                     说明</strong><br>Accept-Ranges             是否接受字节范围请求<br>Age                               推算资源创建经过时间<br>ETag                              资源的匹配信息<br>Location                        令客户端重定向至指定URI<br>Proxy-Authenticate      代理服务器对客户端的认证信息<br>Retry-After                   对再次发起请求的时机要求<br>Server HTTP                  服务器的安装信息<br>Vary                              代理服务器缓存的管理信息<br>WWW-Authenticate     服务器对客户端的认证信息</p>
+<h2 id="Age"><a href="#Age" class="headerlink" title="Age"></a><code>Age</code></h2><p><strong>首部字段 Age 能告知客户端，源服务器在多久前创建了响应。字段值的单位为秒。</strong><br>若创建该响应的服务器是缓存服务器，Age 值是指缓存后的响应再次发起认证到认证完成的时间值。代理创 建响应时必须加上首部字段 Age。</p>
+<h2 id="ETag"><a href="#ETag" class="headerlink" title="ETag"></a><code>ETag</code></h2><p>能告知客户端实体标识，他是一种可将资源以字符串的形式做成唯一标识的方式。服务器会为每一个资源分配对应的ETag值。</p>
+<p>当资源更新的时候，该值也会更新</p>
+<p>例如，同样的访问URI，但是资源分为英文版和中文版，这时候需要区分，就靠这个。</p>
+<p><strong>强<code>Etag</code>和弱<code>Etag</code>区分</strong></p>
+<p>强Etag：无论实体发生多么细微的变化都会该变该值</p>
+<pre class=" language-http"><code class="language-http"><span class="token header-name keyword">Etag:</span>"usagi-1234"</code></pre>
+<p>弱Etag：只用于提示资源是否相同，只有当资源发生根本性改变时，才会改变该值，这时会在最开始加上<code>W/</code></p>
+<pre class=" language-http"><code class="language-http"><span class="token header-name keyword">Etag:</span>"W/usagi-1234"</code></pre>
+<h1 id="实体首部字段"><a href="#实体首部字段" class="headerlink" title="实体首部字段"></a>实体首部字段</h1><p><strong>首部字段名                    说明</strong><br>Allow                            资源可支持的HTTP方法<br>Content-Encoding       实体主体适用的编码方式<br>Content-Language      实体主体的自然语言<br>Content-Length           实体主体的大小（单位：字节）<br>Content-Location        替代对应资源的URI<br>Content-MD5              实体主体的报文摘要<br>Content-Range            实体主体的位置范围<br>Content-Type              实体主体的媒体类型<br>Expires                         实体主体过期的日期时间<br>Last-Modified              资源的最后修改日期时间</p>
+<h2 id="Allow"><a href="#Allow" class="headerlink" title="Allow"></a>Allow</h2><p>首部字段 Allow 用于通知客户端能够支持 Request-URI 指定资源的所有 HTTP 方法。当服务器接收到不支持 的 HTTP 方法时，会以状态码 405 Method Not Allowed 作为响应返回。与此同时，还会把所有能支持的 HTTP 方法写入首部字段 Allow 后返回。</p>
+<h1 id="Cookie首部字段"><a href="#Cookie首部字段" class="headerlink" title="Cookie首部字段"></a>Cookie首部字段</h1><p>Cookie 的工作机制是用户识别及状态管理。Web 网站为了管理用户的状态会通过 Web 浏览器，把一些数据 临时写入用户的计算机内。接着当用户访问该Web网站时，可通过通信方式取回之前发放的 Cookie。</p>
+<p><strong>为 Cookie 服务的首部字段</strong></p>
+<p><strong>首部字段名                 说明                                                 首部类型</strong><br>Set-Cookie                开始状态管理所使用的Cookie信息     响应首部字段<br>Cookie                      服务器接收到的Cookie信息                请求首部字段</p>
+<h2 id="Set-Cookie"><a href="#Set-Cookie" class="headerlink" title="Set-Cookie"></a><code>Set-Cookie</code></h2><p>当服务器准备开始管理客户端的状态时，会事先告知各种信息。</p>
+<pre class=" language-http"><code class="language-http"><span class="token header-name keyword">Set-Cookie:</span> status=enable; expires=Tue, 05 Jul 2011 07:26:31 GMT; path=/; domain=.hackr.jp;​
+</code></pre>
+<p><strong>属性                                说明</strong><br>NAME=VALUE               赋予 Cookie 的名称和其值（必需项）<br>expires=DATE               Cookie的有效期（若不明确指定则默认为浏览器关闭前为止）<br>path=PATH                   将服务器上的文件目录作为Cookie的适用对象（若不指定则默认为文档 所在的文件目录）<br>domain=域名                作为 Cookie 适用对象的域名 （若不指定则默认为创建 Cookie 的服务 器的域名）<br>Secure                           仅在 HTTPS 安全通信时才会发送 Cookie<br>HttpOnly                       加以限制，使 Cookie 不能被 JavaScript 脚本访问</p>
+<h2 id="Cookie"><a href="#Cookie" class="headerlink" title="Cookie"></a><code>Cookie</code></h2><pre class=" language-http"><code class="language-http"><span class="token header-name keyword">Cookie:</span> status=enable
+</code></pre>
+<p>首部字段 Cookie 会告知服务器，<strong>当客户端想获得 HTTP 状态管理支持时，就会在请求中包含从服务器接收到的 Cookie。接收到多个 Cookie 时，同样可以以多个 Cookie 形式发送。</strong></p>
+<h1 id="其他首部字段"><a href="#其他首部字段" class="headerlink" title="其他首部字段"></a>其他首部字段</h1><p>HTTP 首部字段是可以自行扩展的。所以在 Web 服务器和浏览器的应用上，会出现各种非标准的首部字段。</p>
+<ul>
+<li>X-Frame-Options</li>
+<li>X-XSS-Protection</li>
+<li>DNT</li>
+<li>P3P</li>
+</ul>
+<h2 id="X-Frame-Options"><a href="#X-Frame-Options" class="headerlink" title="X-Frame-Options"></a>X-Frame-Options</h2><p>X-Frame-Options属于HTTP响应首部，控制网站内容在其他Web网站的Frame标签的显示问题，主要目的是防止点击劫持攻击</p>
+<h2 id="X-XSS-Protection"><a href="#X-XSS-Protection" class="headerlink" title="X-XSS-Protection"></a>X-XSS-Protection</h2><p>X-XSS-Protection属于HTTP响应首部，针对跨站脚本攻击（XSS），控制XSS防护机制的开关</p>
+<ul>
+<li>0：将XSS过滤设置成无效状态</li>
+<li>1：将XSS过滤设置成有效状态</li>
+</ul>
+<h2 id="DNT"><a href="#DNT" class="headerlink" title="DNT"></a>DNT</h2><p>HTTP请求首部，Do Not Track，拒绝个人信息被手机，表示被精准广告追踪的一种方法</p>
+<ul>
+<li>0：同意被追踪</li>
+<li>1：拒绝被追踪</li>
+</ul>
+<h2 id="P3P"><a href="#P3P" class="headerlink" title="P3P"></a>P3P</h2><p>HTTP响应首部，P3P（The Platform for privaccy Preferences,在线隐私偏好技术）</p>
+<p>让web网站上的个人隐私变成一种仅供程序理解的形式，以保护用户隐私</p>
+<h1 id="练手识别"><a href="#练手识别" class="headerlink" title="练手识别"></a>练手识别</h1><p>通用首部（General）：</p>
+<pre class=" language-http"><code class="language-http">Request URL: https://www.tmall.com/    请求路径
+Request Method: GET                    请求方法
+Status Code: 200                     返回状态吗
+Remote Address: 127.0.0.1:53314        远程地址、路由地址
+Referrer Policy: unsafe-url            再次请求代理服务器时间。。。。不是很懂
+</code></pre>
+<p>请求首部（Request Headers）</p>
+<pre class=" language-http"><code class="language-http">:authority: www.tmall.com    验证地址
+:method: GET                
+:path: /                    请求路径
+:scheme: https                请求协议约束
+<span class="token header-name keyword">accept:</span>         text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3      可以接受的数据类型，以及权重
+<span class="token header-name keyword">accept-encoding:</span> gzip, deflate, br     科技接受的数据编码，压缩算法
+<span class="token header-name keyword">accept-language:</span> zh-CN,zh;q=0.9         可以接受的语言及权重
+<span class="token header-name keyword">cache-control:</span> no-cache                 缓存控制
+<span class="token header-name keyword">cookie:</span> cna=dfdnFX6DIUQCAdNDN+J         本地cookie 不完整嘻嘻
+<span class="token header-name keyword">pragma:</span> no-cache                     历史遗留字段    它用来向后兼容只支持 HTTP/1.0 协议的缓存服务器，那时候 HTTP/1.1 协议中的 Cache-Control 还没有出来。
+<span class="token header-name keyword">upgrade-insecure-requests:</span> 1        我理解为请求安全的标志符，标志是否开启安全XXX
+<span class="token header-name keyword">user-agent:</span> Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/74.0.3729.157 Safari/537.36   客户端信息
+</code></pre>
+<p>响应首部（Response Headers）</p>
+<pre class=" language-http"><code class="language-http"><span class="token header-name keyword">age:</span> 26        首部字段 Age 能告知客户端，源服务器在多久前创建了响应。字段值的单位为秒。
+若创建该响应的服务器是缓存服务器，Age 值是指缓存后的响应再次发起认证到认证完成的时间值。代理创 建响应时必须加上首部字段 Age。
+<span class="token header-name keyword">ali-swift-global-savetime:</span> 1558416087    应该是天猫自己的一种技术，记载什么的全局保存时间
+<span class="token header-name keyword">cache-control:</span> max-age=0, s-maxage=120    缓存（客户端和代理缓存）时间 s-maxage仅仅应用于共享缓存.而不引用于用户代理的本地缓存,等针对单用户的缓存. 另外,s-maxage的优先级要高于max-age.
+<span class="token header-name keyword">content-encoding:</span> gzip                    数据类型
+<span class="token header-name keyword">content-type:</span> text/html; charset=utf-8    内容类型
+<span class="token header-name keyword">date:</span> Tue, 21 May 2019 05:21:27 GMT        http响应报文创建时间
+<span class="token header-name keyword">eagleeye-traceid:</span> b6f230a715584160870783622e  
+<span class="token header-name keyword">eagleid:</span> 74d3f9ce15584161132898039e
+<span class="token header-name keyword">etag:</span> W/"37755-uKo1cPkII7DgKj6Ubs+6mkTJEUI"    资源标识 应该是多级标识
+<span class="token header-name keyword">realpath:</span> page/portal/act/fp                真正访问路径
+<span class="token header-name keyword">server:</span> Tengine                                服务器信息
+<span class="token header-name keyword">status:</span> 200                                    状态吗
+<span class="token header-name keyword">strict-transport-security:</span> max-age=0        
+<span class="token header-name keyword">strict-transport-security:</span> max-age=31536000
+<span class="token header-name keyword">timing-allow-origin:</span> *, *                    
+<span class="token header-name keyword">vary:</span> Accept-Encoding                        代理服务器缓存的管理信息
+<span class="token header-name keyword">vary:</span> Accept-Encoding
+<span class="token header-name keyword">vary:</span> Origin, Ali-Detector-Type, X-Host
+<span class="token header-name keyword">via:</span> cache38.l2cn1732[0,200-0,H], cache5.l2cn1732[1,0], cache6.cn557[0,200-0,H], cache6.cn557[1,0]                            服务器路径
+<span class="token header-name keyword">x-cache:</span> HIT TCP_MEM_HIT dirn:-2:-2
+<span class="token header-name keyword">x-readtime:</span> 93
+<span class="token header-name keyword">x-server-id:</span> wormholesource011020214076.center.na61
+<span class="token header-name keyword">x-swift-cachetime:</span> 96
+<span class="token header-name keyword">x-swift-savetime:</span> Tue, 21 May 2019 05:21:51 GMT
+<span class="token header-name keyword">x-via:</span> cn1266.l1, cache1.cn1266, l2cn1732.l2, cache38.l2cn1732, wormholesource011020214076.center.na61        应该是性能优化的一部分，以后涉及到了深入一波
+</code></pre>
+
+            </div>
+            <hr/>
+
+            
+
+            <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+
+<div id="article-share">
+    
+    <div class="social-share" data-disabled="qzone" data-wechat-qrcode-helper="<p>微信里点“发现”->“扫一扫”二维码便可查看分享。</p>"></div>
+    
+</div>
+
+<script src="/libs/share/js/social-share.min.js"></script>
+
+            
+
+    <div class="reprint" id="reprint-statement">
+        <p class="reprint-tip">
+            <i class="fa fa-exclamation-triangle"></i>&nbsp;&nbsp;
+            <span>转载规则</span>
+        </p>
+        
+            <div class="center-align">
+                <a rel="license" href="https://creativecommons.org/licenses/by/4.0/deed.zh">
+                    <img alt=""
+                         style="border-width:0"
+                         src="https://i.creativecommons.org/l/by/4.0/88x31.png"/>
+                </a>
+            </div>
+            <br/>
+            <span xmlns:dct="http://purl.org/dc/terms/" href="http://purl.org/dc/dcmitype/Text"
+                  property="dct:title" rel="dct:type">
+                    《HTTP首部字段》
+                </span> 由
+            <a xmlns:cc="http://creativecommons.org/ns#" href="/2019/05/21/http-shou-bu-zi-duan/" property="cc:attributionName"
+               rel="cc:attributionURL">
+                hmlr123
+            </a> 采用
+            <a rel="license" href="https://creativecommons.org/licenses/by/4.0/deed.zh">
+                知识共享署名 4.0 国际许可协议
+            </a>进行许可。
+        
+    </div>
+
+    <script async defer>
+      document.addEventListener("copy", function (e) {
+        let toastHTML = '<span>复制成功，请遵循本文的转载规则</span><button class="btn-flat toast-action" onclick="navToReprintStatement()" style="font-size: smaller">查看</a>';
+        M.toast({html: toastHTML})
+      });
+
+      function navToReprintStatement() {
+        $("html, body").animate({scrollTop: $("#reprint-statement").offset().top - 80}, 800);
+      }
+    </script>
+
+
+        </div>
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge left-badge text-color">
+                <i class="fa fa-chevron-left"></i>&nbsp;上一篇</div>
+            <div class="card">
+                <a href="/2019/05/22/yi-xie-ying-gai-zhi-dao-http-zhi-shi/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/5.jpg" class="responsive-img" alt="一些应该知道HTTP知识">
+                        
+                        <span class="card-title">一些应该知道HTTP知识</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            主要是常见状态码以及请求方法
+
+
+概念HTTP协议，即超文本传输协议(Hypertext transfer protocol)。是一种详细规定了浏览器和万维网(WWW = World Wide Web)服务器之间互相通信的规则，通过因特网传
+                        
+                    </div>
+                    <div class="publish-info">
+                        <span class="publish-date">
+                            <i class="fa fa-clock-o fa-fw icon-date"></i>2019-05-22
+                        </span>
+                        <span class="publish-author">
+                            
+                            <i class="fa fa-user fa-fw"></i>
+                            hmlr123
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/网络原理/" target="_blank">
+                        <span class="chip bg-color">网络原理</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fa fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2019/05/20/shuang-chong-xiao-yan-suo-shi-xian-dui-xiang-dan-li/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/13.jpg" class="responsive-img" alt="双重校验锁实现对象单例">
+                        
+                        <span class="card-title">双重校验锁实现对象单例</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            干干干货
+
+
+双重校验锁实现对象单例
+public class Singleton {
+
+    private volatile static Singleton uniqueInstance;
+
+    private Singleto
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="fa fa-clock-o fa-fw icon-date"></i>2019-05-20
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fa fa-user fa-fw"></i>
+                            hmlr123
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/java/" target="_blank">
+                        <span class="chip bg-color">java</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+</article>
+</div>
+
+
+
+    </div>
+    <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
+        <div class="toc-widget">
+            <div class="toc-title"><i class="fa fa-list-alt"></i>&nbsp;&nbsp;目录</div>
+            <div id="toc-content"></div>
+        </div>
+    </div>
+</div>
+
+<!-- TOC 悬浮按钮. -->
+
+<div id="floating-toc-btn" class="hide-on-med-and-down">
+    <a class="btn-floating btn-large bg-color">
+        <i class="fa fa-list"></i>
+    </a>
+</div>
+
+
+<script src="/libs/tocbot/tocbot.min.js"></script>
+<script>
+    $(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            // headingsOffset: -205,
+            headingSelector: 'h1, h2, h3, h4, h5, h6'
+        });
+
+        // modify the toc link href to support Chinese.
+        let i = 0;
+        let tocHeading = 'toc-heading-';
+        $('#toc-content a').each(function () {
+            $(this).attr('href', '#' + tocHeading + (++i));
+        });
+
+        // modify the heading title id to support Chinese.
+        i = 0;
+        $('#articleContent').children('h1, h2, h3, h4, h5, h6').each(function () {
+            $(this).attr('id', tocHeading + (++i));
+        });
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+
+        
+        /* 修复文章卡片 div 的宽度. */
+        let fixPostCardWidth = function (srcId, targetId) {
+            let srcDiv = $('#' + srcId);
+            if (srcDiv.length === 0) {
+                return;
+            }
+
+            let w = srcDiv.width();
+            if (w >= 450) {
+                w = w + 21;
+            } else if (w >= 350 && w < 450) {
+                w = w + 18;
+            } else if (w >= 300 && w < 350) {
+                w = w + 16;
+            } else {
+                w = w + 14;
+            }
+            $('#' + targetId).width(w);
+        };
+
+        // 切换TOC目录展开收缩的相关操作.
+        const expandedClass = 'expanded';
+        let $tocAside = $('#toc-aside');
+        let $mainContent = $('#main-content');
+        $('#floating-toc-btn .btn-floating').click(function () {
+            if ($tocAside.hasClass(expandedClass)) {
+                $tocAside.removeClass(expandedClass).slideUp(500);
+                $mainContent.removeClass('l9');
+            } else {
+                $tocAside.addClass(expandedClass).slideDown(500);
+                $mainContent.addClass('l9');
+            }
+            fixPostCardWidth('artDetail', 'prenext-posts');
+        });
+        
+    });
+</script>
+    
+
+</main>
+
+
+<footer class="page-footer bg-color">
+    <div class="container row center-align">
+        <div class="col s12 m8 l8 copy-right">
+            本站由&copy;<a href="https://hmlr123.com/" target="_blank">hmlr123</a>基于
+            <a href="https://hexo.io/" target="_blank">Hexo</a> 的
+            <a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">hexo-theme-matery</a>主题搭建.
+
+            
+                &nbsp;<i class="fa fa-area-chart"></i>&nbsp;站点总字数:&nbsp;
+                <span class="white-color">82.2k</span>
+            
+
+            
+			
+                <br>
+                
+                <span id="busuanzi_container_site_pv">
+                    <i class="fa fa-heart-o"></i>
+                    本站总访问量 <span id="busuanzi_value_site_pv" class="white-color"></span>
+                </span>
+                
+                
+                <span id="busuanzi_container_site_uv">
+                    <i class="fa fa-users"></i>
+                    次,&nbsp;访客数 <span id="busuanzi_value_site_uv" class="white-color"></span> 人.
+                </span>
+                
+            
+        </div>
+        <div class="col s12 m4 l4 social-link social-statis">
+    <a href="hmlr123" class="tooltipped" target="_blank" data-tooltip="访问我的GitHub" data-position="top" data-delay="50">
+        <i class="fa fa-github"></i>
+    </a>
+
+
+
+    <a href="mailto:2870027009@qq.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+        <i class="fa fa-envelope-open"></i>
+    </a>
+
+
+
+    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=2870027009" class="tooltipped" data-tooltip="QQ联系我: 2870027009" data-position="top" data-delay="50">
+        <i class="fa fa-qq"></i>
+    </a>
+
+
+
+    <a href="/atom.xml" class="tooltipped" target="_blank" data-tooltip="RSS 订阅" data-position="top" data-delay="50">
+        <i class="fa fa-rss"></i>
+    </a>
+</div>
+    </div>
+</footer>
+
+<div class="progress-bar"></div>
+
+
+<!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fa fa-search"></i>&nbsp;&nbsp;搜索</span>
+            <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字"
+                   class="search-input">
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<script src="/js/search.js"></script>
+<script type="text/javascript">
+$(function () {
+    searchFunc("/" + "search.xml", 'searchInput', 'searchResult');
+});
+</script>
+<!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fa fa-angle-up"></i>
+    </a>
+</div>
+
+
+<script src="/libs/materialize/materialize.min.js"></script>
+<script src="/libs/masonry/masonry.pkgd.min.js"></script>
+<script src="/libs/aos/aos.js"></script>
+<script src="/libs/scrollprogress/scrollProgress.min.js"></script>
+<script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
+<script src="/js/matery.js"></script>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+
+
+
+    <script src="/libs/others/clicklove.js"></script>
+
+
+    <script async src="/libs/others/busuanzi.pure.mini.js"></script>
+
+
+</body>
+</html>

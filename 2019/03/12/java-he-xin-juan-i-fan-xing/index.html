@@ -1,0 +1,1277 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+
+
+<head><meta name="generator" content="Hexo 3.9.0">
+    <meta charset="utf-8">
+    <meta name="keywords" content="java核心卷Ⅰ-泛型, hmlr123">
+    <meta name="description" content="本章节主要讲java核心卷Ⅰ泛型
+
+
+定义简单泛型类public class Pair&amp;lt;T&gt;
+{
+    private T first;
+    private T second;
+
+
+    public Pair(){
+    ">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="renderer" content="webkit|ie-stand|ie-comp">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <title>java核心卷Ⅰ-泛型 | hmlr123</title>
+    <link rel="icon" type="image/png" href="/favicon.png">
+
+    <link rel="stylesheet" type="text/css" href="/libs/awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/materialize/materialize.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/aos/aos.css">
+    <link rel="stylesheet" type="text/css" href="/libs/animate/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="/libs/lightGallery/css/lightgallery.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/matery.css">
+    <link rel="stylesheet" type="text/css" href="/css/my.css">
+    <style type="text/css">
+        
+    </style>
+
+    <script src="/libs/jquery/jquery-2.2.0.min.js"></script>
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"></head>
+
+
+<body>
+
+<header class="navbar-fixed">
+    <nav id="headNav" class="bg-color nav-transparent">
+        <div id="navContainer" class="nav-wrapper container">
+            <div class="brand-logo">
+                <a href="/" class="waves-effect waves-light">
+                    
+                    <img src="/medias/logo.png" class="logo-img" alt="LOGO">
+                    
+                    <span class="logo-span">hmlr123</span>
+                </a>
+            </div>
+            
+
+<a href="#" data-target="mobile-nav" class="sidenav-trigger button-collapse"><i class="fa fa-navicon"></i></a>
+<ul class="right">
+    
+    <li class="hide-on-med-and-down">
+        <a href="/" class="waves-effect waves-light">
+            
+            <i class="fa fa-home"></i>
+            
+            <span>首页</span>
+        </a>
+    </li>
+    
+    <li class="hide-on-med-and-down">
+        <a href="/tags" class="waves-effect waves-light">
+            
+            <i class="fa fa-tags"></i>
+            
+            <span>标签</span>
+        </a>
+    </li>
+    
+    <li class="hide-on-med-and-down">
+        <a href="/categories" class="waves-effect waves-light">
+            
+            <i class="fa fa-bookmark"></i>
+            
+            <span>分类</span>
+        </a>
+    </li>
+    
+    <li class="hide-on-med-and-down">
+        <a href="/archives" class="waves-effect waves-light">
+            
+            <i class="fa fa-archive"></i>
+            
+            <span>归档</span>
+        </a>
+    </li>
+    
+    <li class="hide-on-med-and-down">
+        <a href="/about" class="waves-effect waves-light">
+            
+            <i class="fa fa-user-circle-o"></i>
+            
+            <span>关于</span>
+        </a>
+    </li>
+    
+    <li class="hide-on-med-and-down">
+        <a href="/friends" class="waves-effect waves-light">
+            
+            <i class="fa fa-address-book"></i>
+            
+            <span>友情链接</span>
+        </a>
+    </li>
+    
+    <li>
+        <a href="#searchModal" class="modal-trigger waves-effect waves-light">
+            <i id="searchIcon" class="fa fa-search" title="搜索"></i>
+        </a>
+    </li>
+</ul>
+
+<div id="mobile-nav" class="side-nav sidenav">
+
+    <div class="mobile-head bg-color">
+        
+        <img src="/medias/logo.png" class="logo-img circle responsive-img">
+        
+        <div class="logo-name">hmlr123</div>
+        <div class="logo-desc">
+            
+            走走停停，记录滴滴点点
+            
+        </div>
+    </div>
+
+    
+
+    <ul class="menu-list mobile-menu-list">
+        
+        <li>
+            <a href="/" class="waves-effect waves-light">
+                
+                <i class="fa fa-fw fa-home"></i>
+                
+                首页
+            </a>
+        </li>
+        
+        <li>
+            <a href="/tags" class="waves-effect waves-light">
+                
+                <i class="fa fa-fw fa-tags"></i>
+                
+                标签
+            </a>
+        </li>
+        
+        <li>
+            <a href="/categories" class="waves-effect waves-light">
+                
+                <i class="fa fa-fw fa-bookmark"></i>
+                
+                分类
+            </a>
+        </li>
+        
+        <li>
+            <a href="/archives" class="waves-effect waves-light">
+                
+                <i class="fa fa-fw fa-archive"></i>
+                
+                归档
+            </a>
+        </li>
+        
+        <li>
+            <a href="/about" class="waves-effect waves-light">
+                
+                <i class="fa fa-fw fa-user-circle-o"></i>
+                
+                关于
+            </a>
+        </li>
+        
+        <li>
+            <a href="/friends" class="waves-effect waves-light">
+                
+                <i class="fa fa-fw fa-address-book"></i>
+                
+                友情链接
+            </a>
+        </li>
+        
+        
+    </ul>
+</div>
+
+        </div>
+
+        
+    </nav>
+
+</header>
+
+
+
+
+
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/15.jpg')">
+    <div class="container">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <div class="description center-align post-title">
+                        java核心卷Ⅰ-泛型
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<main class="post-container content">
+
+    
+    <link rel="stylesheet" href="/libs/tocbot/tocbot.css">
+<style>
+    #articleContent h1::before,
+    #articleContent h2::before,
+    #articleContent h3::before,
+    #articleContent h4::before,
+    #articleContent h5::before,
+    #articleContent h6::before {
+        display: block;
+        content: " ";
+        height: 100px;
+        margin-top: -100px;
+        visibility: hidden;
+    }
+
+    #articleContent :focus {
+        outline: none;
+    }
+
+    .toc-fixed {
+        position: fixed;
+        top: 64px;
+    }
+
+    .toc-widget {
+        padding-left: 20px;
+    }
+
+    .toc-widget .toc-title {
+        margin: 35px 0 15px 0;
+        padding-left: 17px;
+        font-size: 1.5rem;
+        font-weight: bold;
+        line-height: 1.5rem;
+    }
+
+    .toc-widget ol {
+        padding: 0;
+        list-style: none;
+    }
+
+    #toc-content ol {
+        padding-left: 10px;
+    }
+
+    #toc-content ol li {
+        padding-left: 10px;
+    }
+
+    #toc-content .toc-link:hover {
+        color: #42b983;
+        font-weight: 700;
+        text-decoration: underline;
+    }
+
+    #toc-content .toc-link::before {
+        background-color: transparent;
+        max-height: 25px;
+    }
+
+    #toc-content .is-active-link {
+        color: #42b983;
+    }
+
+    #toc-content .is-active-link::before {
+        background-color: #42b983;
+    }
+
+    #floating-toc-btn {
+        position: fixed;
+        right: 20px;
+        bottom: 76px;
+        padding-top: 15px;
+        margin-bottom: 0;
+        z-index: 998;
+    }
+
+    #floating-toc-btn .btn-floating {
+        width: 48px;
+        height: 48px;
+    }
+
+    #floating-toc-btn .btn-floating i {
+        line-height: 48px;
+        font-size: 1.4rem;
+    }
+</style>
+<div class="row">
+    <div id="main-content" class="col s12 m12 l9">
+        <!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                    <div class="article-tag">
+                        
+                            <a href="/tags/java/" target="_blank">
+                                <span class="chip bg-color">java</span>
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                    <div class="post-cate">
+                        <i class="fa fa-bookmark fa-fw icon-category"></i>
+                        
+                            <a href="/categories/读书笔记/" class="post-category" target="_blank">
+                                读书笔记
+                            </a>
+                        
+                            <a href="/categories/读书笔记/java核心卷1/" class="post-category" target="_blank">
+                                java核心卷1
+                            </a>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+
+            <div class="post-info">
+                <div class="post-date info-break-policy">
+                    <i class="fa fa-calendar-minus-o fa-fw"></i>发布日期:&nbsp;&nbsp;
+                    2019-03-12
+                </div>
+
+                
+                    
+                    <div class="info-break-policy">
+                        <i class="fa fa-file-word-o fa-fw"></i>文章字数:&nbsp;&nbsp;
+                        5k
+                    </div>
+                    
+
+                    
+                    <div class="info-break-policy">
+                        <i class="fa fa-clock-o fa-fw"></i>阅读时长:&nbsp;&nbsp;
+                        20 分
+                    </div>
+                    
+                
+				
+				
+                    <div id="busuanzi_container_page_pv" class="info-break-policy">
+                        <i class="fa fa-eye fa-fw"></i>阅读次数:&nbsp;&nbsp;
+                        <span id="busuanzi_value_page_pv"></span>
+                    </div>
+				
+            </div>
+        </div>
+        <hr class="clearfix">
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <p>本章节主要讲java核心卷Ⅰ泛型</p>
+<a id="more"></a>
+
+<h1 id="定义简单泛型类"><a href="#定义简单泛型类" class="headerlink" title="定义简单泛型类"></a>定义简单泛型类</h1><pre class=" language-java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">Pair</span><span class="token operator">&lt;</span>T<span class="token operator">></span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">private</span> T first<span class="token punctuation">;</span>
+    <span class="token keyword">private</span> T second<span class="token punctuation">;</span>
+
+
+    <span class="token keyword">public</span> <span class="token function">Pair</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+           first<span class="token operator">=</span>null<span class="token punctuation">;</span>
+        second<span class="token operator">=</span>null<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token comment" spellcheck="true">//这不算泛型方法 只用用类的泛型</span>
+    <span class="token keyword">public</span> <span class="token function">Pair</span><span class="token punctuation">(</span>T first<span class="token punctuation">,</span>T second<span class="token punctuation">)</span><span class="token punctuation">{</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>first<span class="token operator">=</span>first<span class="token punctuation">;</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>second<span class="token operator">=</span>second<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token comment" spellcheck="true">//同样也不是</span>
+    <span class="token keyword">public</span> T getFirstO <span class="token punctuation">{</span>
+        <span class="token keyword">return</span> first<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">public</span> T getSecondO <span class="token punctuation">{</span>
+        <span class="token keyword">return</span> second<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">setFirst</span> <span class="token punctuation">(</span>T newValue<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        first <span class="token operator">=</span> newValue<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">setSecond</span><span class="token punctuation">(</span>T newValue<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        second <span class="token operator">=</span> newValue<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span></code></pre>
+<h1 id="泛型方法"><a href="#泛型方法" class="headerlink" title="泛型方法"></a>泛型方法</h1><pre class=" language-java"><code class="language-java"><span class="token keyword">package</span> faxing<span class="token punctuation">;</span>
+
+
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">Test</span> <span class="token punctuation">{</span>
+    <span class="token comment" spellcheck="true">//&lt;T>是泛型的声明 第一个T是泛型的返回值 第二个T是泛型的形参</span>
+    <span class="token keyword">public</span> <span class="token operator">&lt;</span>T<span class="token operator">></span> T <span class="token function">Test</span><span class="token punctuation">(</span>T t<span class="token punctuation">)</span><span class="token punctuation">{</span>
+        <span class="token comment" spellcheck="true">//？通配符，声明class1是Object或者继承于Object的子类类型</span>
+        Class<span class="token operator">&lt;</span><span class="token operator">?</span> <span class="token keyword">extends</span> <span class="token class-name">Object</span><span class="token operator">></span> class1 <span class="token operator">=</span> t<span class="token punctuation">.</span><span class="token function">getClass</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>class1<span class="token punctuation">.</span><span class="token function">getClass</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">return</span> t<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span></code></pre>
+<p>详细关于泛型方法与泛型类的语法参考</p>
+<p><a href="https://blog.csdn.net/s10461/article/details/53941091" target="_blank" rel="noopener">https://blog.csdn.net/s10461/article/details/53941091</a></p>
+<h1 id="泛型上下限"><a href="#泛型上下限" class="headerlink" title="泛型上下限"></a>泛型上下限</h1><p>​    正如第二个代码所示使用extends表示泛型的上限制，这里extends后面不仅可以是类，也可以是接口。</p>
+<p>但是不能一个是接口，一个是类，同时那个类是实现了接口的那种情况。</p>
+<h1 id="泛型diamagnetic与虚拟机"><a href="#泛型diamagnetic与虚拟机" class="headerlink" title="泛型diamagnetic与虚拟机"></a>泛型diamagnetic与虚拟机</h1><h2 id="泛型擦出"><a href="#泛型擦出" class="headerlink" title="泛型擦出"></a>泛型擦出</h2><p>在JVM中是不存在泛型的概念的，所有的泛型在编译时就会变成普通的类、接口、方法。上代码这是我们编辑代码时所见的，有泛型的概念</p>
+<pre class=" language-java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">Pair</span><span class="token operator">&lt;</span>T<span class="token operator">></span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">private</span> T first<span class="token punctuation">;</span>
+    <span class="token keyword">private</span> T second<span class="token punctuation">;</span>
+
+
+    <span class="token keyword">public</span> <span class="token function">Pair</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+        first<span class="token operator">=</span>null<span class="token punctuation">;</span>
+        second<span class="token operator">=</span>null<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token comment" spellcheck="true">//这不算泛型方法 只用用类的泛型</span>
+    <span class="token keyword">public</span> <span class="token function">Pair</span><span class="token punctuation">(</span>T first<span class="token punctuation">,</span>T second<span class="token punctuation">)</span><span class="token punctuation">{</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>first<span class="token operator">=</span>first<span class="token punctuation">;</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>second<span class="token operator">=</span>second<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token comment" spellcheck="true">//同样也不是</span>
+    <span class="token keyword">public</span> T getFirstO <span class="token punctuation">{</span>
+        <span class="token keyword">return</span> first<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">public</span> T getSecondO <span class="token punctuation">{</span>
+        <span class="token keyword">return</span> second<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">setFirst</span> <span class="token punctuation">(</span>T newValue<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        first <span class="token operator">=</span> newValue<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">setSecond</span><span class="token punctuation">(</span>T newValue<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        second <span class="token operator">=</span> newValue<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token comment" spellcheck="true">//这里的T不同于类中声明的那个T</span>
+    <span class="token keyword">public</span> <span class="token operator">&lt;</span>T<span class="token operator">></span> T <span class="token function">Test</span><span class="token punctuation">(</span>T t<span class="token punctuation">)</span><span class="token punctuation">{</span>
+        <span class="token comment" spellcheck="true">//？通配符，声明class1是Object或者继承于Object的子类类型</span>
+        Class<span class="token operator">&lt;</span><span class="token operator">?</span> <span class="token keyword">extends</span> <span class="token class-name">Object</span><span class="token operator">></span> class1 <span class="token operator">=</span> t<span class="token punctuation">.</span><span class="token function">getClass</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>class1<span class="token punctuation">.</span><span class="token function">getClass</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">return</span> t<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span></code></pre>
+<p>在编译之后会变成下面代码的样子。其实是在编译时所有的泛型会变成其他类，规则是：</p>
+<ul>
+<li><p>如果在类中指明了他继承的那个类，形式如下：</p>
+<p><img src="https://i.loli.net/2019/03/12/5c87b8fb1326d.png" alt></p>
+</li>
+<li><p>会编译成以他的继承的类、接口（其实不能说是继承，只是因为用extends更能体现继承的思想）为上限的类型，及那个类及那个类的子类，就是那个家伙或他的子子孙孙（应该优先子孙的）,就是下面这种类型</p>
+<pre class=" language-java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">Pair</span>
+<span class="token punctuation">{</span>
+    <span class="token keyword">private</span> Object first<span class="token punctuation">;</span>
+    <span class="token keyword">private</span> Object second<span class="token punctuation">;</span>
+
+</code></pre>
+</li>
+</ul>
+<pre><code>  public Pair(){
+  first=null;
+  second=null;
+  }
+  //这不算泛型方法 只用用类的泛型
+  public Pair(Object first,Object second){
+      this.first=first;
+      this.second=second;
+  }
+  //同样也不是
+  public Object getFirstO {
+      return first;
+  }
+  public Object getSecondO {
+      return second;
+  }
+  public void setFirst (Object newValue) {
+      first = newValue;
+  }
+  public void setSecond(Object newValue) {
+      second = newValue;
+  }
+  //这里的T不同于类中声明的那个T
+  public Object Test(Object t){
+      //？通配符，声明class1是Object或者继承于Object的子类类型
+      Object class1 = t.getClass();
+      System.out.println(class1.getClass());
+      return t;
+  }</code></pre><p>  }</p>
+<pre><code>
+* 带来两个问题
+
+  1. 继承泛型带来的麻烦，(子类没有覆盖住父类的方法)
+
+     &lt;https://blog.csdn.net/weixin_37770552/article/details/77692449&gt;
+
+     上面那个代码，他在编译时变成了Object类型，包括里面的泛型参数。如果我们想继承他的方法，比如
+
+     ```java
+     class SonPair extends Pair&lt;String&gt;{
+         public void setFirst(String fir){....}
+     }
+     ```
+
+     很明显能看出来的问题，我们准备覆盖setFirst方法，然而父类的那个方法的类型是Object，然而这里是String类型，覆盖失败。
+
+     来看看编译器解决这个问题
+
+     ```java
+     编译器 会自动在 SonPair中生成一个桥方法(bridge method ) 强转
+     public void setFirst(Object fir){
+         setFirst((String) fir)
+     }
+
+     ```
+
+     这样也带来一个问题，如果我们想覆盖getFirst方法，看下面代码
+
+     ```java
+     class SonPair extends Pair&lt;String&gt;{
+         public String getFirst(){....}
+     }
+     ```
+
+     和之前生成的代码对比，我们生成的同名不同返回值的两个方法
+
+     ```java
+     ①String getFirst() // 自己定义的方法
+     ②Object getFirst() // 编译器生成的桥方法
+     ```
+
+     这里给自己补充一个知识点：方法签名=方法名+参数列表。上图：
+
+     ![](https://i.loli.net/2019/03/12/5c87ba0aa21ee.png)
+
+     这样就带来了问题，我们不能写出方法签名相同的代码。
+
+     但是jvm会用类型参数和返回值确定一个方法 。所以这里是可行的
+
+  2. 泛型类型中的方法冲突
+
+     在第一个代码中添加一下方法
+
+     ```java
+     public boolean equals(T value){
+         return (first.equals(value));
+     }
+     ```
+
+     ![](https://i.loli.net/2019/03/12/5c87ba6b8499c.png)
+
+     Name clash: The method equals(T) of type Pair has the same erasure as equals(Object) of type Object but does not override it
+
+     所以我也不知道这里怎么解决。
+
+  参考链接：
+
+  关于泛型基本语法：&lt;https://blog.csdn.net/s10461/article/details/53941091&gt;
+
+  关于类型擦除：&lt;https://blog.csdn.net/weixin_37770552/article/details/77692449&gt;
+
+
+
+# 通配符类型
+
+全文摘自这里，此处只是备份，怕链接失效，没有这么好的博客
+
+&lt;https://segmentfault.com/a/1190000005337789&gt;
+
+
+
+## 数组的协变
+
+在了解通配符之前，先来了解一下数组。Java 中的数组是协变的，什么意思？看下面的例子：
+
+```java
+class Fruit {}
+class Apple extends Fruit {}
+class Jonathan extends Apple {}
+class Orange extends Fruit {}
+
+
+public class CovariantArrays {
+    public static void main(String[] args) {
+        Fruit[] fruit = new Apple[10];
+        fruit[0] = new Apple(); // OK
+        fruit[1] = new Jonathan(); // OK
+            // Runtime type is Apple[], not Fruit[] or Orange[]:
+        try {
+            // Compiler allows you to add Fruit:
+            fruit[0] = new Fruit(); // ArrayStoreException
+        } catch(Exception e) { System.out.println(e); }
+        try {
+            // Compiler allows you to add Oranges:
+            fruit[0] = new Orange(); // ArrayStoreException
+        } catch(Exception e) { System.out.println(e); }
+    }
+} /* Output:
+java.lang.ArrayStoreException: Fruit
+java.lang.ArrayStoreException: Orange
+*///:~</code></pre><p>​    main 方法中的第一行，创建了一个 Apple 数组并把它赋给 Fruit 数组的引用。这是有意义的，Apple 是 Fruit 的子类，一个 Apple 对象也是一种 Fruit 对象，所以一个 Apple 数组也是一种 Fruit 的数组。这称作数组的协变，Java 把数组设计为协变的，对此是有争议的，有人认为这是一种缺陷。</p>
+<p>​    尽管 Apple[] 可以 “向上转型” 为 Fruit[]，但数组元素的实际类型还是 Apple，我们只能向数组中放入 Apple或者 Apple 的子类。在上面的代码中，向数组中放入了 Fruit 对象和 Orange 对象。对于编译器来说，这是可以通过编译的，但是在运行时期，JVM 能够知道数组的实际类型是 Apple[]，所以当其它对象加入数组的时候就会抛出异常。</p>
+<p>​    泛型设计的目的之一是要使这种运行时期的错误在编译期就能发现，看看用泛型容器类来代替数组会发生什么：</p>
+<pre class=" language-java"><code class="language-java"><span class="token comment" spellcheck="true">// Compile Error: incompatible types:</span>
+ArrayList<span class="token operator">&lt;</span>Fruit<span class="token operator">></span> flist <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">ArrayList</span><span class="token operator">&lt;</span>Apple<span class="token operator">></span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre>
+<p>​    上面的代码根本就无法编译。当涉及到泛型时， 尽管 Apple 是 Fruit 的子类型，但是 ArrayList<apple> 不是 ArrayList<fruit> 的子类型，泛型不支持协变。</fruit></apple></p>
+<h2 id="使用通配符"><a href="#使用通配符" class="headerlink" title="使用通配符"></a>使用通配符</h2><p>​    从上面我们知道，List&lt;Number&gt; list = ArrayList&lt;Integer&gt;&gt;这样的语句是无法通过编译的，尽管 Integer 是 Number 的子类型。那么如果我们确实需要建立这种 “向上转型” 的关系怎么办呢？这就需要通配符来发挥作用了。</p>
+<h2 id="上边界限定通配符"><a href="#上边界限定通配符" class="headerlink" title="上边界限定通配符"></a>上边界限定通配符</h2><p>​    利用 &lt;? extends Fruit&gt; 形式的通配符，可以实现泛型的向上转型：</p>
+<pre class=" language-java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">GenericsAndCovariance</span> <span class="token punctuation">{</span>
+    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span>String<span class="token punctuation">[</span><span class="token punctuation">]</span> args<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token comment" spellcheck="true">// Wildcards allow covariance:</span>
+        List<span class="token operator">&lt;</span><span class="token operator">?</span> <span class="token keyword">extends</span> <span class="token class-name">Fruit</span><span class="token operator">></span> flist <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">ArrayList</span><span class="token operator">&lt;</span>Apple<span class="token operator">></span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token comment" spellcheck="true">// Compile Error: can’t add any type of object:</span>
+        <span class="token comment" spellcheck="true">// flist.add(new Apple());</span>
+        <span class="token comment" spellcheck="true">// flist.add(new Fruit());</span>
+        <span class="token comment" spellcheck="true">// flist.add(new Object());</span>
+        flist<span class="token punctuation">.</span><span class="token function">add</span><span class="token punctuation">(</span>null<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// Legal but uninteresting</span>
+        <span class="token comment" spellcheck="true">// We know that it returns at least Fruit:</span>
+        Fruit f <span class="token operator">=</span> flist<span class="token punctuation">.</span><span class="token function">get</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span></code></pre>
+<p>​    上面的例子中， flist 的类型是 List&lt;? extends Fruit&gt;，我们可以把它读作：一个类型的 List， 这个类型可以是继承了 Fruit 的某种类型。注意，这并不是说这个 List 可以持有 Fruit 的任意类型。通配符代表了一种特定的类型，它表示 “某种特定的类型，但是 flist 没有指定”。这样不太好理解，具体针对这个例子解释就是，flist 引用可以指向某个类型的 List，只要这个类型继承自 Fruit，可以是 Fruit 或者 Apple，比如例子中的 new ArrayList<apple>，但是为了向上转型给 flist，flist 并不关心这个具体类型是什么。</apple></p>
+<p>​    如上所述，通配符 List&lt;? extends Fruit&gt; 表示某种特定类型 ( Fruit 或者其子类 ) 的 List，但是并不关心这个实际的类型到底是什么，反正是 Fruit 的子类型，Fruit 是它的上边界。那么对这样的一个 List 我们能做什么呢？其实如果我们不知道这个 List 到底持有什么类型，怎么可能安全的添加一个对象呢？在上面的代码中，向 flist 中添加任何对象，无论是 Apple 还是 Orange 甚至是 Fruit 对象，编译器都不允许，唯一可以添加的是 null。所以如果做了泛型的向上转型 (List&lt;? extends Fruit&gt;&gt;flist = new ArrayList&lt;Apple&gt;())，那么我们也就失去了向这个 List 添加任何对象的能力，即使是 Object 也不行。</p>
+<p>​    另一方面，如果调用某个返回 Fruit 的方法，这是安全的。因为我们知道，在这个 List 中，不管它实际的类型到底是什么，但肯定能转型为 Fruit，所以编译器允许返回 Fruit。</p>
+<p>​    了解了通配符的作用和限制后，好像任何接受参数的方法我们都不能调用了。其实倒也不是，看下面的例子：</p>
+<pre class=" language-java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">CompilerIntelligence</span> <span class="token punctuation">{</span>
+    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span>String<span class="token punctuation">[</span><span class="token punctuation">]</span> args<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        List<span class="token operator">&lt;</span><span class="token operator">?</span> <span class="token keyword">extends</span> <span class="token class-name">Fruit</span><span class="token operator">></span> flist <span class="token operator">=</span>
+        Arrays<span class="token punctuation">.</span><span class="token function">asList</span><span class="token punctuation">(</span><span class="token keyword">new</span> <span class="token class-name">Apple</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        Apple a <span class="token operator">=</span> <span class="token punctuation">(</span>Apple<span class="token punctuation">)</span>flist<span class="token punctuation">.</span><span class="token function">get</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// No warning</span>
+        flist<span class="token punctuation">.</span><span class="token function">contains</span><span class="token punctuation">(</span><span class="token keyword">new</span> <span class="token class-name">Apple</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// Argument is ‘Object’</span>
+        flist<span class="token punctuation">.</span><span class="token function">indexOf</span><span class="token punctuation">(</span><span class="token keyword">new</span> <span class="token class-name">Apple</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// Argument is ‘Object’</span>
+
+
+        <span class="token comment" spellcheck="true">//flist.add(new Apple()); 无法编译</span>
+
+
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span></code></pre>
+<p>​    在上面的例子中，flist 的类型是 List&lt;? extends Fruit&gt;，泛型参数使用了受限制的通配符，所以我们失去了向其中加入任何类型对象的例子，最后一行代码无法编译。</p>
+<p>​    但是 flist 却可以调用 contains 和 indexOf 方法，它们都接受了一个 Apple 对象做参数。如果查看 ArrayList 的源代码，可以发现 add() 接受一个泛型类型作为参数，但是 contains 和 indexOf 接受一个 Object 类型的参数，下面是它们的方法签名：</p>
+<pre class=" language-java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">boolean</span> <span class="token function">add</span><span class="token punctuation">(</span>E e<span class="token punctuation">)</span>
+<span class="token keyword">public</span> <span class="token keyword">boolean</span> <span class="token function">contains</span><span class="token punctuation">(</span>Object o<span class="token punctuation">)</span>
+<span class="token keyword">public</span> <span class="token keyword">int</span> <span class="token function">indexOf</span><span class="token punctuation">(</span>Object o<span class="token punctuation">)</span></code></pre>
+<p>​    所以如果我们指定泛型参数为 &lt;? extends Fruit&gt;时，add() 方法的参数变为 ? extends Fruit，编译器无法判断这个参数接受的到底是 Fruit 的哪种类型，所以它不会接受任何类型。</p>
+<p>​    然而，contains 和 indexOf 的类型是 Object，并没有涉及到通配符，所以编译器允许调用这两个方法。这意味着一切取决于泛型类的编写者来决定那些调用是 “安全” 的，并且用 Object 作为这些安全方法的参数。如果某些方法不允许类型参数是通配符时的调用，这些方法的参数应该用类型参数，比如 add(E e)。</p>
+<p>​    当我们自己编写泛型类时，上面介绍的就有用了。下面编写一个 Holder 类：</p>
+<pre class=" language-java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">Holder</span><span class="token operator">&lt;</span>T<span class="token operator">></span> <span class="token punctuation">{</span>
+    <span class="token keyword">private</span> T value<span class="token punctuation">;</span>
+    <span class="token keyword">public</span> <span class="token function">Holder</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span><span class="token punctuation">}</span>
+    <span class="token keyword">public</span> <span class="token function">Holder</span><span class="token punctuation">(</span>T val<span class="token punctuation">)</span> <span class="token punctuation">{</span> value <span class="token operator">=</span> val<span class="token punctuation">;</span> <span class="token punctuation">}</span>
+    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">set</span><span class="token punctuation">(</span>T val<span class="token punctuation">)</span> <span class="token punctuation">{</span> value <span class="token operator">=</span> val<span class="token punctuation">;</span> <span class="token punctuation">}</span>
+    <span class="token keyword">public</span> T <span class="token function">get</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span> <span class="token keyword">return</span> value<span class="token punctuation">;</span> <span class="token punctuation">}</span>
+    <span class="token keyword">public</span> <span class="token keyword">boolean</span> <span class="token function">equals</span><span class="token punctuation">(</span>Object obj<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">return</span> value<span class="token punctuation">.</span><span class="token function">equals</span><span class="token punctuation">(</span>obj<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span>String<span class="token punctuation">[</span><span class="token punctuation">]</span> args<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        Holder<span class="token operator">&lt;</span>Apple<span class="token operator">></span> Apple <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Holder</span><span class="token operator">&lt;</span>Apple<span class="token operator">></span><span class="token punctuation">(</span><span class="token keyword">new</span> <span class="token class-name">Apple</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        Apple d <span class="token operator">=</span> Apple<span class="token punctuation">.</span><span class="token function">get</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        Apple<span class="token punctuation">.</span><span class="token function">set</span><span class="token punctuation">(</span>d<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token comment" spellcheck="true">// Holder&lt;Fruit> Fruit = Apple; // Cannot upcast</span>
+        Holder<span class="token operator">&lt;</span><span class="token operator">?</span> <span class="token keyword">extends</span> <span class="token class-name">Fruit</span><span class="token operator">></span> fruit <span class="token operator">=</span> Apple<span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// OK</span>
+        Fruit p <span class="token operator">=</span> fruit<span class="token punctuation">.</span><span class="token function">get</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        d <span class="token operator">=</span> <span class="token punctuation">(</span>Apple<span class="token punctuation">)</span>fruit<span class="token punctuation">.</span><span class="token function">get</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// Returns ‘Object’</span>
+        <span class="token keyword">try</span> <span class="token punctuation">{</span>
+                Orange c <span class="token operator">=</span> <span class="token punctuation">(</span>Orange<span class="token punctuation">)</span>fruit<span class="token punctuation">.</span><span class="token function">get</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// No warning</span>
+        <span class="token punctuation">}</span> <span class="token keyword">catch</span><span class="token punctuation">(</span>Exception e<span class="token punctuation">)</span> <span class="token punctuation">{</span> System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>e<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token punctuation">}</span>
+            <span class="token comment" spellcheck="true">// fruit.set(new Apple()); // Cannot call set()</span>
+            <span class="token comment" spellcheck="true">// fruit.set(new Fruit()); // Cannot call set()</span>
+        System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>fruit<span class="token punctuation">.</span><span class="token function">equals</span><span class="token punctuation">(</span>d<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// OK</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span> <span class="token comment" spellcheck="true">/* Output: (Sample)
+java.lang.ClassCastException: Apple cannot be cast to Orange
+true
+*/</span><span class="token comment" spellcheck="true">//:~</span></code></pre>
+<p>​    在 Holer 类中，set() 方法接受类型参数 T 的对象作为参数，get() 返回一个 T 类型，而 equals() 接受一个 Object 作为参数。fruit 的类型是 Holder&lt;? extends Fruit&gt;，所以set()方法不会接受任何对象的添加，但是 equals() 可以正常工作。</p>
+<h2 id="下边界限"><a href="#下边界限" class="headerlink" title="下边界限"></a>下边界限</h2><p>通配符的另一个方向是　“超类型的通配符“: ? super T，T 是类型参数的下界。使用这种形式的通配符，我们就可以 ”传递对象” 了。还是用例子解释：</p>
+<pre class=" language-java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">SuperTypeWildcards</span> <span class="token punctuation">{</span>
+    <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">writeTo</span><span class="token punctuation">(</span>List<span class="token operator">&lt;</span><span class="token operator">?</span> <span class="token keyword">super</span> Apple<span class="token operator">></span> apples<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        apples<span class="token punctuation">.</span><span class="token function">add</span><span class="token punctuation">(</span><span class="token keyword">new</span> <span class="token class-name">Apple</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        apples<span class="token punctuation">.</span><span class="token function">add</span><span class="token punctuation">(</span><span class="token keyword">new</span> <span class="token class-name">Jonathan</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token comment" spellcheck="true">// apples.add(new Fruit()); // Error</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span></code></pre>
+<p>riteTo 方法的参数 apples 的类型是 List&lt;? super Apple&gt;，它表示某种类型的 List，这个类型是 Apple 的基类型。也就是说，我们不知道实际类型是什么，但是这个类型肯定是 Apple 的父类型。因此，我们可以知道向这个 List 添加一个 Apple 或者其子类型的对象是安全的，这些对象都可以向上转型为 Apple。但是我们不知道加入 Fruit 对象是否安全，因为那样会使得这个 List 添加跟 Apple 无关的类型。</p>
+<p>在了解了子类型边界和超类型边界之后，我们就可以知道如何向泛型类型中 “写入” ( 传递对象给方法参数) 以及如何从泛型类型中 “读取” ( 从方法中返回对象 )。下面是一个例子：</p>
+<pre class=" language-java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">Collections</span> <span class="token punctuation">{</span>
+    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token operator">&lt;</span>T<span class="token operator">></span> <span class="token keyword">void</span> <span class="token function">copy</span><span class="token punctuation">(</span>List<span class="token operator">&lt;</span><span class="token operator">?</span> <span class="token keyword">super</span> T<span class="token operator">></span> dest<span class="token punctuation">,</span> List<span class="token operator">&lt;</span><span class="token operator">?</span> <span class="token keyword">extends</span> <span class="token class-name">T</span><span class="token operator">></span> src<span class="token punctuation">)</span>
+    <span class="token punctuation">{</span>
+        <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i<span class="token operator">=</span><span class="token number">0</span><span class="token punctuation">;</span> i<span class="token operator">&lt;</span>src<span class="token punctuation">.</span><span class="token function">size</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span>
+        dest<span class="token punctuation">.</span><span class="token function">set</span><span class="token punctuation">(</span>i<span class="token punctuation">,</span>src<span class="token punctuation">.</span><span class="token function">get</span><span class="token punctuation">(</span>i<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span></code></pre>
+<p>src 是原始数据的 List，因为要从这里面读取数据，所以用了上边界限定通配符：&lt;? extends T&gt;，取出的元素转型为 T。dest 是要写入的目标 List，所以用了下边界限定通配符：&lt;? super T&gt;，可以写入的元素类型是 T 及其子类型。</p>
+<h2 id="无边界通配符"><a href="#无边界通配符" class="headerlink" title="无边界通配符"></a>无边界通配符</h2><p>有一种通配符是无边界通配符，它的使用形式是一个单独的问号：List&lt;?&gt;，也就是没有任何限定。不做任何限制，跟不用类型参数的 List 有什么区别呢？</p>
+<p>List&lt;?&gt; list 表示 list 是持有某种特定类型的 List，但是不知道具体是哪种类型。那么我们可以向其中添加对象吗？当然不可以，因为并不知道实际是哪种类型，所以不能添加任何类型，这是不安全的。而单独的 List list ，也就是没有传入泛型参数，表示这个 list 持有的元素的类型是 Object，因此可以添加任何类型的对象，只不过编译器会有警告信息。</p>
+<p>总结：</p>
+<p>使用 List&lt;? extends C&gt;&gt;list 这种形式，表示 list 可以引用一个 ArrayList ( 或者其它 List 的 子类 ) 的对象，这个对象包含的元素类型是 C 的子类型 ( 包含 C 本身）的一种。</p>
+<p>使用 List&lt;? super C&gt; list 这种形式，表示 list 可以引用一个 ArrayList ( 或者其它 List 的 子类 ) 的对象，这个对象包含的元素就类型是 C 的超类型 ( 包含 C 本身 ) 的一种。</p>
+<p>《java核心卷》</p>
+<p>带有超类型限定的通配符可以向泛型对象写人，super。</p>
+<p>带有子类型限定的通配符可以从泛型对象读取，extends。</p>
+<h1 id="泛型的继承规则"><a href="#泛型的继承规则" class="headerlink" title="泛型的继承规则"></a>泛型的继承规则</h1><pre class=" language-java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">Father</span> <span class="token punctuation">{</span>
+    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">fatherPrint</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"I am father"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span></code></pre>
+<pre class=" language-java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">Son</span> <span class="token keyword">extends</span> <span class="token class-name">Father</span><span class="token punctuation">{</span>
+    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">sonPrint</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"I am son"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span></code></pre>
+<pre class=" language-java"><code class="language-java"><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">FatherSon</span> <span class="token punctuation">{</span>
+    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span>String<span class="token punctuation">[</span><span class="token punctuation">]</span> args<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        Pair<span class="token operator">&lt;</span>Father<span class="token operator">></span> fPair<span class="token operator">=</span><span class="token keyword">new</span> <span class="token class-name">Pair</span><span class="token operator">&lt;</span>Son<span class="token operator">></span><span class="token punctuation">(</span><span class="token keyword">new</span> <span class="token class-name">Son</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token keyword">new</span> <span class="token class-name">Son</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+
+        Pair<span class="token operator">&lt;</span>Son<span class="token operator">></span> fPair2<span class="token operator">=</span><span class="token keyword">new</span> <span class="token class-name">Pair</span><span class="token operator">&lt;</span>Son<span class="token operator">></span><span class="token punctuation">(</span><span class="token keyword">new</span> <span class="token class-name">Son</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token keyword">new</span> <span class="token class-name">Son</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span></code></pre>
+<p>报错：</p>
+<p><img src="https://i.loli.net/2019/03/13/5c885f153851b.png" alt></p>
+<p>Type mismatch: cannot convert from Pair Son to Pair Father</p>
+<p>虽然泛型中类型T是继承关系，但是在泛型中这种写法是不允许的</p>
+<p>实际上，无论类型变量T和S之间有什么关系，包括继承关系还是实现关系，Pair和Pair之间都不会有什么联系</p>
+<p>下面这种继承是可以的</p>
+<pre class=" language-java"><code class="language-java"><span class="token keyword">class</span> <span class="token class-name">BasicPair</span><span class="token operator">&lt;</span>T<span class="token operator">></span> <span class="token punctuation">{</span>
+
+
+<span class="token punctuation">}</span>
+
+
+<span class="token keyword">class</span> <span class="token class-name">Pair</span><span class="token operator">&lt;</span>T<span class="token operator">></span> <span class="token keyword">extends</span> <span class="token class-name">BasicPair</span><span class="token operator">&lt;</span>T<span class="token operator">></span><span class="token punctuation">{</span>
+
+
+    <span class="token keyword">private</span> T first<span class="token punctuation">;</span>
+    <span class="token keyword">private</span> T second<span class="token punctuation">;</span>
+
+
+    <span class="token keyword">public</span> <span class="token function">Pair</span><span class="token punctuation">(</span>T first<span class="token punctuation">,</span> T second<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">super</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>first <span class="token operator">=</span> first<span class="token punctuation">;</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>second <span class="token operator">=</span> second<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+
+    <span class="token keyword">public</span> T <span class="token function">getFirst</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">return</span> first<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+
+    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">setFirst</span><span class="token punctuation">(</span>T first<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>first <span class="token operator">=</span> first<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+
+    <span class="token keyword">public</span> T <span class="token function">getSecond</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">return</span> second<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+
+    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">setSecond</span><span class="token punctuation">(</span>T second<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>second <span class="token operator">=</span> second<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span></code></pre>
+<p><img src="https://i.loli.net/2019/03/13/5c885f872d5da.png" alt></p>
+<p>引用一句话泛型的继承只是在类这个维度上是可以的，他们的参数类型必须是一致的</p>
+<p>参考链接：</p>
+<p><a href="https://blog.csdn.net/l294265421/article/details/46413975" target="_blank" rel="noopener">https://blog.csdn.net/l294265421/article/details/46413975</a></p>
+<p><a href="https://blog.csdn.net/csdn_of_coder/article/details/52563982" target="_blank" rel="noopener">https://blog.csdn.net/csdn_of_coder/article/details/52563982</a></p>
+<h1 id="泛型的约束与局限性"><a href="#泛型的约束与局限性" class="headerlink" title="泛型的约束与局限性"></a>泛型的约束与局限性</h1><blockquote>
+<p>泛型的一个原则：<strong>如果一段代码在编译时没有提出“未经检查的转换”警告，则程序在运行时不会引发ClasscastException异常</strong></p>
+</blockquote>
+<h2 id="不能用基本类型实例化类型参数"><a href="#不能用基本类型实例化类型参数" class="headerlink" title="不能用基本类型实例化类型参数"></a>不能用基本类型实例化类型参数</h2><p>​        因为泛型在编译时存在类型擦除，会将类型转换成原始类型，如果是原始类型，就无法转换，但是基本类型是有8种，我们可以使用他们的封装类代替</p>
+<h2 id="运行时类型查询只适合原始类型"><a href="#运行时类型查询只适合原始类型" class="headerlink" title="运行时类型查询只适合原始类型"></a>运行时类型查询只适合原始类型</h2><p>因为泛型的擦除，使代码运行时用的是原始类型，而其他类型无法使用instanceof 上代码</p>
+<pre class=" language-java"><code class="language-java"><span class="token comment" spellcheck="true">//泛型类</span>
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">OriginTest</span><span class="token operator">&lt;</span>T<span class="token operator">></span> <span class="token punctuation">{</span>
+    <span class="token keyword">private</span> T id<span class="token punctuation">;</span>
+    <span class="token keyword">private</span> T name<span class="token punctuation">;</span>
+    <span class="token keyword">private</span> T salary<span class="token punctuation">;</span>
+    <span class="token keyword">public</span> T <span class="token function">getId</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">return</span> id<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">setId</span><span class="token punctuation">(</span>T id<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>id <span class="token operator">=</span> id<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">public</span> T <span class="token function">getName</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">return</span> name<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">setName</span><span class="token punctuation">(</span>T name<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>name <span class="token operator">=</span> name<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">public</span> T <span class="token function">getSalary</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">return</span> salary<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">setSalary</span><span class="token punctuation">(</span>T salary<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>salary <span class="token operator">=</span> salary<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">public</span> <span class="token function">OriginTest</span><span class="token punctuation">(</span>T id<span class="token punctuation">,</span> T name<span class="token punctuation">,</span> T salary<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">super</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>id <span class="token operator">=</span> id<span class="token punctuation">;</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>name <span class="token operator">=</span> name<span class="token punctuation">;</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>salary <span class="token operator">=</span> salary<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword">public</span> <span class="token function">OriginTest</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">super</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span></code></pre>
+<pre class=" language-java"><code class="language-java"><span class="token comment" spellcheck="true">//测试</span>
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">OriginTest1</span> <span class="token punctuation">{</span>
+    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span>String<span class="token punctuation">[</span><span class="token punctuation">]</span> args<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        OriginTest<span class="token operator">&lt;</span>String<span class="token operator">></span> test <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">OriginTest</span><span class="token operator">&lt;</span><span class="token operator">></span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">if</span><span class="token punctuation">(</span>test <span class="token keyword">instanceof</span> <span class="token class-name">OriginTest</span><span class="token operator">&lt;</span>String<span class="token operator">></span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token boolean">true</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span><span class="token keyword">else</span> <span class="token punctuation">{</span>
+            System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token boolean">false</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span></code></pre>
+<p>报错：</p>
+<p><img src="https://i.loli.net/2019/03/13/5c886062ce4d7.png" alt></p>
+<p>Cannot perform instanceof check against parameterized type OriginTest. Use the form OriginTest&lt;?&gt; instead since further generic type information will be erased at runtime</p>
+<p>无法对参数化类型OriginTest 执行instanceof检查。 请使用OriginTest &lt;？&gt;形式，因为在运行时将删除其他泛型类型信息</p>
+<h2 id="不能创建参数化类型的数组"><a href="#不能创建参数化类型的数组" class="headerlink" title="不能创建参数化类型的数组"></a>不能创建参数化类型的数组</h2><p>同样也是擦除搞得鬼，</p>
+<p>个人理解，new的时候实例化的是Object类型的，然而我们使用变量是String类型，我们不能直接用父类类型变量指向子类的对象。需要强制类型转换，所以这里是不允许的</p>
+<p><img src="https://i.loli.net/2019/03/13/5c8860c048e5b.png" alt></p>
+<p>但是在想如果我们用的变量是Object类型的呢，实验的一般发现这样仍然不行，编译器不允许这样的存在。</p>
+<p><img src="https://i.loli.net/2019/03/13/5c8860f35b340.png" alt></p>
+<p>报错：Cannot create a generic array of OriginTest 上面两个报错一样</p>
+<p>那么我们用强制类型转换（其实就是向上转型，向下转型问题）：</p>
+<p>声明通配类型的数组，然后后进行类型转换</p>
+<pre class=" language-java"><code class="language-java">OriginTest<span class="token operator">&lt;</span>String<span class="token operator">></span><span class="token punctuation">[</span><span class="token punctuation">]</span> test1<span class="token operator">=</span><span class="token punctuation">(</span>OriginTest<span class="token operator">&lt;</span>String<span class="token operator">></span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">)</span> <span class="token keyword">new</span> <span class="token class-name">OriginTest</span><span class="token operator">&lt;</span><span class="token operator">?</span><span class="token operator">></span><span class="token punctuation">[</span><span class="token number">10</span><span class="token punctuation">]</span><span class="token punctuation">;</span></code></pre>
+<p>但是这里存在警告：Type safety: Unchecked cast from OriginTest&lt;?&gt;[] to OriginTest[]</p>
+<p>这是不安全的，上截图</p>
+<p><img src="https://i.loli.net/2019/03/13/5c88613026afc.png" alt></p>
+<p>对于这类问题，使用集合代替数组，解决不同类型的问题：</p>
+<pre class=" language-java"><code class="language-java"><span class="token keyword">new</span> <span class="token class-name">ArrayList</span><span class="token operator">&lt;</span>OriginTest<span class="token operator">&lt;</span>String<span class="token operator">>></span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre>
+<h2 id="varargs警告-可变参数警告"><a href="#varargs警告-可变参数警告" class="headerlink" title="varargs警告(可变参数警告)"></a>varargs警告(可变参数警告)</h2><p>补充知识点：可变参数其实就是数组</p>
+<p>所以当我们使用可变参数泛型的类时，会出现上面那种问题，这里规则放松，没有报错只是警告。但是在后面赋值的时候还是会出现异常，应该是类型转换异常</p>
+<h2 id="不能实例化类型变量"><a href="#不能实例化类型变量" class="headerlink" title="不能实例化类型变量"></a>不能实例化类型变量</h2><p>我们不知只有new T(…) new T[…]或者T.class这样的类型变量，原因就是编译器不知道T是什么类型。这里我有个疑问，既然T默认在没有指定类型的情况下，是编译成Object类型，这里为什么不行？？？</p>
+<p>当我们想定义未知类型的 对象时，有两种方法：</p>
+<p><img src="https://i.loli.net/2019/03/13/5c8861b27ab2d.png" alt></p>
+<p>第二种方法也可以表示为：</p>
+<pre class=" language-java"><code class="language-java">Pair<span class="token operator">&lt;</span>String<span class="token operator">></span> t<span class="token operator">=</span>Pair<span class="token punctuation">.</span><span class="token function">makePair</span><span class="token punctuation">(</span>String<span class="token operator">:</span><span class="token operator">:</span><span class="token keyword">new</span><span class="token punctuation">)</span></code></pre>
+<p>makePair 方法接收一个Supplier， 这是一个函数式接口， 表示一个无参数而且返回类型为T 的函数</p>
+<p><img src="https://i.loli.net/2019/03/13/5c8861f37db14.png" alt></p>
+<h2 id="不能构造泛型数组"><a href="#不能构造泛型数组" class="headerlink" title="不能构造泛型数组"></a>不能构造泛型数组</h2><p>数组是可以由父类指向子类实体的</p>
+<pre class=" language-java"><code class="language-java">Father<span class="token punctuation">[</span><span class="token punctuation">]</span> f<span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Son</span><span class="token punctuation">[</span><span class="token punctuation">]</span><span class="token punctuation">;</span></code></pre>
+<p>​    然而如果可以使用泛型数组，在编译时泛型数组会被擦除为object类型，意味着此时数组中可以存储任意类型的数据，让我们在使用指向该数组的变量类型时就会报错(可以理解为类型转换错误)，出现极大问题，因此，java不允许使用泛型数组。详细代码看参考链接</p>
+<p>参考链接：</p>
+<p><a href="http://www.blogjava.net/sean/archive/2005/08/09/9630.html" target="_blank" rel="noopener">http://www.blogjava.net/sean/archive/2005/08/09/9630.html</a></p>
+<p><a href="https://blog.csdn.net/x_iya/article/details/79550667" target="_blank" rel="noopener">https://blog.csdn.net/x_iya/article/details/79550667</a></p>
+
+            </div>
+            <hr/>
+
+            
+
+            <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+
+<div id="article-share">
+    
+    <div class="social-share" data-disabled="qzone" data-wechat-qrcode-helper="<p>微信里点“发现”->“扫一扫”二维码便可查看分享。</p>"></div>
+    
+</div>
+
+<script src="/libs/share/js/social-share.min.js"></script>
+
+            
+
+    <div class="reprint" id="reprint-statement">
+        <p class="reprint-tip">
+            <i class="fa fa-exclamation-triangle"></i>&nbsp;&nbsp;
+            <span>转载规则</span>
+        </p>
+        
+            <div class="center-align">
+                <a rel="license" href="https://creativecommons.org/licenses/by/4.0/deed.zh">
+                    <img alt=""
+                         style="border-width:0"
+                         src="https://i.creativecommons.org/l/by/4.0/88x31.png"/>
+                </a>
+            </div>
+            <br/>
+            <span xmlns:dct="http://purl.org/dc/terms/" href="http://purl.org/dc/dcmitype/Text"
+                  property="dct:title" rel="dct:type">
+                    《java核心卷Ⅰ-泛型》
+                </span> 由
+            <a xmlns:cc="http://creativecommons.org/ns#" href="/2019/03/12/java-he-xin-juan-i-fan-xing/" property="cc:attributionName"
+               rel="cc:attributionURL">
+                hmlr123
+            </a> 采用
+            <a rel="license" href="https://creativecommons.org/licenses/by/4.0/deed.zh">
+                知识共享署名 4.0 国际许可协议
+            </a>进行许可。
+        
+    </div>
+
+    <script async defer>
+      document.addEventListener("copy", function (e) {
+        let toastHTML = '<span>复制成功，请遵循本文的转载规则</span><button class="btn-flat toast-action" onclick="navToReprintStatement()" style="font-size: smaller">查看</a>';
+        M.toast({html: toastHTML})
+      });
+
+      function navToReprintStatement() {
+        $("html, body").animate({scrollTop: $("#reprint-statement").offset().top - 80}, 800);
+      }
+    </script>
+
+
+        </div>
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge left-badge text-color">
+                <i class="fa fa-chevron-left"></i>&nbsp;上一篇</div>
+            <div class="card">
+                <a href="/2019/03/14/centos7-6mini-ban-wang-luo-pei-zhi/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/3.jpg" class="responsive-img" alt="Centos7.6mini版-网络配置">
+                        
+                        <span class="card-title">Centos7.6mini版-网络配置</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            踩了一天的坑终于centos7.6无法访问外网的原因了
+踩坑两个文件
+/etc/sysconofig/network
+/etc/sysconofig/network
+
+
+
+
+查看ipip addr
+默认网卡信息：进入配置文件
+cd /etc
+                        
+                    </div>
+                    <div class="publish-info">
+                        <span class="publish-date">
+                            <i class="fa fa-clock-o fa-fw icon-date"></i>2019-03-14
+                        </span>
+                        <span class="publish-author">
+                            
+                            <i class="fa fa-user fa-fw"></i>
+                            hmlr123
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/linux/" target="_blank">
+                        <span class="chip bg-color">linux</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fa fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2019/03/12/da-hua-shu-ju-jie-gou-suan-fa/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/14.jpg" class="responsive-img" alt="大话数据结构-算法">
+                        
+                        <span class="card-title">大话数据结构-算法</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            敲黑板：时间复杂度计算
+
+
+
+
+算法是解决特定问题求解步骤的描述，在计算中表现为指令的有限序列，并且每天指令表示一个或多个操作
+算法特性
+输入输出
+有穷性
+确定性
+可行性
+算法设计要求：
+正确性 可读性 健壮性 高效率和低存储量需求
+算法度
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="fa fa-clock-o fa-fw icon-date"></i>2019-03-12
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fa fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/读书笔记/" class="post-category" target="_blank">
+                                    读书笔记
+                                </a>
+                            
+                            <a href="/categories/读书笔记/大话数据结构/" class="post-category" target="_blank">
+                                    大话数据结构
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/数据结构与算法/" target="_blank">
+                        <span class="chip bg-color">数据结构与算法</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+    </div>
+</article>
+</div>
+
+
+
+    </div>
+    <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
+        <div class="toc-widget">
+            <div class="toc-title"><i class="fa fa-list-alt"></i>&nbsp;&nbsp;目录</div>
+            <div id="toc-content"></div>
+        </div>
+    </div>
+</div>
+
+<!-- TOC 悬浮按钮. -->
+
+<div id="floating-toc-btn" class="hide-on-med-and-down">
+    <a class="btn-floating btn-large bg-color">
+        <i class="fa fa-list"></i>
+    </a>
+</div>
+
+
+<script src="/libs/tocbot/tocbot.min.js"></script>
+<script>
+    $(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            // headingsOffset: -205,
+            headingSelector: 'h1, h2, h3, h4, h5, h6'
+        });
+
+        // modify the toc link href to support Chinese.
+        let i = 0;
+        let tocHeading = 'toc-heading-';
+        $('#toc-content a').each(function () {
+            $(this).attr('href', '#' + tocHeading + (++i));
+        });
+
+        // modify the heading title id to support Chinese.
+        i = 0;
+        $('#articleContent').children('h1, h2, h3, h4, h5, h6').each(function () {
+            $(this).attr('id', tocHeading + (++i));
+        });
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+
+        
+        /* 修复文章卡片 div 的宽度. */
+        let fixPostCardWidth = function (srcId, targetId) {
+            let srcDiv = $('#' + srcId);
+            if (srcDiv.length === 0) {
+                return;
+            }
+
+            let w = srcDiv.width();
+            if (w >= 450) {
+                w = w + 21;
+            } else if (w >= 350 && w < 450) {
+                w = w + 18;
+            } else if (w >= 300 && w < 350) {
+                w = w + 16;
+            } else {
+                w = w + 14;
+            }
+            $('#' + targetId).width(w);
+        };
+
+        // 切换TOC目录展开收缩的相关操作.
+        const expandedClass = 'expanded';
+        let $tocAside = $('#toc-aside');
+        let $mainContent = $('#main-content');
+        $('#floating-toc-btn .btn-floating').click(function () {
+            if ($tocAside.hasClass(expandedClass)) {
+                $tocAside.removeClass(expandedClass).slideUp(500);
+                $mainContent.removeClass('l9');
+            } else {
+                $tocAside.addClass(expandedClass).slideDown(500);
+                $mainContent.addClass('l9');
+            }
+            fixPostCardWidth('artDetail', 'prenext-posts');
+        });
+        
+    });
+</script>
+    
+
+</main>
+
+
+<footer class="page-footer bg-color">
+    <div class="container row center-align">
+        <div class="col s12 m8 l8 copy-right">
+            本站由&copy;<a href="https://hmlr123.com/" target="_blank">hmlr123</a>基于
+            <a href="https://hexo.io/" target="_blank">Hexo</a> 的
+            <a href="https://github.com/blinkfox/hexo-theme-matery" target="_blank">hexo-theme-matery</a>主题搭建.
+
+            
+                &nbsp;<i class="fa fa-area-chart"></i>&nbsp;站点总字数:&nbsp;
+                <span class="white-color">82.2k</span>
+            
+
+            
+			
+                <br>
+                
+                <span id="busuanzi_container_site_pv">
+                    <i class="fa fa-heart-o"></i>
+                    本站总访问量 <span id="busuanzi_value_site_pv" class="white-color"></span>
+                </span>
+                
+                
+                <span id="busuanzi_container_site_uv">
+                    <i class="fa fa-users"></i>
+                    次,&nbsp;访客数 <span id="busuanzi_value_site_uv" class="white-color"></span> 人.
+                </span>
+                
+            
+        </div>
+        <div class="col s12 m4 l4 social-link social-statis">
+    <a href="hmlr123" class="tooltipped" target="_blank" data-tooltip="访问我的GitHub" data-position="top" data-delay="50">
+        <i class="fa fa-github"></i>
+    </a>
+
+
+
+    <a href="mailto:2870027009@qq.com" class="tooltipped" target="_blank" data-tooltip="邮件联系我" data-position="top" data-delay="50">
+        <i class="fa fa-envelope-open"></i>
+    </a>
+
+
+
+    <a href="tencent://AddContact/?fromId=50&fromSubId=1&subcmd=all&uin=2870027009" class="tooltipped" data-tooltip="QQ联系我: 2870027009" data-position="top" data-delay="50">
+        <i class="fa fa-qq"></i>
+    </a>
+
+
+
+    <a href="/atom.xml" class="tooltipped" target="_blank" data-tooltip="RSS 订阅" data-position="top" data-delay="50">
+        <i class="fa fa-rss"></i>
+    </a>
+</div>
+    </div>
+</footer>
+
+<div class="progress-bar"></div>
+
+
+<!-- 搜索遮罩框 -->
+<div id="searchModal" class="modal">
+    <div class="modal-content">
+        <div class="search-header">
+            <span class="title"><i class="fa fa-search"></i>&nbsp;&nbsp;搜索</span>
+            <input type="search" id="searchInput" name="s" placeholder="请输入搜索的关键字"
+                   class="search-input">
+        </div>
+        <div id="searchResult"></div>
+    </div>
+</div>
+
+<script src="/js/search.js"></script>
+<script type="text/javascript">
+$(function () {
+    searchFunc("/" + "search.xml", 'searchInput', 'searchResult');
+});
+</script>
+<!-- 回到顶部按钮 -->
+<div id="backTop" class="top-scroll">
+    <a class="btn-floating btn-large waves-effect waves-light" href="#!">
+        <i class="fa fa-angle-up"></i>
+    </a>
+</div>
+
+
+<script src="/libs/materialize/materialize.min.js"></script>
+<script src="/libs/masonry/masonry.pkgd.min.js"></script>
+<script src="/libs/aos/aos.js"></script>
+<script src="/libs/scrollprogress/scrollProgress.min.js"></script>
+<script src="/libs/lightGallery/js/lightgallery-all.min.js"></script>
+<script src="/js/matery.js"></script>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+
+
+
+    <script src="/libs/others/clicklove.js"></script>
+
+
+    <script async src="/libs/others/busuanzi.pure.mini.js"></script>
+
+
+</body>
+</html>
