@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2019-10-10T15:17:32.128Z</updated>
+  <updated>2019-10-12T16:46:17.881Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,24 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>sql语句练习</title>
+    <link href="http://yoursite.com/2019/10/13/sql-yu-ju-lian-xi/"/>
+    <id>http://yoursite.com/2019/10/13/sql-yu-ju-lian-xi/</id>
+    <published>2019-10-12T16:43:20.000Z</published>
+    <updated>2019-10-12T16:46:17.881Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;昨天参加了两场笔试，发现在及在SQL语句上缺少训练，写的很糟糕，现在突击训练以下，相关思考在代码里面&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="MySQL" scheme="http://yoursite.com/tags/MySQL/"/>
+    
+  </entry>
   
   <entry>
     <title>看尚硅谷韩顺平老师数据结构与算法有感</title>
@@ -393,30 +411,6 @@
     <summary type="html">
     
       &lt;p&gt;纯理论，让我们了解一下先人的智慧，各种树的存储结构，后面有大作用。不懂多看大话数据结构那部分内容&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="读书笔记" scheme="http://yoursite.com/categories/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/"/>
-    
-      <category term="大话数据结构" scheme="http://yoursite.com/categories/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/%E5%A4%A7%E8%AF%9D%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"/>
-    
-    
-      <category term="java" scheme="http://yoursite.com/tags/java/"/>
-    
-      <category term="数据结构与算法" scheme="http://yoursite.com/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>大话数据结构-顺序队列</title>
-    <link href="http://yoursite.com/2019/05/03/da-hua-shu-ju-jie-gou-shun-xu-dui-lie/"/>
-    <id>http://yoursite.com/2019/05/03/da-hua-shu-ju-jie-gou-shun-xu-dui-lie/</id>
-    <published>2019-05-03T06:24:50.000Z</published>
-    <updated>2019-05-03T06:27:54.341Z</updated>
-    
-    <summary type="html">
-    
-      &lt;p&gt;渣渣威，每日一法&lt;/p&gt;
     
     </summary>
     
