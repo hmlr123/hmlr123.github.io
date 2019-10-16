@@ -4,15 +4,12 @@
 
 <head><meta name="generator" content="Hexo 3.9.0">
     <meta charset="utf-8">
-    <meta name="keywords" content="链表实现十进制加法, hmlr123">
-    <meta name="description" content="只有走出去，才会学到更多东西
+    <meta name="keywords" content="BitMap算法, hmlr123">
+    <meta name="description" content="这是前海亿车的一道笔试题，虽然我没做出来，但是我又学到了一种新的算法，加油！
 
 
-题目这是昨天笔试深圳前海亿车公司的算法题。
-题目如下：
-给一组单链表表示的十进制数字，实现数字的加法
-1 —&amp;gt; 2 —&amp;gt;7 —&amp;gt;4
-​                    8—&amp;gt;3">
+参考链接https://www.cnblogs.com/senlinyang/p/7885685.html
+问题描述在40亿的unsigned int 类型的">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -20,7 +17,7 @@
     <meta name="format-detection" content="telephone=no">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <title>链表实现十进制加法 | hmlr123</title>
+    <title>BitMap算法 | hmlr123</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/font-awesome.min.css">
@@ -204,13 +201,13 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/13.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/21.jpg')">
     <div class="container">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
                     <div class="description center-align post-title">
-                        链表实现十进制加法
+                        BitMap算法
                     </div>
                 </div>
             </div>
@@ -340,21 +337,21 @@
             <div class="post-info">
                 <div class="post-date info-break-policy">
                     <i class="fa fa-calendar-minus-o fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2019-10-16
+                    2019-10-17
                 </div>
 
                 
                     
                     <div class="info-break-policy">
                         <i class="fa fa-file-word-o fa-fw"></i>文章字数:&nbsp;&nbsp;
-                        895
+                        1.1k
                     </div>
                     
 
                     
                     <div class="info-break-policy">
                         <i class="fa fa-clock-o fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                        3 分
+                        5 分
                     </div>
                     
                 
@@ -370,135 +367,162 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <p>只有走出去，才会学到更多东西</p>
+                <p>这是前海亿车的一道笔试题，虽然我没做出来，但是我又学到了一种新的算法，加油！</p>
 <a id="more"></a>
 
-<h1 id="题目"><a href="#题目" class="headerlink" title="题目"></a>题目</h1><p>这是昨天笔试深圳前海亿车公司的算法题。</p>
-<p>题目如下：</p>
-<p>给一组单链表表示的十进制数字，实现数字的加法</p>
-<p>1 —&gt; 2 —&gt;7 —&gt;4</p>
-<p>​                    8—&gt;3</p>
-<p>实现他们的加法，注意链表顺序，不能使用其他数据结构</p>
-<h1 id="我的思路"><a href="#我的思路" class="headerlink" title="我的思路"></a>我的思路</h1><p>类似桶排序算法（其实不能这么说，应该是把数字拆分为个十百千万，但是我们这里不用放到桶里面），然后依次获取尾部节点的数据（获取尾部节点的同时删除尾部节点），相加，然后放在我们新建链表的头部，后面每次添加的节点都会放到链表的头部。但是问题是加法存在进位，如何表示进位的数据？我当时想的是新建一个节点，保存该进位的数据。这样就带来一个问题，再后续的java中如何处理这个节点？我想的是用变量存储该链表的长度，每次循环链表的长度应该是顺序增加的。当时我觉着这样应该可以解决。</p>
-<p>后来回来又想了以下，我的思路还是有问题：</p>
-<p>链表表示数据怎么表示，需要头节点存放数据吗？当我写到这里的时候，思路就已经短断掉了。</p>
-<h1 id="网上思路"><a href="#网上思路" class="headerlink" title="网上思路"></a>网上思路</h1><h2 id="思路分析"><a href="#思路分析" class="headerlink" title="思路分析"></a>思路分析</h2><ol>
-<li>将链表反转，</li>
-<li>然后实现从个十百千万位的加法，有进位就使用变量保存起来，然后相加的时候加上去，再对相加后的数据取余，余数就是我们当前位置的数据，整数就是我们进位的数据，也就是下一个节点要想加的数据</li>
-<li>当有链表为空的时候，就可以推出循环，将长链表的数据加上去</li>
-</ol>
-<h2 id="思路演示"><a href="#思路演示" class="headerlink" title="思路演示"></a>思路演示</h2><p>1 —&gt; 2 —&gt;7 —&gt;4</p>
-<p>​                    8—&gt;3</p>
-<p>反转</p>
-<p>4 —&gt; 7 —&gt;2 —&gt;1</p>
-<p>3—&gt;8</p>
-<p>相加</p>
-<p>7 —&gt; 5 —&gt;3 —&gt;1</p>
-<h2 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h2><pre class=" language-java"><code class="language-java"><span class="token keyword">package</span> interview<span class="token punctuation">.</span>day1015<span class="token punctuation">;</span>
+<p>参考链接<a href="https://www.cnblogs.com/senlinyang/p/7885685.html" target="_blank" rel="noopener">https://www.cnblogs.com/senlinyang/p/7885685.html</a></p>
+<h1 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h1><p>在40亿的unsigned int 类型的数据中，找出我们指定的数据。</p>
+<h1 id="问题分析"><a href="#问题分析" class="headerlink" title="问题分析"></a>问题分析</h1><p>一个数字int类型占4个字节，一个字节占8个bit，我们总共需要占用40 * 10000 * 10000 * 4 * 8个比特的内存</p>
+<p>内存中1G是 = 1 * 1024 * 1024 * 1024 * 8 bit，计算一下我们需要14.90G的内存存放数据。一般情况下我们的内存是吃不消的，所以常规的排序算法等都不可用。</p>
+<h1 id="BitMap算法引入"><a href="#BitMap算法引入" class="headerlink" title="BitMap算法引入"></a>BitMap算法引入</h1><p>我们都知道1Byte = 8 bit; 1 int  = 4 Byte = 4 * 8 bit; 假如我们一位数字代表一个数 即：</p>
+<p>1就是1；2就是10；3就是100，存在则该位数为1，不存在则为0，这样我们一个int类型可以表示32个数字，这样我们只需要40 * 10000 * 10000 * 4 * 8 / （4 * 8）bit位置数字表示就可以，也就是（40 * 10000 * 10000）/（1024 * 1024 * 8）M表示，也就是476.84M表示，大大缩小了我们的内存空间</p>
+<h1 id="那么问题来了，我们该如何表示这些数据呢"><a href="#那么问题来了，我们该如何表示这些数据呢" class="headerlink" title="那么问题来了，我们该如何表示这些数据呢"></a>那么问题来了，我们该如何表示这些数据呢</h1><h2 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h2><p>经过上面的分析，我们知道：</p>
+<p>1：0-31</p>
+<p>2：32-63</p>
+<p>3：64-95</p>
+<p>所以我们只用一维数组表示即可，至于中间的位数为1表示存在，0表示不存在</p>
+<p>假设数据n,那么可以表示为[n/32]行，n%32列的数据为1</p>
+<h2 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h2><p>首先引入位运算</p>
+<table>
+<thead>
+<tr>
+<th>左移</th>
+<th>右移</th>
+<th>无符号左</th>
+<th>无符号右移</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>n &gt;&gt; 1表示 n / 2</td>
+<td>n &gt;&gt; 1表示 n / 2</td>
+<td>n &gt;&gt; 1表示 n / 2</td>
+<td>n &gt;&gt; 1表示 n / 2</td>
+</tr>
+<tr>
+<td>n &gt;&gt; 2表示 n / 4</td>
+<td>n &gt;&gt; 2表示 n / 4</td>
+<td>n &gt;&gt; 2表示 n / 4</td>
+<td>n &gt;&gt; 2表示 n / 4</td>
+</tr>
+<tr>
+<td>n &gt;&gt; 3表示 n / 8</td>
+<td>n &gt;&gt; 3表示 n / 8</td>
+<td>n &gt;&gt; 3表示 n / 8</td>
+<td>n &gt;&gt; 3表示 n / 8</td>
+</tr>
+</tbody></table>
+<p><code>0x1F</code>表示32</p>
+<p>n &amp; <code>0x1F</code> = n</p>
+<p>1 &lt;&lt; n 表示找到第n位数字</p>
+<p>所以</p>
+<p>n / 32 可以用 n &gt;&gt; 4表示</p>
+<p>n %32 可以用 (value &amp; 0x1F)</p>
+<p>根据上面关于表示问题的分析，我们需要把[n/32[n%32] 位置的数字置为1，我们可以这样做<code>[n/32] |= 1 &lt;&lt; (n &amp; 0x1F)</code>其中<code>1 &lt;&lt; (n &amp; 0x1F)</code>表示找到该列，<code>[n/32] |= 1 &lt;&lt; (n &amp; 0x1F)</code>把该行该列数据置为1；</p>
+<h1 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h1><pre class=" language-java"><code class="language-java"><span class="token keyword">package</span> interview<span class="token punctuation">.</span>day1015<span class="token punctuation">;</span>
+
+<span class="token keyword">import</span> java<span class="token punctuation">.</span>sql<span class="token punctuation">.</span>Time<span class="token punctuation">;</span>
+<span class="token keyword">import</span> java<span class="token punctuation">.</span>util<span class="token punctuation">.</span>ArrayList<span class="token punctuation">;</span>
+<span class="token keyword">import</span> java<span class="token punctuation">.</span>util<span class="token punctuation">.</span>List<span class="token punctuation">;</span>
+<span class="token keyword">import</span> java<span class="token punctuation">.</span>util<span class="token punctuation">.</span>Random<span class="token punctuation">;</span>
 
 <span class="token comment" spellcheck="true">/**
- * 单链表反转，然后相加
+ * 位图算法
+ * 分析：每位数都可以用一个bit位置表示,比如1 可以用1表示 2 可以用 10表示
+ * 由于int占四个字节 每个字节占8个bit位置 所以1可以表示 32个位置
+ * 加入我们有n个数字，我们就可以使用 n/32个数字表示
+ * 现在假设我们有n = 1 0000 0000 个数字使用int类型表示，那么每个数字表示为
+ * a[i >> 4][1 &lt;&lt; ]
  *
  * @author liwei
- * @date 2019/10/15 18:13
+ * @date 2019/10/16 22:19
  */</span>
-<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">YiHaiTest</span> <span class="token punctuation">{</span>
-    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span>String<span class="token punctuation">[</span><span class="token punctuation">]</span> args<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-        Node node1 <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Node</span><span class="token punctuation">(</span><span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-        Node node2 <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Node</span><span class="token punctuation">(</span><span class="token number">3</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-        Node node3 <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Node</span><span class="token punctuation">(</span><span class="token number">5</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-        Node node4 <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Node</span><span class="token punctuation">(</span><span class="token number">6</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-        node1<span class="token punctuation">.</span>next <span class="token operator">=</span> node2<span class="token punctuation">;</span>
-        node2<span class="token punctuation">.</span>next <span class="token operator">=</span> node3<span class="token punctuation">;</span>
-        node3<span class="token punctuation">.</span>next <span class="token operator">=</span> node4<span class="token punctuation">;</span>
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">BitMap</span> <span class="token punctuation">{</span>
 
-        Node node5 <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Node</span><span class="token punctuation">(</span><span class="token number">3</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-        Node node6 <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Node</span><span class="token punctuation">(</span><span class="token number">5</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-        Node node7 <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Node</span><span class="token punctuation">(</span><span class="token number">5</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-        Node node8 <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Node</span><span class="token punctuation">(</span><span class="token number">5</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">private</span> <span class="token keyword">final</span> <span class="token keyword">static</span> <span class="token keyword">int</span> N <span class="token operator">=</span> <span class="token number">100000000</span><span class="token punctuation">;</span>
 
-        node5<span class="token punctuation">.</span>next <span class="token operator">=</span> node6<span class="token punctuation">;</span>
-        node6<span class="token punctuation">.</span>next <span class="token operator">=</span> node7<span class="token punctuation">;</span>
-        node7<span class="token punctuation">.</span>next <span class="token operator">=</span> node8<span class="token punctuation">;</span>
+    <span class="token keyword">private</span> <span class="token keyword">static</span> <span class="token keyword">int</span><span class="token punctuation">[</span><span class="token punctuation">]</span> a <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">int</span><span class="token punctuation">[</span>N <span class="token operator">/</span> <span class="token number">32</span> <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
 
-        Node reverseNode1 <span class="token operator">=</span> <span class="token function">reverseNode</span><span class="token punctuation">(</span>node1<span class="token punctuation">)</span><span class="token punctuation">;</span>
-        Node reverseNode2 <span class="token operator">=</span> <span class="token function">reverseNode</span><span class="token punctuation">(</span>node5<span class="token punctuation">)</span><span class="token punctuation">;</span>
-        Node add <span class="token operator">=</span> <span class="token function">add</span><span class="token punctuation">(</span>reverseNode1<span class="token punctuation">,</span> reverseNode2<span class="token punctuation">)</span><span class="token punctuation">;</span>
-        Node node <span class="token operator">=</span> <span class="token function">reverseNode</span><span class="token punctuation">(</span>add<span class="token punctuation">)</span><span class="token punctuation">;</span>
-        System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>node<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">add</span><span class="token punctuation">(</span><span class="token keyword">int</span> value<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token comment" spellcheck="true">// value / 32</span>
+        <span class="token keyword">int</span> row <span class="token operator">=</span> value <span class="token operator">>></span> <span class="token number">5</span><span class="token punctuation">;</span>
+        <span class="token comment" spellcheck="true">// value % 32</span>
+        <span class="token comment" spellcheck="true">// 将对应位置的元素置为1 找出对应的位置的元素value &amp; 0x1F   1左移对应的位数就找到对应的位置</span>
+        a<span class="token punctuation">[</span>row<span class="token punctuation">]</span> <span class="token operator">|=</span> <span class="token number">1</span> <span class="token operator">&lt;&lt;</span> <span class="token punctuation">(</span>value <span class="token operator">&amp;</span> <span class="token number">0x1F</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
     <span class="token punctuation">}</span>
 
     <span class="token comment" spellcheck="true">/**
-     * 链表反转.
+     * 是否存在
      *
-     * @param node
+     * @param n
+     * @return
      */</span>
-    <span class="token keyword">public</span> <span class="token keyword">static</span> Node <span class="token function">reverseNode</span><span class="token punctuation">(</span>Node node<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-        Node pre <span class="token operator">=</span> null<span class="token punctuation">;</span>
-        Node temp <span class="token operator">=</span> null<span class="token punctuation">;</span>
-        <span class="token keyword">while</span> <span class="token punctuation">(</span>node <span class="token operator">!=</span> null<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-            <span class="token comment" spellcheck="true">//保存当前节点的下一个节点</span>
-            temp <span class="token operator">=</span> node<span class="token punctuation">.</span>next<span class="token punctuation">;</span>
-            <span class="token comment" spellcheck="true">//当前节点的下一个节点为当前节点的前置节点</span>
-            node<span class="token punctuation">.</span>next <span class="token operator">=</span> pre<span class="token punctuation">;</span>
-            <span class="token comment" spellcheck="true">//更新前置节点</span>
-            pre <span class="token operator">=</span> node<span class="token punctuation">;</span>
-            <span class="token comment" spellcheck="true">//重新赋值当前节点</span>
-            node <span class="token operator">=</span> temp<span class="token punctuation">;</span>
-        <span class="token punctuation">}</span>
-        <span class="token keyword">return</span> pre<span class="token punctuation">;</span>
+    <span class="token keyword">public</span> <span class="token keyword">boolean</span> <span class="token function">exit</span><span class="token punctuation">(</span><span class="token keyword">int</span> n<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token comment" spellcheck="true">// n / 32</span>
+        <span class="token keyword">int</span> row <span class="token operator">=</span> n <span class="token operator">>></span> <span class="token number">5</span><span class="token punctuation">;</span>
+        <span class="token keyword">return</span> <span class="token punctuation">(</span>a<span class="token punctuation">[</span>row<span class="token punctuation">]</span> <span class="token operator">&amp;</span> <span class="token punctuation">(</span><span class="token number">1</span> <span class="token operator">&lt;&lt;</span> <span class="token punctuation">(</span>n <span class="token operator">&amp;</span> <span class="token number">0x1F</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token operator">==</span> <span class="token number">1</span><span class="token punctuation">;</span>
     <span class="token punctuation">}</span>
 
-    <span class="token keyword">public</span> <span class="token keyword">static</span> Node <span class="token function">add</span><span class="token punctuation">(</span>Node node1<span class="token punctuation">,</span> Node node2<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-        <span class="token comment" spellcheck="true">//保存头节点</span>
-        Node head <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Node</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-        <span class="token comment" spellcheck="true">// 替代尾节点前进</span>
-        Node temp <span class="token operator">=</span> head<span class="token punctuation">;</span>
-        <span class="token comment" spellcheck="true">//保存进位的值</span>
-        <span class="token keyword">int</span> sum <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
-        <span class="token keyword">while</span> <span class="token punctuation">(</span>node1 <span class="token operator">!=</span> null <span class="token operator">||</span> node2 <span class="token operator">!=</span> null <span class="token operator">||</span> sum <span class="token operator">!=</span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-            <span class="token keyword">if</span> <span class="token punctuation">(</span>node1 <span class="token operator">!=</span> null<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-                sum <span class="token operator">+=</span> node2<span class="token punctuation">.</span>value<span class="token punctuation">;</span>
-                node1 <span class="token operator">=</span> node1<span class="token punctuation">.</span>next<span class="token punctuation">;</span>
+
+    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">display</span><span class="token punctuation">(</span><span class="token keyword">int</span> n<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> n<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token comment" spellcheck="true">// 保存每个数的二进制代表的数据</span>
+            List<span class="token operator">&lt;</span>Integer<span class="token operator">></span> list <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">ArrayList</span><span class="token operator">&lt;</span><span class="token operator">></span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token comment" spellcheck="true">// 代表某一行的起始位</span>
+            <span class="token keyword">int</span> temp <span class="token operator">=</span> a<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">;</span>
+            <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> j <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> j <span class="token operator">&lt;</span> <span class="token number">32</span><span class="token punctuation">;</span> j<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                list<span class="token punctuation">.</span><span class="token function">add</span><span class="token punctuation">(</span>temp <span class="token operator">&amp;</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                <span class="token comment" spellcheck="true">//依次往下走</span>
+                temp <span class="token operator">>>=</span> <span class="token number">1</span><span class="token punctuation">;</span>
             <span class="token punctuation">}</span>
-            <span class="token keyword">if</span> <span class="token punctuation">(</span>node2 <span class="token operator">!=</span> null<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-                sum <span class="token operator">+=</span> node2<span class="token punctuation">.</span>value<span class="token punctuation">;</span>
-                node2 <span class="token operator">=</span> node2<span class="token punctuation">.</span>next<span class="token punctuation">;</span>
-            <span class="token punctuation">}</span>
+            System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>list<span class="token punctuation">)</span><span class="token punctuation">;</span>
 
-            temp<span class="token punctuation">.</span>next <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Node</span><span class="token punctuation">(</span>sum <span class="token operator">%</span> <span class="token number">10</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-            sum <span class="token operator">=</span> sum <span class="token operator">/</span> <span class="token number">10</span><span class="token punctuation">;</span>
-            temp <span class="token operator">=</span> temp<span class="token punctuation">.</span>next<span class="token punctuation">;</span>
         <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
 
-        <span class="token keyword">return</span> head<span class="token punctuation">.</span>next<span class="token punctuation">;</span>
+    <span class="token keyword">public</span> <span class="token keyword">int</span> <span class="token function">count</span><span class="token punctuation">(</span><span class="token keyword">int</span> n<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">int</span> count <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span>
+        <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> N<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token function">exit</span><span class="token punctuation">(</span>n<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                count<span class="token operator">++</span><span class="token punctuation">;</span>
+            <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span>
+        <span class="token keyword">return</span> count<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token comment" spellcheck="true">/**
+     * 排序
+     *
+     */</span>
+    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">sort</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> N<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token function">exit</span><span class="token punctuation">(</span>i<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">print</span><span class="token punctuation">(</span>i <span class="token operator">+</span> <span class="token string">"\t"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span>String<span class="token punctuation">[</span><span class="token punctuation">]</span> args<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        BitMap bitMap <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">BitMap</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+        <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> N<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            bitMap<span class="token punctuation">.</span><span class="token function">add</span><span class="token punctuation">(</span><span class="token keyword">new</span> <span class="token class-name">Random</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">nextInt</span><span class="token punctuation">(</span>N<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+<span class="token comment" spellcheck="true">//        boolean exit = bitMap.exit(1234);</span>
+<span class="token comment" spellcheck="true">//        System.out.println(exit);</span>
+<span class="token comment" spellcheck="true">//        display(5);</span>
+<span class="token comment" spellcheck="true">//        int i = new Random().nextInt(N);</span>
+<span class="token comment" spellcheck="true">//        int count = bitMap.count(i);</span>
+<span class="token comment" spellcheck="true">//        System.out.println("统计" + i + "的数量：" + count);</span>
+        <span class="token keyword">long</span> start <span class="token operator">=</span> System<span class="token punctuation">.</span><span class="token function">currentTimeMillis</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        bitMap<span class="token punctuation">.</span><span class="token function">sort</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">long</span> end <span class="token operator">=</span> System<span class="token punctuation">.</span><span class="token function">currentTimeMillis</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>end <span class="token operator">-</span> start<span class="token punctuation">)</span><span class="token punctuation">;</span>
     <span class="token punctuation">}</span>
 
 
-<span class="token punctuation">}</span>
-
-<span class="token keyword">class</span> <span class="token class-name">Node</span> <span class="token punctuation">{</span>
-    <span class="token keyword">public</span> <span class="token keyword">int</span> value<span class="token punctuation">;</span>
-    <span class="token keyword">public</span> Node next<span class="token punctuation">;</span>
-
-    <span class="token keyword">public</span> <span class="token function">Node</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-    <span class="token punctuation">}</span>
-
-    <span class="token keyword">public</span> <span class="token function">Node</span><span class="token punctuation">(</span><span class="token keyword">int</span> value<span class="token punctuation">)</span> <span class="token punctuation">{</span>
-        <span class="token keyword">this</span><span class="token punctuation">.</span>value <span class="token operator">=</span> value<span class="token punctuation">;</span>
-    <span class="token punctuation">}</span>
-
-    <span class="token annotation punctuation">@Override</span>
-    <span class="token keyword">public</span> String <span class="token function">toString</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
-        <span class="token keyword">return</span> <span class="token string">"Node{"</span> <span class="token operator">+</span>
-                <span class="token string">"value="</span> <span class="token operator">+</span> value <span class="token operator">+</span>
-                <span class="token string">", next="</span> <span class="token operator">+</span> next <span class="token operator">+</span>
-                <span class="token string">'}'</span><span class="token punctuation">;</span>
-    <span class="token punctuation">}</span>
 <span class="token punctuation">}</span>
 </code></pre>
-<h2 id="结果展示"><a href="#结果展示" class="headerlink" title="结果展示"></a>结果展示</h2><pre class=" language-java"><code class="language-java"><span class="token comment" spellcheck="true">// Node{value=7, next=Node{value=1, next=Node{value=1, next=Node{value=0, next=null}}}}</span></code></pre>
-<h1 id="finally"><a href="#finally" class="headerlink" title="finally"></a>finally</h1><ol>
+<h1 id="Finally"><a href="#Finally" class="headerlink" title="Finally"></a>Finally</h1><ol>
 <li>虽然我现在很菜，但是只要我持续学习，持续整理，持续输出。从有一天菜鸟也会编程（变成）大神</li>
 <li>就算是从下水道干起，我也要做最好的下水道，扛把子</li>
 </ol>
@@ -536,9 +560,9 @@
             <br/>
             <span xmlns:dct="http://purl.org/dc/terms/" href="http://purl.org/dc/dcmitype/Text"
                   property="dct:title" rel="dct:type">
-                    《链表实现十进制加法》
+                    《BitMap算法》
                 </span> 由
-            <a xmlns:cc="http://creativecommons.org/ns#" href="/2019/10/16/lian-biao-shi-xian-shi-jin-zhi-jia-fa/" property="cc:attributionName"
+            <a xmlns:cc="http://creativecommons.org/ns#" href="/2019/10/17/bitmap-suan-fa/" property="cc:attributionName"
                rel="cc:attributionURL">
                 hmlr123
             </a> 采用
@@ -579,7 +603,7 @@
         repo: 'hmlr123.github.io',
         owner: 'hmlr123',
         admin: "hmlr123",
-        id: '2019-10-16T09-50-49',
+        id: '2019-10-17T00-01-07',
         distractionFreeMode: false  // Facebook-like distraction free mode
     });
 
@@ -600,9 +624,10 @@
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fa fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="fa fa-dot-circle-o"></i>&nbsp;本篇
+            </div>
             <div class="card">
                 <a href="/2019/10/17/bitmap-suan-fa/">
                     <div class="card-image">
@@ -624,9 +649,9 @@
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="fa fa-clock-o fa-fw icon-date"></i>2019-10-17
-                        </span>
+                            <span class="publish-date">
+                                <i class="fa fa-clock-o fa-fw icon-date"></i>2019-10-17
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fa fa-user fa-fw"></i>
@@ -635,6 +660,7 @@
                         </span>
                     </div>
                 </div>
+
                 
                 <div class="card-action article-tags">
                     
@@ -657,27 +683,31 @@
                 下一篇&nbsp;<i class="fa fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2019/10/14/java-zhu-yi-shi-xiang/">
+                <a href="/2019/10/16/lian-biao-shi-xian-shi-jin-zhi-jia-fa/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/9.jpg" class="responsive-img" alt="'java注意事项'">
+                        <img src="/medias/featureimages/13.jpg" class="responsive-img" alt="链表实现十进制加法">
                         
-                        <span class="card-title">'java注意事项'</span>
+                        <span class="card-title">链表实现十进制加法</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            复习的时候看到这篇文章，很有意思，值得注意，差不多80%都遇到过，记录下来，引以为戒
+                            只有走出去，才会学到更多东西
 
 
-摘自https://github.com/Snailclimb/JavaGuide/blob/master/docs/java/Java%E7%96%
+题目这是昨天笔试深圳前海亿车公司的算法题。
+题目如下：
+给一组单链表表示的十进制数字，实现数字的加法
+1 —&gt; 2 —&gt;7 —&gt;4
+​                    8—&gt;3
                         
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="fa fa-clock-o fa-fw icon-date"></i>2019-10-14
+                                <i class="fa fa-clock-o fa-fw icon-date"></i>2019-10-16
                             </span>
                         <span class="publish-author">
                             
@@ -689,6 +719,10 @@
                 </div>
                 
                 <div class="card-action article-tags">
+                    
+                    <a href="/tags/数据结构与算法/" target="_blank">
+                        <span class="chip bg-color">数据结构与算法</span>
+                    </a>
                     
                     <a href="/tags/java/" target="_blank">
                         <span class="chip bg-color">java</span>
