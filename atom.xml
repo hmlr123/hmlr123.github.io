@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2019-10-15T03:17:44.787Z</updated>
+  <updated>2019-10-16T02:12:00.924Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,26 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>链表实现十进制加法</title>
+    <link href="http://yoursite.com/2019/10/16/lian-biao-shi-xian-shi-jin-zhi-jia-fa/"/>
+    <id>http://yoursite.com/2019/10/16/lian-biao-shi-xian-shi-jin-zhi-jia-fa/</id>
+    <published>2019-10-16T01:50:49.000Z</published>
+    <updated>2019-10-16T02:12:00.924Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;只有走出去，才会学到更多东西&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="java" scheme="http://yoursite.com/tags/java/"/>
+    
+      <category term="数据结构与算法" scheme="http://yoursite.com/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/"/>
+    
+  </entry>
   
   <entry>
     <title>&#39;java注意事项&#39;</title>
@@ -57,7 +77,7 @@
     <link href="http://yoursite.com/2019/10/10/kan-shang-huo-gu-han-shun-ping-lao-shi-shu-ju-jie-gou-yu-suan-fa-you-gan/"/>
     <id>http://yoursite.com/2019/10/10/kan-shang-huo-gu-han-shun-ping-lao-shi-shu-ju-jie-gou-yu-suan-fa-you-gan/</id>
     <published>2019-10-10T13:27:06.000Z</published>
-    <updated>2019-10-15T00:12:43.122Z</updated>
+    <updated>2019-10-16T02:11:42.509Z</updated>
     
     <summary type="html">
     
@@ -396,24 +416,6 @@
       <category term="java" scheme="http://yoursite.com/tags/java/"/>
     
       <category term="思想" scheme="http://yoursite.com/tags/%E6%80%9D%E6%83%B3/"/>
-    
-      <category term="面试" scheme="http://yoursite.com/tags/%E9%9D%A2%E8%AF%95/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>面试</title>
-    <link href="http://yoursite.com/2019/05/06/mian-shi/"/>
-    <id>http://yoursite.com/2019/05/06/mian-shi/</id>
-    <published>2019-05-06T06:26:09.000Z</published>
-    <updated>2019-05-06T06:29:55.386Z</updated>
-    
-    <summary type="html">
-    
-      &lt;p&gt;记录一下自己的不足&lt;/p&gt;
-    
-    </summary>
-    
     
       <category term="面试" scheme="http://yoursite.com/tags/%E9%9D%A2%E8%AF%95/"/>
     
