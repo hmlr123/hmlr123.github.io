@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2019-10-16T16:50:05.043Z</updated>
+  <updated>2019-10-17T02:51:13.946Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,24 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>运算符优先级</title>
+    <link href="http://yoursite.com/2019/10/17/yun-suan-fu-you-xian-ji/"/>
+    <id>http://yoursite.com/2019/10/17/yun-suan-fu-you-xian-ji/</id>
+    <published>2019-10-17T02:35:48.000Z</published>
+    <updated>2019-10-17T02:51:13.946Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;这是中通的一道笔试题，以前没怎么注意，现在总结一下&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="基础" scheme="http://yoursite.com/tags/%E5%9F%BA%E7%A1%80/"/>
+    
+  </entry>
   
   <entry>
     <title>BitMap算法</title>
@@ -380,31 +398,6 @@
     <summary type="html">
     
       &lt;p&gt;重点在于 二叉树的构建，满二叉树怎么构建，完全二叉树怎么构建&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="读书笔记" scheme="http://yoursite.com/categories/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/"/>
-    
-      <category term="大话数据结构" scheme="http://yoursite.com/categories/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/%E5%A4%A7%E8%AF%9D%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"/>
-    
-    
-      <category term="数据结构与算法" scheme="http://yoursite.com/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/"/>
-    
-      <category term="java" scheme="http://yoursite.com/tags/java/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>大话数据结构-二叉树</title>
-    <link href="http://yoursite.com/2019/05/08/da-hua-shu-ju-jie-gou-er-cha-shu/"/>
-    <id>http://yoursite.com/2019/05/08/da-hua-shu-ju-jie-gou-er-cha-shu/</id>
-    <published>2019-05-08T06:55:35.000Z</published>
-    <updated>2019-05-08T07:08:33.253Z</updated>
-    
-    <summary type="html">
-    
-      &lt;p&gt;纯理论，了解一下&lt;/p&gt;
-&lt;p&gt;搬砖，&lt;a href=&quot;&lt;https://www.jianshu.com/p/bf73c8d50dc2&gt;&quot;&gt;摘自&lt;/a&gt;&lt;/p&gt;
     
     </summary>
     
