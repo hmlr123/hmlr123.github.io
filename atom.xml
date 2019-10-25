@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2019-10-17T02:51:13.946Z</updated>
+  <updated>2019-10-24T16:37:15.327Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -17,11 +17,51 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>有序数组合并</title>
+    <link href="http://yoursite.com/2019/10/25/you-xu-shu-zu-he-bing/"/>
+    <id>http://yoursite.com/2019/10/25/you-xu-shu-zu-he-bing/</id>
+    <published>2019-10-24T16:36:38.000Z</published>
+    <updated>2019-10-24T16:37:15.327Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;不是很难&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="java" scheme="http://yoursite.com/tags/java/"/>
+    
+      <category term="数据结构与算法" scheme="http://yoursite.com/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>大数相加</title>
+    <link href="http://yoursite.com/2019/10/25/da-shu-xiang-jia/"/>
+    <id>http://yoursite.com/2019/10/25/da-shu-xiang-jia/</id>
+    <published>2019-10-24T16:01:10.000Z</published>
+    <updated>2019-10-24T16:35:49.424Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;这是六一科技的笔试算法题，有两种解法&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="java" scheme="http://yoursite.com/tags/java/"/>
+    
+      <category term="数据结构与算法" scheme="http://yoursite.com/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/"/>
+    
+  </entry>
+  
+  <entry>
     <title>运算符优先级</title>
     <link href="http://yoursite.com/2019/10/17/yun-suan-fu-you-xian-ji/"/>
     <id>http://yoursite.com/2019/10/17/yun-suan-fu-you-xian-ji/</id>
     <published>2019-10-17T02:35:48.000Z</published>
-    <updated>2019-10-17T02:51:13.946Z</updated>
+    <updated>2019-10-17T14:31:11.699Z</updated>
     
     <summary type="html">
     
@@ -48,9 +88,9 @@
     </summary>
     
     
-      <category term="数据结构与算法" scheme="http://yoursite.com/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/"/>
-    
       <category term="java" scheme="http://yoursite.com/tags/java/"/>
+    
+      <category term="数据结构与算法" scheme="http://yoursite.com/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/"/>
     
   </entry>
   
@@ -68,9 +108,9 @@
     </summary>
     
     
-      <category term="数据结构与算法" scheme="http://yoursite.com/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/"/>
-    
       <category term="java" scheme="http://yoursite.com/tags/java/"/>
+    
+      <category term="数据结构与算法" scheme="http://yoursite.com/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/"/>
     
   </entry>
   
@@ -124,27 +164,9 @@
     </summary>
     
     
-      <category term="数据结构与算法" scheme="http://yoursite.com/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/"/>
-    
       <category term="java" scheme="http://yoursite.com/tags/java/"/>
     
-  </entry>
-  
-  <entry>
-    <title>链接文档</title>
-    <link href="http://yoursite.com/2019/10/10/lian-jie-wen-dang/"/>
-    <id>http://yoursite.com/2019/10/10/lian-jie-wen-dang/</id>
-    <published>2019-10-10T13:19:26.000Z</published>
-    <updated>2019-10-15T00:12:31.392Z</updated>
-    
-    <summary type="html">
-    
-      &lt;p&gt;主要记录自己平时开发过程中一些小知识查询的链接，容易遗忘又懒的写文档的知识点。当汇成一片的时候就知道自己那里有很大问题了，嘿嘿，懒人的做法。这个还是暑假实习受邓哥的影响，养成的习惯，要一直保持下去，不然对不起邓哥！&lt;/p&gt;
-    
-    </summary>
-    
-    
-      <category term="小零碎" scheme="http://yoursite.com/tags/%E5%B0%8F%E9%9B%B6%E7%A2%8E/"/>
+      <category term="数据结构与算法" scheme="http://yoursite.com/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/"/>
     
   </entry>
   
@@ -382,33 +404,9 @@
       <category term="大话数据结构" scheme="http://yoursite.com/categories/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/%E5%A4%A7%E8%AF%9D%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"/>
     
     
-      <category term="数据结构与算法" scheme="http://yoursite.com/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/"/>
-    
       <category term="java" scheme="http://yoursite.com/tags/java/"/>
     
-  </entry>
-  
-  <entry>
-    <title>大话数据结构-二叉树前中后序遍历</title>
-    <link href="http://yoursite.com/2019/05/09/da-hua-shu-ju-jie-gou-er-cha-shu-qian-zhong-hou-xu-bian-li/"/>
-    <id>http://yoursite.com/2019/05/09/da-hua-shu-ju-jie-gou-er-cha-shu-qian-zhong-hou-xu-bian-li/</id>
-    <published>2019-05-09T04:41:22.000Z</published>
-    <updated>2019-05-09T13:07:36.485Z</updated>
-    
-    <summary type="html">
-    
-      &lt;p&gt;重点在于 二叉树的构建，满二叉树怎么构建，完全二叉树怎么构建&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="读书笔记" scheme="http://yoursite.com/categories/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/"/>
-    
-      <category term="大话数据结构" scheme="http://yoursite.com/categories/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/%E5%A4%A7%E8%AF%9D%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"/>
-    
-    
       <category term="数据结构与算法" scheme="http://yoursite.com/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/"/>
-    
-      <category term="java" scheme="http://yoursite.com/tags/java/"/>
     
   </entry>
   

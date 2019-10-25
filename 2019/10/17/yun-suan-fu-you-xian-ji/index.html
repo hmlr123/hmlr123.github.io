@@ -32,6 +32,10 @@
     <link rel="stylesheet" type="text/css" href="/css/my.css">
     <style type="text/css">
         
+        code[class*="language-"], pre[class*="language-"] {
+            white-space: pre !important;
+        }
+        
     </style>
 
     <script src="/libs/jquery/jquery-2.2.0.min.js"></script>
@@ -343,7 +347,7 @@
                     
                     <div class="info-break-policy">
                         <i class="fa fa-file-word-o fa-fw"></i>文章字数:&nbsp;&nbsp;
-                        292
+                        285
                     </div>
                     
 
@@ -388,82 +392,82 @@
 <tbody><tr>
 <td>1</td>
 <td>括号</td>
-<td>()、[]</td>
+<td><code>()、[]</code></td>
 </tr>
 <tr>
 <td>2</td>
 <td>正负号</td>
-<td>+、-</td>
+<td><code>+、-</code></td>
 </tr>
 <tr>
 <td>3</td>
 <td>自增自减，非</td>
-<td>++、–、!</td>
+<td><code>++、--、!</code></td>
 </tr>
 <tr>
 <td>4</td>
 <td>乘除，取余</td>
-<td>*、/、%</td>
+<td><code>*、/、%</code></td>
 </tr>
 <tr>
 <td>5</td>
 <td>加减</td>
-<td>+、-</td>
+<td><code>+、-</code></td>
 </tr>
 <tr>
 <td>6</td>
 <td>移位运算</td>
-<td>&lt;&lt;、&gt;&gt;、&gt;&gt;&gt;</td>
+<td><code>&lt;&lt;、&gt;&gt;、&gt;&gt;&gt;</code></td>
 </tr>
 <tr>
 <td>7</td>
 <td>大小关系</td>
-<td>&gt;、&gt;=、&lt;、&lt;=</td>
+<td><code>&gt;、&gt;=、&lt;、&lt;=</code></td>
 </tr>
 <tr>
 <td>8</td>
 <td>相等关系</td>
-<td>==、!=</td>
+<td><code>==、!=</code></td>
 </tr>
 <tr>
 <td>9</td>
 <td>按位与</td>
-<td>&amp;</td>
+<td><code>&amp;</code></td>
 </tr>
 <tr>
 <td>10</td>
 <td>按位异或</td>
-<td>^</td>
+<td><code>^</code></td>
 </tr>
 <tr>
 <td>11</td>
 <td>按位或</td>
-<td>|</td>
+<td><code>\</code></td>
 </tr>
 <tr>
 <td>12</td>
 <td>逻辑与</td>
-<td>&amp;&amp;</td>
+<td><code>&amp;&amp;</code></td>
 </tr>
 <tr>
 <td>13</td>
 <td>逻辑或</td>
-<td>||</td>
+<td>`</td>
 </tr>
 <tr>
 <td>14</td>
 <td>条件运算</td>
-<td>?:</td>
+<td><code>?:</code></td>
 </tr>
 <tr>
 <td>15</td>
 <td>赋值运算</td>
-<td>=、+=、-=、*=、/=、%=</td>
+<td><code>=、+=、-=、*=、/=、%=</code></td>
 </tr>
 <tr>
 <td>16</td>
 <td>位赋值运算</td>
-<td>&amp;=、|=、&lt;&lt;=、&gt;&gt;=、&gt;&gt;&gt;=</td>
+<td>`&amp;=、</td>
 </tr>
 </tbody></table>
 <h1 id="结果"><a href="#结果" class="headerlink" title="结果"></a>结果</h1><p><code>()</code> <code>!</code> 算数运算符 关系运算符 逻辑运算符 赋值运算符</p>
@@ -569,37 +573,40 @@
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fa fa-dot-circle-o"></i>&nbsp;本篇
-            </div>
+                <i class="fa fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/2019/10/17/yun-suan-fu-you-xian-ji/">
+                <a href="/2019/10/25/da-shu-xiang-jia/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/0.jpg" class="responsive-img" alt="运算符优先级">
+                        <img src="/medias/featureimages/1.jpg" class="responsive-img" alt="大数相加">
                         
-                        <span class="card-title">运算符优先级</span>
+                        <span class="card-title">大数相加</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            这是中通的一道笔试题，以前没怎么注意，现在总结一下
+                            这是六一科技的笔试算法题，有两种解法
 
 
-题目() ! 算数运算符 关系运算符 逻辑运算符 赋值运算符 优先级
-运算符类型逻辑运算符：! &amp;&amp; ||
-算数运算符：+ - * / %
-赋值运算符：=
-关系运算符：
+非负大数相加，大数使用String表示
+解法一：字符串反转，相加package day1024;
+
+import java.util.Arrays;
+
+/**
+ * 大数相加.
+ *
+ * @aut
                         
                     </div>
                     <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="fa fa-clock-o fa-fw icon-date"></i>2019-10-17
-                            </span>
+                        <span class="publish-date">
+                            <i class="fa fa-clock-o fa-fw icon-date"></i>2019-10-25
+                        </span>
                         <span class="publish-author">
                             
                             <i class="fa fa-user fa-fw"></i>
@@ -608,12 +615,15 @@
                         </span>
                     </div>
                 </div>
-
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/基础/" target="_blank">
-                        <span class="chip bg-color">基础</span>
+                    <a href="/tags/java/" target="_blank">
+                        <span class="chip bg-color">java</span>
+                    </a>
+                    
+                    <a href="/tags/数据结构与算法/" target="_blank">
+                        <span class="chip bg-color">数据结构与算法</span>
                     </a>
                     
                 </div>
@@ -661,12 +671,12 @@
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/数据结构与算法/" target="_blank">
-                        <span class="chip bg-color">数据结构与算法</span>
-                    </a>
-                    
                     <a href="/tags/java/" target="_blank">
                         <span class="chip bg-color">java</span>
+                    </a>
+                    
+                    <a href="/tags/数据结构与算法/" target="_blank">
+                        <span class="chip bg-color">数据结构与算法</span>
                     </a>
                     
                 </div>
@@ -787,7 +797,7 @@
 
             
                 &nbsp;<i class="fa fa-area-chart"></i>&nbsp;站点总字数:&nbsp;
-                <span class="white-color">100.3k</span>
+                <span class="white-color">98.1k</span>
             
 
             
