@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2019-10-24T16:37:15.327Z</updated>
+  <updated>2019-10-26T06:12:05.841Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,46 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>字典树</title>
+    <link href="http://yoursite.com/2019/10/26/zi-dian-shu/"/>
+    <id>http://yoursite.com/2019/10/26/zi-dian-shu/</id>
+    <published>2019-10-25T17:23:46.000Z</published>
+    <updated>2019-10-26T06:12:05.841Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;这是熊猫优选中的一道算法题，当时我以为是KMP算法，使用暴力匹配。后来看字典树这个数据结构，才知道考察的是这个。&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="java" scheme="http://yoursite.com/tags/java/"/>
+    
+      <category term="数据结构与算法" scheme="http://yoursite.com/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>赫夫曼树生成</title>
+    <link href="http://yoursite.com/2019/10/25/he-fu-man-shu-sheng-cheng/"/>
+    <id>http://yoursite.com/2019/10/25/he-fu-man-shu-sheng-cheng/</id>
+    <published>2019-10-25T12:57:28.000Z</published>
+    <updated>2019-10-25T14:15:48.963Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;这是回忆多比特笔试题中的一道算法题，然后联想到这个，多比特那道题我现在还没有完全确认网上的写法是否合理。我当时的想法是使用Prim算法计算满二叉树的最短路径。有点头痛，得动动脑子想想。这里先把自己整理得这个赫夫曼树写上去，虽然以前写过，但是这次是我自己独立完成，没有任何百度或者其他资料，有点小得意。&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="java" scheme="http://yoursite.com/tags/java/"/>
+    
+      <category term="数据结构与算法" scheme="http://yoursite.com/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/"/>
+    
+  </entry>
   
   <entry>
     <title>有序数组合并</title>
@@ -364,49 +404,6 @@
       <category term="java" scheme="http://yoursite.com/tags/java/"/>
     
       <category term="Spring" scheme="http://yoursite.com/tags/Spring/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>linux-tomcat配置</title>
-    <link href="http://yoursite.com/2019/05/19/linux-tomcat-pei-zhi/"/>
-    <id>http://yoursite.com/2019/05/19/linux-tomcat-pei-zhi/</id>
-    <published>2019-05-19T09:32:09.000Z</published>
-    <updated>2019-05-19T09:34:00.497Z</updated>
-    
-    <summary type="html">
-    
-      &lt;p&gt;怕忘记了&lt;/p&gt;
-    
-    </summary>
-    
-    
-      <category term="linux" scheme="http://yoursite.com/tags/linux/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>大话数据结构-线索二叉树中序线索化</title>
-    <link href="http://yoursite.com/2019/05/11/da-hua-shu-ju-jie-gou-xian-suo-er-cha-shu-zhong-xu-xian-suo-hua/"/>
-    <id>http://yoursite.com/2019/05/11/da-hua-shu-ju-jie-gou-xian-suo-er-cha-shu-zhong-xu-xian-suo-hua/</id>
-    <published>2019-05-11T06:51:37.000Z</published>
-    <updated>2019-05-11T07:15:01.269Z</updated>
-    
-    <summary type="html">
-    
-      &lt;p&gt;理解什么事线索二叉树，怎么将二叉树线索化，线索化的二叉树怎么遍历&lt;/p&gt;
-&lt;p&gt;拓展，前序线索二叉树遍历，后序线索二叉树遍历&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="读书笔记" scheme="http://yoursite.com/categories/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/"/>
-    
-      <category term="大话数据结构" scheme="http://yoursite.com/categories/%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0/%E5%A4%A7%E8%AF%9D%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"/>
-    
-    
-      <category term="java" scheme="http://yoursite.com/tags/java/"/>
-    
-      <category term="数据结构与算法" scheme="http://yoursite.com/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/"/>
     
   </entry>
   
