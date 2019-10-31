@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2019-10-27T01:06:44.966Z</updated>
+  <updated>2019-10-31T15:20:10.354Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,26 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>完数</title>
+    <link href="http://yoursite.com/2019/10/31/wan-shu/"/>
+    <id>http://yoursite.com/2019/10/31/wan-shu/</id>
+    <published>2019-10-31T14:33:11.000Z</published>
+    <updated>2019-10-31T15:20:10.354Z</updated>
+    
+    <summary type="html">
+    
+      &lt;p&gt;这是途虎养车的算法题，是我想复杂了，其实很简单&lt;/p&gt;
+    
+    </summary>
+    
+    
+      <category term="java" scheme="http://yoursite.com/tags/java/"/>
+    
+      <category term="数据结构与算法" scheme="http://yoursite.com/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/"/>
+    
+  </entry>
   
   <entry>
     <title>字典树</title>
@@ -384,26 +404,6 @@
     
     
       <category term="java" scheme="http://yoursite.com/tags/java/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>ArrayList源码</title>
-    <link href="http://yoursite.com/2019/05/20/arraylist-yuan-ma/"/>
-    <id>http://yoursite.com/2019/05/20/arraylist-yuan-ma/</id>
-    <published>2019-05-20T02:34:00.000Z</published>
-    <updated>2019-05-20T02:36:21.420Z</updated>
-    
-    <summary type="html">
-    
-      &lt;p&gt;面试前突击看的，感觉还行，看懂了，更要多看&lt;/p&gt;
-    
-    </summary>
-    
-    
-      <category term="java" scheme="http://yoursite.com/tags/java/"/>
-    
-      <category term="Spring" scheme="http://yoursite.com/tags/Spring/"/>
     
   </entry>
   

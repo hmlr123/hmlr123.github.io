@@ -4,12 +4,14 @@
 
 <head><meta name="generator" content="Hexo 3.9.0">
     <meta charset="utf-8">
-    <meta name="keywords" content="面向对象思想, hmlr123">
-    <meta name="description" content="我对面向对象的认识，踩坑！
+    <meta name="keywords" content="完数, hmlr123">
+    <meta name="description" content="这是途虎养车的算法题，是我想复杂了，其实很简单
 
 
-什么是面向对象，为什么要面向对象。面向过程，面对一个问题，一个步骤一个步骤的解决。针对的是问题的分析综合解决
-面向对象，把构成问题事务分解为一个个对象，目的不是为了完成一个步骤，而是描述某个事物在整个解决问题">
+题目介绍一个数如果恰好等于它的因子之和，这个数就称为”完数”。例如6=1＋2＋3.编程找出1000以内的所有完数。
+Codingpackage interview.day1031;
+
+im">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -17,7 +19,7 @@
     <meta name="format-detection" content="telephone=no">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <title>面向对象思想 | hmlr123</title>
+    <title>完数 | hmlr123</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/font-awesome.min.css">
@@ -205,13 +207,13 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/21.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/12.jpg')">
     <div class="container">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
                     <div class="description center-align post-title">
-                        面向对象思想
+                        完数
                     </div>
                 </div>
             </div>
@@ -326,12 +328,8 @@
                                 <span class="chip bg-color">java</span>
                             </a>
                         
-                            <a href="/tags/思想/" target="_blank">
-                                <span class="chip bg-color">思想</span>
-                            </a>
-                        
-                            <a href="/tags/面试/" target="_blank">
-                                <span class="chip bg-color">面试</span>
+                            <a href="/tags/数据结构与算法/" target="_blank">
+                                <span class="chip bg-color">数据结构与算法</span>
                             </a>
                         
                     </div>
@@ -345,21 +343,21 @@
             <div class="post-info">
                 <div class="post-date info-break-policy">
                     <i class="fa fa-calendar-minus-o fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2019-05-06
+                    2019-10-31
                 </div>
 
                 
                     
                     <div class="info-break-policy">
                         <i class="fa fa-file-word-o fa-fw"></i>文章字数:&nbsp;&nbsp;
-                        1.1k
+                        281
                     </div>
                     
 
                     
                     <div class="info-break-policy">
                         <i class="fa fa-clock-o fa-fw"></i>阅读时长:&nbsp;&nbsp;
-                        3 分
+                        1 分
                     </div>
                     
                 
@@ -375,36 +373,47 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <p>我对面向对象的认识，踩坑！</p>
+                <p>这是途虎养车的算法题，是我想复杂了，其实很简单</p>
 <a id="more"></a>
 
-<h1 id="什么是面向对象，为什么要面向对象。"><a href="#什么是面向对象，为什么要面向对象。" class="headerlink" title="什么是面向对象，为什么要面向对象。"></a>什么是面向对象，为什么要面向对象。</h1><p><strong>面向过程</strong>，面对一个问题，一个步骤一个步骤的解决。针对的是问题的分析综合解决</p>
-<p><strong>面向对象</strong>，把构成问题事务分解为一个个对象，目的不是为了完成一个步骤，而是描述某个事物在整个解决问题的步骤中的行为，构造一个仿真环境，最终要解决的问题间建立一个方法</p>
-<h1 id="面向对象四大特性"><a href="#面向对象四大特性" class="headerlink" title="面向对象四大特性"></a>面向对象四大特性</h1><h2 id="抽象"><a href="#抽象" class="headerlink" title="抽象"></a>抽象</h2><p>提取现实世界中某事物的关键特性，为该事物构建模型的过程。对同一事物在不同的需求下，需要提取的特性可能不一样。得到的抽象模型中一般包含：属性（数据）和操作（行为）。这个抽象模型我们称之为<strong>类</strong>。对类进行实例化得到对象。</p>
-<h2 id="继承"><a href="#继承" class="headerlink" title="继承"></a>继承</h2><p>概念：一个类继承另外一个类，继承的类就是子类，被继承的类就是父类</p>
-<p>目的：实现代码的复用</p>
-<p>理解：特殊和泛化关系，子类是父类更加详细的分类，拥有父类的属性和方法，能扩展自己的属性和方法，也能重写父类的方法</p>
-<h2 id="封装"><a href="#封装" class="headerlink" title="封装"></a>封装</h2><p>概念：也称信息隐藏，利用抽象数据类型将数据和基于数据的操作封装到一起，成为一个不可分割的独立实体，数据被保护在抽象数据类型的内部，尽可能的隐藏内部细节，只保留一些对外接口使之对外部发生联系。也就是说用户不用知道对象内部方法的实现细节，但可以通过对象提供的接口访问对象的数据并与之交互</p>
-<p>优点：</p>
-<ol>
-<li>专业的分工，将能实现特定功能的代码封装到一个独立的实体，其他人可以共同调用</li>
-<li>隐藏信息，通过控制权限将不想给其他类看到的方法隐藏起来</li>
-</ol>
-<h2 id="多态"><a href="#多态" class="headerlink" title="多态"></a>多态</h2><blockquote>
-<p>多态就是指程序中定义的引用变量所指向的具体类型和通过该引用变量发出的方法调用在编程时并不确定，而是在程序运行期间才确定，即一个引用变量倒底会指向哪个类的实例对象，该引用变量发出的方法调用到底是哪个类中实现的方法，必须在由程序运行期间才能决定。因为在程序运行时才确定具体的类，这样，不用修改源程序代码，就可以让引用变量绑定到各种不同的类实现上，从而导致该引用调用的具体方法随之改变，即不修改程序代码就可以改变程序运行时所绑定的具体代码，让程序可以选择多个运行状态，这就是多态性。</p>
-</blockquote>
-<p>概念：<strong><span style="color:red">相同的事物，调用其方法，参数相同时，行为也不同</span></strong></p>
-<p>实现三大要素：继承、重写、父类引用子类</p>
-<p><strong>重写</strong>：子类对父类中某些方法进行重新定义，在调用这些方法时就会调用子类的方法。</p>
-<p>实现两种方式：继承实现、接口实现</p>
-<h3 id="继承实现的多态"><a href="#继承实现的多态" class="headerlink" title="继承实现的多态"></a>继承实现的多态</h3><p>子类继承父类，并重写父类的方法，多个子类继承父类并重写父类的方法，就会产生差异性。当我们使用父类变量指向子类对象的时候，调用相同的方法，产生的效果不同。</p>
-<p>如果父类是抽象类，子类必须实现父类中的所有抽象方法。</p>
-<h3 id="接口实现的多态"><a href="#接口实现的多态" class="headerlink" title="接口实现的多态"></a>接口实现的多态</h3><p>接口可以被很多类实现，一个类可以实现很多不同的接口的方法</p>
-<p>不同的类实现接口的方法不同</p>
-<p>使用接口变量指向实现接口的类，就会产生差异</p>
-<h3 id="向上向下转型"><a href="#向上向下转型" class="headerlink" title="向上向下转型"></a>向上向下转型</h3><p>理解什么是向上，什么是向下。向上是实例化的子类被指向父类。向下是被实例化的父类指向子类。</p>
-<p>向上转型：父类变量指向子类对象，自动转型，父类有的方法，都可以使用，调用的是子类的方法</p>
-<p>向下转型：子类变量指向父类对象，强制转型，将会失去子类特有的方法。调用的是父类的方法</p>
+<h1 id="题目介绍"><a href="#题目介绍" class="headerlink" title="题目介绍"></a>题目介绍</h1><p>一个数如果恰好等于它的因子之和，这个数就称为”完数”。例如6=1＋2＋3.编程找出1000以内的所有完数。</p>
+<h1 id="Coding"><a href="#Coding" class="headerlink" title="Coding"></a>Coding</h1><pre class=" language-java"><code class="language-java"><span class="token keyword">package</span> interview<span class="token punctuation">.</span>day1031<span class="token punctuation">;</span>
+
+<span class="token keyword">import</span> java<span class="token punctuation">.</span>util<span class="token punctuation">.</span>ArrayList<span class="token punctuation">;</span>
+<span class="token keyword">import</span> java<span class="token punctuation">.</span>util<span class="token punctuation">.</span>HashMap<span class="token punctuation">;</span>
+<span class="token keyword">import</span> java<span class="token punctuation">.</span>util<span class="token punctuation">.</span>List<span class="token punctuation">;</span>
+<span class="token keyword">import</span> java<span class="token punctuation">.</span>util<span class="token punctuation">.</span>Map<span class="token punctuation">;</span>
+
+<span class="token comment" spellcheck="true">/**
+ * @author liwei
+ * @date 2019/10/31 22:38
+ */</span>
+<span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">PerfectNumber</span> <span class="token punctuation">{</span>
+    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span>String<span class="token punctuation">[</span><span class="token punctuation">]</span> args<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        Map<span class="token operator">&lt;</span>Integer<span class="token punctuation">,</span> List<span class="token operator">&lt;</span>Integer<span class="token operator">>></span> map <span class="token operator">=</span> <span class="token function">perfectNumber</span><span class="token punctuation">(</span><span class="token number">100000</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">for</span> <span class="token punctuation">(</span>Map<span class="token punctuation">.</span>Entry<span class="token operator">&lt;</span>Integer<span class="token punctuation">,</span> List<span class="token operator">&lt;</span>Integer<span class="token operator">>></span> entry <span class="token operator">:</span> map<span class="token punctuation">.</span><span class="token function">entrySet</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            System<span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span>entry<span class="token punctuation">.</span><span class="token function">getKey</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">toString</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token string">"\t"</span> <span class="token operator">+</span> entry<span class="token punctuation">.</span><span class="token function">getValue</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">toString</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token keyword">public</span> <span class="token keyword">static</span> Map<span class="token operator">&lt;</span>Integer<span class="token punctuation">,</span> List<span class="token operator">&lt;</span>Integer<span class="token operator">>></span> <span class="token function">perfectNumber</span><span class="token punctuation">(</span><span class="token keyword">int</span> num<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        Map<span class="token operator">&lt;</span>Integer<span class="token punctuation">,</span> List<span class="token operator">&lt;</span>Integer<span class="token operator">>></span> map <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">HashMap</span><span class="token operator">&lt;</span><span class="token operator">></span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> num<span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token keyword">int</span> temp <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+            List<span class="token operator">&lt;</span>Integer<span class="token operator">></span> list <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">ArrayList</span><span class="token operator">&lt;</span><span class="token operator">></span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> j <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> j <span class="token operator">&lt;</span> i <span class="token operator">/</span> <span class="token number">2</span> <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">;</span> j<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                temp <span class="token operator">+=</span> j<span class="token punctuation">;</span>
+                list<span class="token punctuation">.</span><span class="token function">add</span><span class="token punctuation">(</span>j<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token punctuation">}</span>
+            <span class="token keyword">if</span> <span class="token punctuation">(</span>temp <span class="token operator">==</span> i<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                map<span class="token punctuation">.</span><span class="token function">put</span><span class="token punctuation">(</span>i<span class="token punctuation">,</span> list<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span>
+        <span class="token keyword">return</span> map<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre>
+<h1 id="Question"><a href="#Question" class="headerlink" title="Question"></a>Question</h1><p>把问题想复杂了，想到10000次循环带来的性能损耗和尽量减少循环比较的次数。其中循环比较的次数本来是想使用目标值/当前循环的值，得到区间值。到这里思路就断了。这里直接使用一半来判断就很简洁了。</p>
 
             </div>
             <hr/>
@@ -439,9 +448,9 @@
             <br/>
             <span xmlns:dct="http://purl.org/dc/terms/" href="http://purl.org/dc/dcmitype/Text"
                   property="dct:title" rel="dct:type">
-                    《面向对象思想》
+                    《完数》
                 </span> 由
-            <a xmlns:cc="http://creativecommons.org/ns#" href="/2019/05/06/mian-xiang-dui-xiang-si-xiang/" property="cc:attributionName"
+            <a xmlns:cc="http://creativecommons.org/ns#" href="/2019/10/31/wan-shu/" property="cc:attributionName"
                rel="cc:attributionURL">
                 hmlr123
             </a> 采用
@@ -482,7 +491,7 @@
         repo: 'hmlr123.github.io',
         owner: 'hmlr123',
         admin: "hmlr123",
-        id: '2019-05-06T14-39-12',
+        id: '2019-10-31T22-33-11',
         distractionFreeMode: false  // Facebook-like distraction free mode
     });
 
@@ -503,51 +512,45 @@
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fa fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="fa fa-dot-circle-o"></i>&nbsp;本篇
+            </div>
             <div class="card">
-                <a href="/2019/05/08/da-hua-shu-ju-jie-gou-er-cha-shu/">
+                <a href="/2019/10/31/wan-shu/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/20.jpg" class="responsive-img" alt="大话数据结构-二叉树">
+                        <img src="/medias/featureimages/12.jpg" class="responsive-img" alt="完数">
                         
-                        <span class="card-title">大话数据结构-二叉树</span>
+                        <span class="card-title">完数</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            纯理论，了解一下
-搬砖，摘自
+                            这是途虎养车的算法题，是我想复杂了，其实很简单
 
 
-定义二叉树是n(n&gt;=0)个结点的有限集合，该集合或者为空集（称为空二叉树），或者由一个根结点和两棵互不相交的、分别称为根结点的左子树和右子树组成。
+题目介绍一个数如果恰好等于它的因子之和，这个数就称为”完数”。例如6=1＋2＋3.编程找出1000以内的所有完数。
+Codingpackage interview.day1031;
 
-特点由二叉树定义以及图示分析得出二叉树有以下特点
+im
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="fa fa-clock-o fa-fw icon-date"></i>2019-05-08
-                        </span>
+                            <span class="publish-date">
+                                <i class="fa fa-clock-o fa-fw icon-date"></i>2019-10-31
+                            </span>
                         <span class="publish-author">
                             
-                            <i class="fa fa-bookmark fa-fw icon-category"></i>
-                            
-                            <a href="/categories/读书笔记/" class="post-category" target="_blank">
-                                    读书笔记
-                                </a>
-                            
-                            <a href="/categories/读书笔记/大话数据结构/" class="post-category" target="_blank">
-                                    大话数据结构
-                                </a>
-                            
+                            <i class="fa fa-user fa-fw"></i>
+                            hmlr123
                             
                         </span>
                     </div>
                 </div>
+
                 
                 <div class="card-action article-tags">
                     
@@ -570,28 +573,27 @@
                 下一篇&nbsp;<i class="fa fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2019/05/06/mian-shi/">
+                <a href="/2019/10/26/zi-dian-shu/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/19.jpg" class="responsive-img" alt="面试">
+                        <img src="/medias/featureimages/8.jpg" class="responsive-img" alt="字典树">
                         
-                        <span class="card-title">面试</span>
+                        <span class="card-title">字典树</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            记录一下自己的不足
+                            这是熊猫优选中的一道算法题，当时我以为是KMP算法，使用暴力匹配。后来看字典树这个数据结构，才知道考察的是这个。
 
 
-走走停停，5月份了，投了很多建立，很多石沉大海，偶有回信，记录一下。
-
+介绍概念又称单词查找树，Trie树，是一种树形结构，是一种哈希树的变种。典型应用是用于统计，排序和保存大量的字符串（但不仅
                         
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="fa fa-clock-o fa-fw icon-date"></i>2019-05-06
+                                <i class="fa fa-clock-o fa-fw icon-date"></i>2019-10-26
                             </span>
                         <span class="publish-author">
                             
@@ -604,8 +606,12 @@
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/面试/" target="_blank">
-                        <span class="chip bg-color">面试</span>
+                    <a href="/tags/java/" target="_blank">
+                        <span class="chip bg-color">java</span>
+                    </a>
+                    
+                    <a href="/tags/数据结构与算法/" target="_blank">
+                        <span class="chip bg-color">数据结构与算法</span>
                     </a>
                     
                 </div>
